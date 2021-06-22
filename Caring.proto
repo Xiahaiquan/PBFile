@@ -266,7 +266,11 @@ message r_get_mtu_size_t{
 	required uint32		m_mtu				= 2;
 	
 }
-
+message r_get_watch_info_t{
+	required uint32		m_err_code			= 1;
+	required uint32		id				= 2;
+	
+}
 message set_bin_data_t{
 	required uint32		m_sn				= 1;
 	required bytes      m_data				= 2;
@@ -494,6 +498,7 @@ message hl_cmds {
 		CMD_SET_WARMING_DATA        = 57;
 		CMD_GET_MENU_SEQUENCE_DATA  = 58;
 		CMD_SYNC_CONTACTS           = 59;
+		CMD_GET_WATCHINFO           = 60;
 	}
  
 	required cmd_t			cmd				= 1;//cmd  
@@ -558,6 +563,7 @@ message hl_cmds {
 	optional r_get_menu_sequence_t    r_get_menu_seq_data   = 58;
 	optional r_get_weather_info_t 	  r_get_weather_info    = 59;
 	optional set_contacts_t		sync_contacts_info 		    = 61;
+	optional r_get_watch_info_t      r_get_watch_info       = 62;
 }
 
 

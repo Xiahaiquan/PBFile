@@ -1747,6 +1747,37 @@ struct Caring_r_get_mtu_size_t {
   fileprivate var _mMtu: UInt32? = nil
 }
 
+struct Caring_r_get_watch_info_t {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var mErrCode: UInt32 {
+    get {return _mErrCode ?? 0}
+    set {_mErrCode = newValue}
+  }
+  /// Returns true if `mErrCode` has been explicitly set.
+  var hasMErrCode: Bool {return self._mErrCode != nil}
+  /// Clears the value of `mErrCode`. Subsequent reads from it will return its default value.
+  mutating func clearMErrCode() {self._mErrCode = nil}
+
+  var id: UInt32 {
+    get {return _id ?? 0}
+    set {_id = newValue}
+  }
+  /// Returns true if `id` has been explicitly set.
+  var hasID: Bool {return self._id != nil}
+  /// Clears the value of `id`. Subsequent reads from it will return its default value.
+  mutating func clearID() {self._id = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _mErrCode: UInt32? = nil
+  fileprivate var _id: UInt32? = nil
+}
+
 struct Caring_set_bin_data_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -3396,6 +3427,15 @@ struct Caring_hl_cmds {
   /// Clears the value of `syncContactsInfo`. Subsequent reads from it will return its default value.
   mutating func clearSyncContactsInfo() {_uniqueStorage()._syncContactsInfo = nil}
 
+  var rGetWatchInfo: Caring_r_get_watch_info_t {
+    get {return _storage._rGetWatchInfo ?? Caring_r_get_watch_info_t()}
+    set {_uniqueStorage()._rGetWatchInfo = newValue}
+  }
+  /// Returns true if `rGetWatchInfo` has been explicitly set.
+  var hasRGetWatchInfo: Bool {return _storage._rGetWatchInfo != nil}
+  /// Clears the value of `rGetWatchInfo`. Subsequent reads from it will return its default value.
+  mutating func clearRGetWatchInfo() {_uniqueStorage()._rGetWatchInfo = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   enum cmd_t: SwiftProtobuf.Enum {
@@ -3459,6 +3499,7 @@ struct Caring_hl_cmds {
     case cmdSetWarmingData // = 57
     case cmdGetMenuSequenceData // = 58
     case cmdSyncContacts // = 59
+    case cmdGetWatchinfo // = 60
 
     init() {
       self = .cmdBindDevice
@@ -3525,6 +3566,7 @@ struct Caring_hl_cmds {
       case 57: self = .cmdSetWarmingData
       case 58: self = .cmdGetMenuSequenceData
       case 59: self = .cmdSyncContacts
+      case 60: self = .cmdGetWatchinfo
       default: return nil
       }
     }
@@ -3590,6 +3632,7 @@ struct Caring_hl_cmds {
       case .cmdSetWarmingData: return 57
       case .cmdGetMenuSequenceData: return 58
       case .cmdSyncContacts: return 59
+      case .cmdGetWatchinfo: return 60
       }
     }
 
@@ -5638,6 +5681,50 @@ extension Caring_r_get_mtu_size_t: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
+extension Caring_r_get_watch_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".r_get_watch_info_t"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "m_err_code"),
+    2: .same(proto: "id"),
+  ]
+
+  public var isInitialized: Bool {
+    if self._mErrCode == nil {return false}
+    if self._id == nil {return false}
+    return true
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mErrCode) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._id) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._mErrCode {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
+    }
+    if let v = self._id {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Caring_r_get_watch_info_t, rhs: Caring_r_get_watch_info_t) -> Bool {
+    if lhs._mErrCode != rhs._mErrCode {return false}
+    if lhs._id != rhs._id {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Caring_set_bin_data_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".set_bin_data_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -7122,6 +7209,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     58: .standard(proto: "r_get_menu_seq_data"),
     59: .standard(proto: "r_get_weather_info"),
     61: .standard(proto: "sync_contacts_info"),
+    62: .standard(proto: "r_get_watch_info"),
   ]
 
   fileprivate class _StorageClass {
@@ -7186,6 +7274,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     var _rGetMenuSeqData: Caring_r_get_menu_sequence_t? = nil
     var _rGetWeatherInfo: Caring_r_get_weather_info_t? = nil
     var _syncContactsInfo: Caring_set_contacts_t? = nil
+    var _rGetWatchInfo: Caring_r_get_watch_info_t? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -7253,6 +7342,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       _rGetMenuSeqData = source._rGetMenuSeqData
       _rGetWeatherInfo = source._rGetWeatherInfo
       _syncContactsInfo = source._syncContactsInfo
+      _rGetWatchInfo = source._rGetWatchInfo
     }
   }
 
@@ -7325,6 +7415,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._rGetMenuSeqData, !v.isInitialized {return false}
       if let v = _storage._rGetWeatherInfo, !v.isInitialized {return false}
       if let v = _storage._syncContactsInfo, !v.isInitialized {return false}
+      if let v = _storage._rGetWatchInfo, !v.isInitialized {return false}
       return true
     }
   }
@@ -7398,6 +7489,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         case 59: try { try decoder.decodeSingularMessageField(value: &_storage._rGetWeatherInfo) }()
         case 60: try { try decoder.decodeSingularBytesField(value: &_storage._deviceID) }()
         case 61: try { try decoder.decodeSingularMessageField(value: &_storage._syncContactsInfo) }()
+        case 62: try { try decoder.decodeSingularMessageField(value: &_storage._rGetWatchInfo) }()
         default: break
         }
       }
@@ -7589,6 +7681,9 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._syncContactsInfo {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 61)
       }
+      if let v = _storage._rGetWatchInfo {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 62)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -7659,6 +7754,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         if _storage._rGetMenuSeqData != rhs_storage._rGetMenuSeqData {return false}
         if _storage._rGetWeatherInfo != rhs_storage._rGetWeatherInfo {return false}
         if _storage._syncContactsInfo != rhs_storage._syncContactsInfo {return false}
+        if _storage._rGetWatchInfo != rhs_storage._rGetWatchInfo {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -7729,5 +7825,6 @@ extension Caring_hl_cmds.cmd_t: SwiftProtobuf._ProtoNameProviding {
     57: .same(proto: "CMD_SET_WARMING_DATA"),
     58: .same(proto: "CMD_GET_MENU_SEQUENCE_DATA"),
     59: .same(proto: "CMD_SYNC_CONTACTS"),
+    60: .same(proto: "CMD_GET_WATCHINFO"),
   ]
 }
