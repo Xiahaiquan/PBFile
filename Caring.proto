@@ -4,7 +4,7 @@ option java_package = "com.ls.appserver.iot.health.vo";
 option java_outer_classname = "Caring";
 
 message weather_t{
-	required uint32 	m_weather_num 			= 1;w
+	required uint32 	m_weather_num 			= 1;
 	required uint32		m_climate	 			= 2;
 	required uint32		m_temperature	 		= 3;
 	required uint32 	m_pm25		 			= 4;
@@ -194,21 +194,74 @@ message r_sync_health_data_t{
 message r_get_health_data_t{
 	required uint32		m_err_code			= 1;
 	required uint32		m_sn				= 2;
-	required bytes      m_data				= 3;
+	optional bytes      m_data				= 3;
+	
+	optional r_get_health_step_t step         = 4; //步数
+	optional r_get_health_hrm_t   hrm         = 5;  //心率
+	optional r_get_health_bp_t    bp		   = 6;  //血压
+	optional r_get_health_sleep_t sleep        = 7;  //睡眠
+	optional r_get_health_spo2_t  spo2         = 8;  //睡眠
 }
 
+// 步数
+message r_get_health_step_t{
+	required uint32		totalSteps			= 1;
+	required uint64		totalDistance		= 2;
+	required uint32		totalKcal			= 3;
+	required uint32     duration			= 4;
+	repeated uint32  stepDetails	= 5;
+	required uint32     recordDate 			= 6;
+}
 
-message BpVo {
+// 心率
+message r_get_health_hrm_t{
+	required uint32		maxHeartRate			= 1;
+	required uint32		minHeartRate			= 2;
+	required uint32		averageHeartRate		= 3;
+	repeated uint32  hrsDetails		= 4;
+	required uint32     recordDate 				= 5;
+}
+
+//血压
+message r_get_bp {
 	required uint32 sbp = 1; //收缩压
 	required uint32 dbp = 2; //舒张压
+	required uint32 measureTime = 3; //测量时间
+}
+message r_get_health_bp_t {
+    required r_get_bp maxBp = 1; //最高血压
+    required r_get_bp minBp = 2; //最低血压
+    required r_get_bp avgBp = 3; //平均血压
+    repeated r_get_bp bpDetails  = 4; //血压明细
+    required uint32 recordDate = 5; // 记录日期
 }
 
-message BpDailyVo {
-    required BpVo maxBp = 1; //最高血压
-    required BpVo minBp = 2; //最低血压
-    required BpVo avgBp = 3; //平均血压
-    repeated BpVo bpDetails  = 4; //血压明细
-    required uint32 recordDate = 5; // 记录日期
+// 睡眠
+message r_get_health_sleep_t {
+    required uint32 startTime = 1; //睡眠开始时间
+    required uint32 endTime = 2; //睡眠结束时间
+    required uint32 totalMinutes = 3; //睡眠总时长
+    required uint32 lightSleepMinutes  = 4; //浅睡时长
+    required uint32 deepSleepMinutes = 5; // 深睡时长
+	required uint32 awakeSleepMinutes = 6; // 清醒时长
+	required uint32 awakeTimes = 7; // 清醒次数
+	repeated r_sleep_detail_t sleepDetails = 8; // 睡眠状态明细
+	required uint32     recordDate 				= 9; // 记录日期
+}
+message r_sleep_detail_t {
+	repeated uint32 sleep = 1;
+}
+
+// 血氧
+message r_get_spo2 {
+	required uint32 spo2 = 1; //血氧度
+	required uint32 measureTime = 2; //测量时间
+}
+message r_get_health_spo2_t {
+    required uint32 maxSpo2 = 1; //最大血氧度
+    required uint32 minSpo2 = 2; //最小血氧度
+    repeated r_get_spo2 spo2Details = 3; //血氧度明细
+    required uint32 recordDate = 4; // 记录日期
 }
 
 message r_get_power_t{
