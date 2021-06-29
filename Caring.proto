@@ -4,7 +4,7 @@ option java_package = "com.ls.appserver.iot.health.vo";
 option java_outer_classname = "Caring";
 
 message weather_t{
-	required uint32 	m_weather_num 			= 1;
+	required uint32 	m_weather_num 			= 1;w
 	required uint32		m_climate	 			= 2;
 	required uint32		m_temperature	 		= 3;
 	required uint32 	m_pm25		 			= 4;
@@ -196,6 +196,7 @@ message r_get_health_data_t{
 	required uint32		m_sn				= 2;
 	required bytes      m_data				= 3;
 }
+
 
 message BpVo {
 	required uint32 sbp = 1; //收缩压
@@ -432,9 +433,16 @@ message get_menu_sequence_t {
 message r_get_menu_sequence_t {
     required uint32 m_type                = 1;
     required uint32 m_support             = 2;
-	required uint32 m_count               = 3;
-	required bytes m_data                 = 4;
+    required uint32 m_count               = 3;
+    required bytes m_data                 = 4;
 }
+
+//关怀提醒
+message r_set_caring_reminder_t {
+    required uint32 fallReminder                = 1; //跌倒提醒
+}
+
+
 
 //***********************app or fw send cmd****************/
 message hl_cmds {
@@ -499,6 +507,8 @@ message hl_cmds {
 		CMD_GET_MENU_SEQUENCE_DATA  = 58;
 		CMD_SYNC_CONTACTS           = 59;
 		CMD_GET_WATCHINFO           = 60;
+		CMD_SET_CARING_REMINDER = 61;
+
 	}
  
 	required cmd_t			cmd				= 1;//cmd  
@@ -564,6 +574,9 @@ message hl_cmds {
 	optional r_get_weather_info_t 	  r_get_weather_info    = 59;
 	optional set_contacts_t		sync_contacts_info 		    = 61;
 	optional r_get_watch_info_t      r_get_watch_info       = 62;
+	optional r_set_caring_reminder_t r_set_caring_reminder = 63;
+ 
+
 }
 
 

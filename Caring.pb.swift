@@ -2871,6 +2871,29 @@ struct Caring_r_get_menu_sequence_t {
   fileprivate var _mData: Data? = nil
 }
 
+///关怀提醒
+struct Caring_r_set_caring_reminder_t {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///跌倒提醒
+  var fallReminder: UInt32 {
+    get {return _fallReminder ?? 0}
+    set {_fallReminder = newValue}
+  }
+  /// Returns true if `fallReminder` has been explicitly set.
+  var hasFallReminder: Bool {return self._fallReminder != nil}
+  /// Clears the value of `fallReminder`. Subsequent reads from it will return its default value.
+  mutating func clearFallReminder() {self._fallReminder = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _fallReminder: UInt32? = nil
+}
+
 ///***********************app or fw send cmd****************/
 struct Caring_hl_cmds {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -3436,6 +3459,15 @@ struct Caring_hl_cmds {
   /// Clears the value of `rGetWatchInfo`. Subsequent reads from it will return its default value.
   mutating func clearRGetWatchInfo() {_uniqueStorage()._rGetWatchInfo = nil}
 
+  var rSetCaringReminder: Caring_r_set_caring_reminder_t {
+    get {return _storage._rSetCaringReminder ?? Caring_r_set_caring_reminder_t()}
+    set {_uniqueStorage()._rSetCaringReminder = newValue}
+  }
+  /// Returns true if `rSetCaringReminder` has been explicitly set.
+  var hasRSetCaringReminder: Bool {return _storage._rSetCaringReminder != nil}
+  /// Clears the value of `rSetCaringReminder`. Subsequent reads from it will return its default value.
+  mutating func clearRSetCaringReminder() {_uniqueStorage()._rSetCaringReminder = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   enum cmd_t: SwiftProtobuf.Enum {
@@ -3500,6 +3532,7 @@ struct Caring_hl_cmds {
     case cmdGetMenuSequenceData // = 58
     case cmdSyncContacts // = 59
     case cmdGetWatchinfo // = 60
+    case cmdSetCaringReminder // = 61
 
     init() {
       self = .cmdBindDevice
@@ -3567,6 +3600,7 @@ struct Caring_hl_cmds {
       case 58: self = .cmdGetMenuSequenceData
       case 59: self = .cmdSyncContacts
       case 60: self = .cmdGetWatchinfo
+      case 61: self = .cmdSetCaringReminder
       default: return nil
       }
     }
@@ -3633,6 +3667,7 @@ struct Caring_hl_cmds {
       case .cmdGetMenuSequenceData: return 58
       case .cmdSyncContacts: return 59
       case .cmdGetWatchinfo: return 60
+      case .cmdSetCaringReminder: return 61
       }
     }
 
@@ -7145,6 +7180,43 @@ extension Caring_r_get_menu_sequence_t: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
+extension Caring_r_set_caring_reminder_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".r_set_caring_reminder_t"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "fallReminder"),
+  ]
+
+  public var isInitialized: Bool {
+    if self._fallReminder == nil {return false}
+    return true
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._fallReminder) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._fallReminder {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Caring_r_set_caring_reminder_t, rhs: Caring_r_set_caring_reminder_t) -> Bool {
+    if lhs._fallReminder != rhs._fallReminder {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".hl_cmds"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -7210,6 +7282,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     59: .standard(proto: "r_get_weather_info"),
     61: .standard(proto: "sync_contacts_info"),
     62: .standard(proto: "r_get_watch_info"),
+    63: .standard(proto: "r_set_caring_reminder"),
   ]
 
   fileprivate class _StorageClass {
@@ -7275,6 +7348,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     var _rGetWeatherInfo: Caring_r_get_weather_info_t? = nil
     var _syncContactsInfo: Caring_set_contacts_t? = nil
     var _rGetWatchInfo: Caring_r_get_watch_info_t? = nil
+    var _rSetCaringReminder: Caring_r_set_caring_reminder_t? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -7343,6 +7417,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       _rGetWeatherInfo = source._rGetWeatherInfo
       _syncContactsInfo = source._syncContactsInfo
       _rGetWatchInfo = source._rGetWatchInfo
+      _rSetCaringReminder = source._rSetCaringReminder
     }
   }
 
@@ -7416,6 +7491,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._rGetWeatherInfo, !v.isInitialized {return false}
       if let v = _storage._syncContactsInfo, !v.isInitialized {return false}
       if let v = _storage._rGetWatchInfo, !v.isInitialized {return false}
+      if let v = _storage._rSetCaringReminder, !v.isInitialized {return false}
       return true
     }
   }
@@ -7490,6 +7566,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         case 60: try { try decoder.decodeSingularBytesField(value: &_storage._deviceID) }()
         case 61: try { try decoder.decodeSingularMessageField(value: &_storage._syncContactsInfo) }()
         case 62: try { try decoder.decodeSingularMessageField(value: &_storage._rGetWatchInfo) }()
+        case 63: try { try decoder.decodeSingularMessageField(value: &_storage._rSetCaringReminder) }()
         default: break
         }
       }
@@ -7684,6 +7761,9 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._rGetWatchInfo {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 62)
       }
+      if let v = _storage._rSetCaringReminder {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 63)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -7755,6 +7835,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         if _storage._rGetWeatherInfo != rhs_storage._rGetWeatherInfo {return false}
         if _storage._syncContactsInfo != rhs_storage._syncContactsInfo {return false}
         if _storage._rGetWatchInfo != rhs_storage._rGetWatchInfo {return false}
+        if _storage._rSetCaringReminder != rhs_storage._rSetCaringReminder {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -7826,5 +7907,6 @@ extension Caring_hl_cmds.cmd_t: SwiftProtobuf._ProtoNameProviding {
     58: .same(proto: "CMD_GET_MENU_SEQUENCE_DATA"),
     59: .same(proto: "CMD_SYNC_CONTACTS"),
     60: .same(proto: "CMD_GET_WATCHINFO"),
+    61: .same(proto: "CMD_SET_CARING_REMINDER"),
   ]
 }
