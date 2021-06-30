@@ -3,6 +3,7 @@ package Caring;
 option java_package = "com.ls.appserver.iot.health.vo";
 option java_outer_classname = "Caring";
 
+//天气
 message weather_t{
 	required uint32 	m_weather_num 			= 1;
 	required uint32		m_climate	 			= 2;
@@ -16,13 +17,16 @@ message weather_t{
 	
 }
 
+//闹钟
 message alarm_t{
 	required bytes 		m_alarm1_cfg 			= 1;
 	required uint32		m_alarm1_hour 			= 2;
 	required uint32		m_alarm1_min	 		= 3;
+	required string		name	 				= 4;
 
 }
 
+//用户信息
 message bind_app_info_t{
 	
 	required uint32 m_usrid				= 1;
@@ -34,6 +38,7 @@ message bind_app_info_t{
 
 }
 
+//设备信息
 message r_bind_device_t{
 	required bytes m_projno			= 1;
 	required uint32 m_hwversion		= 2;
@@ -47,10 +52,12 @@ message r_bind_device_t{
 	required uint32 m_devicemac		= 10;
 	required uint32 m_bind_operate	= 11;
 	required uint32	m_power			= 12;
+	required uint32	m_deviceimei	= 13;
+
 }
 
-
-message r_get_device_info_t{
+//获取设备信息
+message r_get_device_info_t {
 	required bytes m_projno			= 1;
 	required uint32 m_hwversion		= 2;
 	required bytes m_fwversion		= 3;
@@ -61,17 +68,23 @@ message r_get_device_info_t{
 	required uint32 m_devicename	= 8;
 	required uint32 m_battvalue		= 9;
 	required uint32 m_devicemac		= 10;
+	repeated uint32 m_deviceid 		= 11;
+	required uint32	m_deviceimei	= 12;
 
 }
 
+//手机信息
 message sync_phone_info_t{
-	required uint32 m_phonemodel		= 1;
-	required uint32 m_systemversion		= 2;
-	required uint32 m_appversion		= 3;
-	required uint32	m_language			= 4;
-
+	required uint32 m_phonemodel		= 1; //手机型号。0：ios，1:android
+	required uint32 m_systemversion		= 2; //app版本
+	required uint32 m_appversion		= 3; //手机的系统版本
+	required uint32	m_language			= 4;//语言。1:英文，2:中文
+	required uint32	m_captcha			= 5;//设备验证码，http和解绑设备时使用
+	required uint32	m_uid				= 6;//用户uid
+	required uint32	m_domain			= 7;//https请求使用的url
 }
 
+//用户信息
 message sync_user_info_t{
 	required uint32 m_usrid			= 1;
 	required uint32 m_gender		= 2;
@@ -82,16 +95,19 @@ message sync_user_info_t{
 
 }
 
+//联系人信息
 message sync_contacts_t{
-	required bytes m_contacts_num  = 1;
-	required bytes m_contacts_name  = 2;
+	required bytes m_contacts_num 	= 1; 
+	required string m_contacts_name  = 2;
 	required uint32 m_contacts_sos  = 3;
 }
 
+//通讯录
 message set_contacts_t{
 	repeated sync_contacts_t contacts = 1; 
 }
 
+//喝水提醒
 message set_drink_slot_t{
 	required uint32 m_drink_slot			= 1;
 	required uint32 m_start_time			= 2;
@@ -100,15 +116,18 @@ message set_drink_slot_t{
 	required uint32 m_nodisturb_end_time	= 5;
 }
 
+//开关设置
 message sync_switch_t{
 	required bytes m_switchs		= 1;
 }
 
+//设置心率采样间隔
 message set_hr_sample_slot_t{
 	required uint32 m_hr_slot		= 1;
 }
 
-message set_longsit_duration_t{
+//手表设置
+message set_watch_setting_t{
 	required uint32 m_longsit_duration		= 1;
 	required uint32 m_start_time			= 2;
 	required uint32 m_end_time				= 3;
@@ -127,14 +146,16 @@ message set_longsit_duration_t{
 	
 }
 
+//免打扰
 message set_notdisturb_t{
 	required bytes m_notdisturb_time_1	= 1;
 	required bytes m_notdisturb_time_2	= 2;
 }
 
+//国家信息
 message set_country_info_t{
-	required bytes m_country_name			= 1;
-	required uint32 m_country_timezone		= 2;
+	required uint32 m_country_code			= 1; //国家码。86
+	required uint32 m_country_timezone		= 2; //时区 8，最高为0代表正时区。1代表负时区
 }
 
 message set_ui_style_t{
@@ -185,9 +206,9 @@ message set_notify_warning_t{
 }
 
 message r_sync_health_data_t{
-	required uint32 	m_sync_type			= 1;
-	required uint32		m_second_start		= 2;
-	required uint32     m_second_end		= 3;
+	required uint32 	m_sync_type			= 1; //同步的数据类型。 步数(0)睡眠(1)心率(2)多运动记录(3)血氧(4)血压(5)
+	required uint32		m_distance_today	= 2; //指定距离今天天数的数据。0代表是今天， 1代表昨天 2代表大前天
+
 	
 }
 
@@ -196,8 +217,8 @@ message r_get_health_data_t{
 	required uint32		m_sn				= 2;
 	optional bytes      m_data				= 3;
 	
-	optional r_get_health_step_t step         = 4; //步数
-	optional r_get_health_hrm_t   hrm         = 5;  //心率
+	optional r_get_health_step_t  step         = 4; //步数
+	optional r_get_health_hrm_t   hrm          = 5;  //心率
 	optional r_get_health_bp_t    bp		   = 6;  //血压
 	optional r_get_health_sleep_t sleep        = 7;  //睡眠
 	optional r_get_health_spo2_t  spo2         = 8;  //睡眠
@@ -209,7 +230,7 @@ message r_get_health_step_t{
 	required uint64		totalDistance		= 2;
 	required uint32		totalKcal			= 3;
 	required uint32     duration			= 4;
-	repeated uint32  stepDetails	= 5;
+	repeated uint32  	stepDetails			= 5;
 	required uint32     recordDate 			= 6;
 }
 
@@ -218,7 +239,7 @@ message r_get_health_hrm_t{
 	required uint32		maxHeartRate			= 1;
 	required uint32		minHeartRate			= 2;
 	required uint32		averageHeartRate		= 3;
-	repeated uint32  hrsDetails		= 4;
+	repeated uint32 	hrsDetails				= 4;
 	required uint32     recordDate 				= 5;
 }
 
@@ -285,6 +306,7 @@ message r_get_weather_info_t {
 
 message set_reset_machine_t{
 	required uint32 m_factory_mode		= 1;
+	repeated uint32 m_captcha 			= 2;
 }
 
 
@@ -409,8 +431,8 @@ message r_get_active_record_data_t{
 	required uint32 m_magic_num					= 16;
 	required uint32 m_sn						= 17;
 	required bytes  m_hr_data					= 18;
-	required uint32  m_active_speed				= 19;
-	required uint32  m_active_swing				= 20;
+	required uint32 m_active_speed				= 19;
+	required uint32 m_active_swing				= 20;
 	required uint32 m_active_min_hr				= 21;
 	required uint32 m_active_skip_times			= 22;
 	required uint32 m_active_gps_count			= 23;
@@ -442,7 +464,7 @@ message set_page_switch_t{
 message set_check_gps_info_t{
 	required uint32 m_check_type	 		= 1;
 	required uint32 m_file_num				= 2;
-	required uint32  m_second				= 3;
+	required uint32 m_second				= 3;
 	required uint32 m_new_version 			= 4;
 	
 }
@@ -489,50 +511,67 @@ message r_get_menu_sequence_t {
     required uint32 m_count               = 3;
     required bytes m_data                 = 4;
 }
+//异常提醒
+message abnormal_warning_t {
+    required uint32 m_warning_type              = 1; //1 心率预警，2:跌倒预警
+    required uint32 m_time_second             	= 2;
+    required uint32 m_warning_longitude         = 3;
+    required bytes 	m_warning_latitude          = 4;
+}
 
 //关怀提醒
 message r_set_caring_reminder_t {
     required uint32 fallReminder                = 1; //跌倒提醒
 }
 
+//set 鉴权值
+message r_set_auth_t{
+	required uint32 m_value = 1;
+	required string m_domain = 2;
+}
 
+
+//4g是否在线
+message r_get_4G_onLine_t {
+	required bool m_online	= 1; 
+}
 
 //***********************app or fw send cmd****************/
 message hl_cmds {
   enum cmd_t { 
-		CMD_BIND_DEVICE 			= 1; 
-	   	CMD_GET_DEVICE_INFO			= 2; 
-	    CMD_SYNC_PHONE_INFO			= 3;
-	    CMD_SYNC_USER_INFO			= 4;
+		CMD_BIND_DEVICE 			= 1;//绑定激活
+	   	CMD_GET_DEVICE_INFO			= 2;//获取设备信息
+	    CMD_SET_AUTH_INFO			= 3;//设置Auth
+	    CMD_SYNC_USER_INFO			= 4;//同步用户信息
 		CMD_SYNC_SWITCH				= 5;
-		CMD_SET_HR_SAMPLE_SLOT		= 6;
-		CMD_SET_LONGSIT_DURATION	= 7;
+		CMD_SET_HR_SAMPLE_SLOT		= 6;//实时心率采集间隔
+		CMD_SET_WATCH_SETTING	 	= 7;//设置手表设置
 		CMD_SET_DRINK_SLOT			= 8;
-		CMD_SET_ALARMS				= 9;
+		CMD_SET_ALARMS				= 9;//设置闹钟吃药提醒
 		CMD_SET_NOTDISTURB			= 10;
-		CMD_SET_COUNTRY_INFO		= 11;
-		CMD_SET_UI_STYLE			= 12;
-		CMD_SET_SPORT_TARGET		= 13;
-		CMD_SET_TIME_FORMAT			= 14;
-		CMD_SET_METRIC_INCH			= 15;
-		CMD_SET_BRIGHT_TIMES		= 16;
-		CMD_SET_HR_WARNING			= 17;
-		CMD_GET_HR_VALUE			= 18;
+		CMD_SET_COUNTRY_INFO		= 11;//设置时区和国家
+		CMD_SET_UI_STYLE			= 12;//内置表盘设置
+		CMD_SET_SPORT_TARGET		= 13;//设置记步目标
+		CMD_SET_TIME_FORMAT			= 14;//设置时间制式
+		CMD_SET_METRIC_INCH			= 15;//设置公英制
+		CMD_SET_BRIGHT_TIMES		= 16;//异常提醒
+		CMD_SET_HR_WARNING			= 17;//设置心率预警值
+		CMD_SET_ABNORMAL_WARNING	= 18;//设置异常提醒
 		CMD_SET_NOTIFY_WARN			= 19;
-		CMD_SET_SYNC_HEALTH_DATA	= 20;
+		CMD_SET_SYNC_HEALTH_DATA	= 20;//通知上传健康数据
 		CMD_GET_POWER_VALUE			= 21;
 		CMD_SET_UPDATA_FW			= 22;
 		CMD_SET_TAKE_PIC			= 23;
 		CMD_SET_FIND_PHONE			= 24;
 		CMD_SET_FIND_DEV			= 25;
-		CMD_SET_WEATHER_INFO		= 26;
-		CMD_SET_RESET_MACHINE		= 27;
+		CMD_SET_WEATHER_INFO		= 26;//设置天气
+		CMD_SET_RESET_MACHINE		= 27;//恢复出厂设置
 		CMD_SET_SPORT_STATUS		= 28;
 		CMD_GET_HEALTH_DATA			= 29;
 		CMD_SET_MUSIC_INFO			= 30;
 		CMD_GET_SYNC_MTU			= 31;
 		CMD_SET_BIN_DATA_UPDATE		= 32;
-		CMD_FACTORY_TEST_MODE		= 33;
+		CMD_FACTORY_TEST_MODE		= 33;//进入厂测模式
 		CMD_SEND_BIG_DATA			= 34;
 		CMD_GET_REALTIME_HR			= 35;
 		CMD_SYNC_REALTIME_HR		= 36;
@@ -549,7 +588,7 @@ message hl_cmds {
 		CMD_SET_LOG_INFO_DATA		= 47;
 		CMD_GET_LOG_INFO_DATA		= 48;
 		CMD_GET_UI_HRS_VALUE		= 49;
-		CMD_SET_ALL_CONFIG_PARAM	= 50;
+		CMD_SET_ALL_CONFIG_PARAM	= 50;//设置所有开关
 		CMD_SET_NFC_OPERATE_CODE	= 51;
 		CMD_SET_PAGE_SWITCH		    = 52;
 		CMD_SET_CHECK_GPS_INFO		= 53;
@@ -557,10 +596,12 @@ message hl_cmds {
 		CMD_GET_UPDATE_SPO2_DATA	= 55;
 		CMD_GET_DIAL_CONFIG_DATA    = 56;
 		CMD_SET_WARMING_DATA        = 57;
-		CMD_GET_MENU_SEQUENCE_DATA  = 58;
-		CMD_SYNC_CONTACTS           = 59;
+		CMD_GET_MENU_SEQUENCE_DATA  = 58;//
+		CMD_SYNC_CONTACTS           = 59;//设置通讯录、紧急联系人
 		CMD_GET_WATCHINFO           = 60;
-		CMD_SET_CARING_REMINDER = 61;
+		CMD_SET_CARING_REMINDER 	= 61;//设置来电转移模式和号码
+		CMD_GET_4G_ONLINE   		= 62;
+		CMD_SET_4G_ONLIND			= 63;
 
 	}
  
@@ -568,7 +609,7 @@ message hl_cmds {
 	required bool 			response		= 2;
 	required uint32	 		seconds			= 3;  
 	required int32	 		timezone		= 45;
-	optional bytes         device_id        = 60; 
+	optional bytes         client_id        = 60; 
 
 	optional bind_app_info_t		set_app_info			= 4;
 	optional r_bind_device_t		r_bind_device 			= 5;
@@ -577,7 +618,7 @@ message hl_cmds {
 	optional sync_user_info_t		sync_user_info 			= 8;
 	optional sync_switch_t			sync_switch 			= 9;
 	optional set_hr_sample_slot_t	set_hr_sample_slot 		= 10;
-	optional set_longsit_duration_t	set_longsit_duration 	= 11;
+	optional set_watch_setting_t	set_watch_setting	 	= 11;
 	optional set_drink_slot_t		set_drink_slot 			= 12;
 	optional set_alarms_t			set_alarms 				= 13;
 	optional set_notdisturb_t		set_notdisturb 			= 14;
@@ -627,9 +668,10 @@ message hl_cmds {
 	optional r_get_weather_info_t 	  r_get_weather_info    = 59;
 	optional set_contacts_t		sync_contacts_info 		    = 61;
 	optional r_get_watch_info_t      r_get_watch_info       = 62;
-	optional r_set_caring_reminder_t r_set_caring_reminder = 63;
- 
-
+	optional r_set_caring_reminder_t r_set_caring_reminder  = 63;
+	optional r_set_auth_t 						 set_auth_t = 64;
+	optional r_get_4G_onLine_t          r_get_4G_onLine     = 65;
+	
 }
 
 
