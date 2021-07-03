@@ -20,13 +20,13 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-///手机信息
-struct Caring_set_app_info_t {
+///手机信息下发给手表    
+struct Caring_set_device_info_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  ///手机型号。0：ios，1:android
+  ///手机型号。0：ios，1:android  
   var mPhonemodel: UInt32 {
     get {return _mPhonemodel ?? 0}
     set {_mPhonemodel = newValue}
@@ -36,9 +36,9 @@ struct Caring_set_app_info_t {
   /// Clears the value of `mPhonemodel`. Subsequent reads from it will return its default value.
   mutating func clearMPhonemodel() {self._mPhonemodel = nil}
 
-  ///app版本
-  var mSystemversion: UInt32 {
-    get {return _mSystemversion ?? 0}
+  ///app版本//YJ:       
+  var mSystemversion: String {
+    get {return _mSystemversion ?? String()}
     set {_mSystemversion = newValue}
   }
   /// Returns true if `mSystemversion` has been explicitly set.
@@ -46,9 +46,9 @@ struct Caring_set_app_info_t {
   /// Clears the value of `mSystemversion`. Subsequent reads from it will return its default value.
   mutating func clearMSystemversion() {self._mSystemversion = nil}
 
-  ///手机的系统版本
-  var mAppversion: UInt32 {
-    get {return _mAppversion ?? 0}
+  ///手机的系统版本//YJ:
+  var mAppversion: String {
+    get {return _mAppversion ?? String()}
     set {_mAppversion = newValue}
   }
   /// Returns true if `mAppversion` has been explicitly set.
@@ -81,8 +81,8 @@ struct Caring_set_app_info_t {
   init() {}
 
   fileprivate var _mPhonemodel: UInt32? = nil
-  fileprivate var _mSystemversion: UInt32? = nil
-  fileprivate var _mAppversion: UInt32? = nil
+  fileprivate var _mSystemversion: String? = nil
+  fileprivate var _mAppversion: String? = nil
   fileprivate var _mLanguage: UInt32? = nil
   fileprivate var _mUid: UInt32? = nil
 }
@@ -378,6 +378,7 @@ struct Caring_set_auth_t {
   /// Clears the value of `mValue`. Subsequent reads from it will return its default value.
   mutating func clearMValue() {self._mValue = nil}
 
+  ///YJ： 40字节
   var mDomain: String {
     get {return _mDomain ?? String()}
     set {_mDomain = newValue}
@@ -401,14 +402,14 @@ struct Caring_set_user_info_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var mUsrid: UInt32 {
-    get {return _mUsrid ?? 0}
-    set {_mUsrid = newValue}
+  var mUserid: UInt32 {
+    get {return _mUserid ?? 0}
+    set {_mUserid = newValue}
   }
-  /// Returns true if `mUsrid` has been explicitly set.
-  var hasMUsrid: Bool {return self._mUsrid != nil}
-  /// Clears the value of `mUsrid`. Subsequent reads from it will return its default value.
-  mutating func clearMUsrid() {self._mUsrid = nil}
+  /// Returns true if `mUserid` has been explicitly set.
+  var hasMUserid: Bool {return self._mUserid != nil}
+  /// Clears the value of `mUserid`. Subsequent reads from it will return its default value.
+  mutating func clearMUserid() {self._mUserid = nil}
 
   var mGender: UInt32 {
     get {return _mGender ?? 0}
@@ -459,7 +460,7 @@ struct Caring_set_user_info_t {
 
   init() {}
 
-  fileprivate var _mUsrid: UInt32? = nil
+  fileprivate var _mUserid: UInt32? = nil
   fileprivate var _mGender: UInt32? = nil
   fileprivate var _mAge: UInt32? = nil
   fileprivate var _mHeight: UInt32? = nil
@@ -495,6 +496,7 @@ struct Caring_set_watch_setting_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  ///13800000000		设置久坐提醒判断的间隔 (单位：1min)
   var mLongsitDuration: UInt32 {
     get {return _mLongsitDuration ?? 0}
     set {_mLongsitDuration = newValue}
@@ -504,6 +506,7 @@ struct Caring_set_watch_setting_t {
   /// Clears the value of `mLongsitDuration`. Subsequent reads from it will return its default value.
   mutating func clearMLongsitDuration() {self._mLongsitDuration = nil}
 
+  ///15:00	string	小时:高16bit 分钟：低16bit
   var mStartTime: UInt32 {
     get {return _mStartTime ?? 0}
     set {_mStartTime = newValue}
@@ -513,6 +516,7 @@ struct Caring_set_watch_setting_t {
   /// Clears the value of `mStartTime`. Subsequent reads from it will return its default value.
   mutating func clearMStartTime() {self._mStartTime = nil}
 
+  ///string	小时:高16bit 分钟：低16bit
   var mEndTime: UInt32 {
     get {return _mEndTime ?? 0}
     set {_mEndTime = newValue}
@@ -522,68 +526,75 @@ struct Caring_set_watch_setting_t {
   /// Clears the value of `mEndTime`. Subsequent reads from it will return its default value.
   mutating func clearMEndTime() {self._mEndTime = nil}
 
-  var mDisturbState: UInt32 {
-    get {return _mDisturbState ?? 0}
-    set {_mDisturbState = newValue}
+  ///	勿扰模式开关
+  var mNodisturbState: UInt32 {
+    get {return _mNodisturbState ?? 0}
+    set {_mNodisturbState = newValue}
   }
-  /// Returns true if `mDisturbState` has been explicitly set.
-  var hasMDisturbState: Bool {return self._mDisturbState != nil}
-  /// Clears the value of `mDisturbState`. Subsequent reads from it will return its default value.
-  mutating func clearMDisturbState() {self._mDisturbState = nil}
+  /// Returns true if `mNodisturbState` has been explicitly set.
+  var hasMNodisturbState: Bool {return self._mNodisturbState != nil}
+  /// Clears the value of `mNodisturbState`. Subsequent reads from it will return its default value.
+  mutating func clearMNodisturbState() {self._mNodisturbState = nil}
 
-  var mSitStatus: UInt32 {
-    get {return _mSitStatus ?? 0}
-    set {_mSitStatus = newValue}
+  ///久坐提醒开关
+  var mLongsitState: UInt32 {
+    get {return _mLongsitState ?? 0}
+    set {_mLongsitState = newValue}
   }
-  /// Returns true if `mSitStatus` has been explicitly set.
-  var hasMSitStatus: Bool {return self._mSitStatus != nil}
-  /// Clears the value of `mSitStatus`. Subsequent reads from it will return its default value.
-  mutating func clearMSitStatus() {self._mSitStatus = nil}
+  /// Returns true if `mLongsitState` has been explicitly set.
+  var hasMLongsitState: Bool {return self._mLongsitState != nil}
+  /// Clears the value of `mLongsitState`. Subsequent reads from it will return its default value.
+  mutating func clearMLongsitState() {self._mLongsitState = nil}
 
-  var brightScreenState: UInt32 {
-    get {return _brightScreenState ?? 0}
-    set {_brightScreenState = newValue}
+  ///抬腕亮屏状态
+  var mFlipWristState: UInt32 {
+    get {return _mFlipWristState ?? 0}
+    set {_mFlipWristState = newValue}
   }
-  /// Returns true if `brightScreenState` has been explicitly set.
-  var hasBrightScreenState: Bool {return self._brightScreenState != nil}
-  /// Clears the value of `brightScreenState`. Subsequent reads from it will return its default value.
-  mutating func clearBrightScreenState() {self._brightScreenState = nil}
+  /// Returns true if `mFlipWristState` has been explicitly set.
+  var hasMFlipWristState: Bool {return self._mFlipWristState != nil}
+  /// Clears the value of `mFlipWristState`. Subsequent reads from it will return its default value.
+  mutating func clearMFlipWristState() {self._mFlipWristState = nil}
 
-  var brightScreenTime: UInt32 {
-    get {return _brightScreenTime ?? 0}
-    set {_brightScreenTime = newValue}
+  ///亮屏时长
+  var mBrightScreenTime: UInt32 {
+    get {return _mBrightScreenTime ?? 0}
+    set {_mBrightScreenTime = newValue}
   }
-  /// Returns true if `brightScreenTime` has been explicitly set.
-  var hasBrightScreenTime: Bool {return self._brightScreenTime != nil}
-  /// Clears the value of `brightScreenTime`. Subsequent reads from it will return its default value.
-  mutating func clearBrightScreenTime() {self._brightScreenTime = nil}
+  /// Returns true if `mBrightScreenTime` has been explicitly set.
+  var hasMBrightScreenTime: Bool {return self._mBrightScreenTime != nil}
+  /// Clears the value of `mBrightScreenTime`. Subsequent reads from it will return its default value.
+  mutating func clearMBrightScreenTime() {self._mBrightScreenTime = nil}
 
-  var sitDisturbState: UInt32 {
-    get {return _sitDisturbState ?? 0}
-    set {_sitDisturbState = newValue}
+  ///中午休息免打扰状态
+  var mNoonNodisturbState: UInt32 {
+    get {return _mNoonNodisturbState ?? 0}
+    set {_mNoonNodisturbState = newValue}
   }
-  /// Returns true if `sitDisturbState` has been explicitly set.
-  var hasSitDisturbState: Bool {return self._sitDisturbState != nil}
-  /// Clears the value of `sitDisturbState`. Subsequent reads from it will return its default value.
-  mutating func clearSitDisturbState() {self._sitDisturbState = nil}
+  /// Returns true if `mNoonNodisturbState` has been explicitly set.
+  var hasMNoonNodisturbState: Bool {return self._mNoonNodisturbState != nil}
+  /// Clears the value of `mNoonNodisturbState`. Subsequent reads from it will return its default value.
+  mutating func clearMNoonNodisturbState() {self._mNoonNodisturbState = nil}
 
-  var sitStartTime: UInt32 {
-    get {return _sitStartTime ?? 0}
-    set {_sitStartTime = newValue}
+  ///勿扰模式开始时间
+  var mNodisturbTimeStart: UInt32 {
+    get {return _mNodisturbTimeStart ?? 0}
+    set {_mNodisturbTimeStart = newValue}
   }
-  /// Returns true if `sitStartTime` has been explicitly set.
-  var hasSitStartTime: Bool {return self._sitStartTime != nil}
-  /// Clears the value of `sitStartTime`. Subsequent reads from it will return its default value.
-  mutating func clearSitStartTime() {self._sitStartTime = nil}
+  /// Returns true if `mNodisturbTimeStart` has been explicitly set.
+  var hasMNodisturbTimeStart: Bool {return self._mNodisturbTimeStart != nil}
+  /// Clears the value of `mNodisturbTimeStart`. Subsequent reads from it will return its default value.
+  mutating func clearMNodisturbTimeStart() {self._mNodisturbTimeStart = nil}
 
-  var sitEndTime: UInt32 {
-    get {return _sitEndTime ?? 0}
-    set {_sitEndTime = newValue}
+  ///勿扰模式结束时间
+  var mNodisturbTimeEnd: UInt32 {
+    get {return _mNodisturbTimeEnd ?? 0}
+    set {_mNodisturbTimeEnd = newValue}
   }
-  /// Returns true if `sitEndTime` has been explicitly set.
-  var hasSitEndTime: Bool {return self._sitEndTime != nil}
-  /// Clears the value of `sitEndTime`. Subsequent reads from it will return its default value.
-  mutating func clearSitEndTime() {self._sitEndTime = nil}
+  /// Returns true if `mNodisturbTimeEnd` has been explicitly set.
+  var hasMNodisturbTimeEnd: Bool {return self._mNodisturbTimeEnd != nil}
+  /// Clears the value of `mNodisturbTimeEnd`. Subsequent reads from it will return its default value.
+  mutating func clearMNodisturbTimeEnd() {self._mNodisturbTimeEnd = nil}
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -592,13 +603,13 @@ struct Caring_set_watch_setting_t {
   fileprivate var _mLongsitDuration: UInt32? = nil
   fileprivate var _mStartTime: UInt32? = nil
   fileprivate var _mEndTime: UInt32? = nil
-  fileprivate var _mDisturbState: UInt32? = nil
-  fileprivate var _mSitStatus: UInt32? = nil
-  fileprivate var _brightScreenState: UInt32? = nil
-  fileprivate var _brightScreenTime: UInt32? = nil
-  fileprivate var _sitDisturbState: UInt32? = nil
-  fileprivate var _sitStartTime: UInt32? = nil
-  fileprivate var _sitEndTime: UInt32? = nil
+  fileprivate var _mNodisturbState: UInt32? = nil
+  fileprivate var _mLongsitState: UInt32? = nil
+  fileprivate var _mFlipWristState: UInt32? = nil
+  fileprivate var _mBrightScreenTime: UInt32? = nil
+  fileprivate var _mNoonNodisturbState: UInt32? = nil
+  fileprivate var _mNodisturbTimeStart: UInt32? = nil
+  fileprivate var _mNodisturbTimeEnd: UInt32? = nil
 }
 
 ///闹钟List
@@ -620,6 +631,7 @@ struct Caring_alarm_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  ///YJ：一个byte就可以了，不需要bytes？
   var mAlarm1Cfg: Data {
     get {return _mAlarm1Cfg ?? Data()}
     set {_mAlarm1Cfg = newValue}
@@ -647,14 +659,15 @@ struct Caring_alarm_t {
   /// Clears the value of `mAlarm1Min`. Subsequent reads from it will return its default value.
   mutating func clearMAlarm1Min() {self._mAlarm1Min = nil}
 
-  var name: String {
-    get {return _name ?? String()}
-    set {_name = newValue}
+  ///YJ:最长长度
+  var mAlarm1Name: String {
+    get {return _mAlarm1Name ?? String()}
+    set {_mAlarm1Name = newValue}
   }
-  /// Returns true if `name` has been explicitly set.
-  var hasName: Bool {return self._name != nil}
-  /// Clears the value of `name`. Subsequent reads from it will return its default value.
-  mutating func clearName() {self._name = nil}
+  /// Returns true if `mAlarm1Name` has been explicitly set.
+  var hasMAlarm1Name: Bool {return self._mAlarm1Name != nil}
+  /// Clears the value of `mAlarm1Name`. Subsequent reads from it will return its default value.
+  mutating func clearMAlarm1Name() {self._mAlarm1Name = nil}
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -663,7 +676,7 @@ struct Caring_alarm_t {
   fileprivate var _mAlarm1Cfg: Data? = nil
   fileprivate var _mAlarm1Hour: UInt32? = nil
   fileprivate var _mAlarm1Min: UInt32? = nil
-  fileprivate var _name: String? = nil
+  fileprivate var _mAlarm1Name: String? = nil
 }
 
 ///国家信息
@@ -893,7 +906,7 @@ struct Caring_set_abnormal_warning_t {
 
 ///----------------------------------------------
 ///
-///通知上传健康数据
+///上传健康数据
 struct Caring_r_get_health_data_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -908,6 +921,7 @@ struct Caring_r_get_health_data_t {
   /// Clears the value of `mErrCode`. Subsequent reads from it will return its default value.
   mutating func clearMErrCode() {_uniqueStorage()._mErrCode = nil}
 
+  ///YJ:放什么数据？   长度1   sn = ffff 就是结束 65535
   var mSn: UInt32 {
     get {return _storage._mSn ?? 0}
     set {_uniqueStorage()._mSn = newValue}
@@ -917,6 +931,7 @@ struct Caring_r_get_health_data_t {
   /// Clears the value of `mSn`. Subsequent reads from it will return its default value.
   mutating func clearMSn() {_uniqueStorage()._mSn = nil}
 
+  ///YJ:放什么数据？   在4G 上没有用。在蓝牙上 根据DN 标识做data拼接 
   var mData: Data {
     get {return _storage._mData ?? Data()}
     set {_uniqueStorage()._mData = newValue}
@@ -966,7 +981,7 @@ struct Caring_r_get_health_data_t {
   /// Clears the value of `sleep`. Subsequent reads from it will return its default value.
   mutating func clearSleep() {_uniqueStorage()._sleep = nil}
 
-  ///睡眠
+  ///血氧
   var spo2: Caring_r_get_health_spo2_t {
     get {return _storage._spo2 ?? Caring_r_get_health_spo2_t()}
     set {_uniqueStorage()._spo2 = newValue}
@@ -1107,7 +1122,7 @@ struct Caring_r_get_health_bp_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  ///最高血压
+  ///最高血压//YJ：有舒张压和收缩压，如何定义最高最低？
   var maxBp: Caring_r_get_bp {
     get {return _maxBp ?? Caring_r_get_bp()}
     set {_maxBp = newValue}
@@ -1432,6 +1447,15 @@ struct Caring_set_reset_machine_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  var mAuth: UInt32 {
+    get {return _mAuth ?? 0}
+    set {_mAuth = newValue}
+  }
+  /// Returns true if `mAuth` has been explicitly set.
+  var hasMAuth: Bool {return self._mAuth != nil}
+  /// Clears the value of `mAuth`. Subsequent reads from it will return its default value.
+  mutating func clearMAuth() {self._mAuth = nil}
+
   var mFactoryMode: UInt32 {
     get {return _mFactoryMode ?? 0}
     set {_mFactoryMode = newValue}
@@ -1441,12 +1465,11 @@ struct Caring_set_reset_machine_t {
   /// Clears the value of `mFactoryMode`. Subsequent reads from it will return its default value.
   mutating func clearMFactoryMode() {self._mFactoryMode = nil}
 
-  var mCaptcha: [UInt32] = []
-
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
+  fileprivate var _mAuth: UInt32? = nil
   fileprivate var _mFactoryMode: UInt32? = nil
 }
 
@@ -1456,6 +1479,7 @@ struct Caring_sync_contacts_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  ///YJ：最长长度20汉字
   var mContactsNum: Data {
     get {return _mContactsNum ?? Data()}
     set {_mContactsNum = newValue}
@@ -1465,6 +1489,7 @@ struct Caring_sync_contacts_t {
   /// Clears the value of `mContactsNum`. Subsequent reads from it will return its default value.
   mutating func clearMContactsNum() {self._mContactsNum = nil}
 
+  ///YJ：最长长度30汉字
   var mContactsName: String {
     get {return _mContactsName ?? String()}
     set {_mContactsName = newValue}
@@ -1591,14 +1616,14 @@ struct Caring_get_menu_sequence_t {
   fileprivate var _mType: UInt32? = nil
 }
 
-///4g是否在线
-struct Caring_r_get_4G_onLine_t {
+///4G在线下线状态通知
+struct Caring_r_get_4G_online_off_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var mOnline: Bool {
-    get {return _mOnline ?? false}
+  var mOnline: UInt32 {
+    get {return _mOnline ?? 0}
     set {_mOnline = newValue}
   }
   /// Returns true if `mOnline` has been explicitly set.
@@ -1606,14 +1631,24 @@ struct Caring_r_get_4G_onLine_t {
   /// Clears the value of `mOnline`. Subsequent reads from it will return its default value.
   mutating func clearMOnline() {self._mOnline = nil}
 
+  var mTimeSecond: UInt32 {
+    get {return _mTimeSecond ?? 0}
+    set {_mTimeSecond = newValue}
+  }
+  /// Returns true if `mTimeSecond` has been explicitly set.
+  var hasMTimeSecond: Bool {return self._mTimeSecond != nil}
+  /// Clears the value of `mTimeSecond`. Subsequent reads from it will return its default value.
+  mutating func clearMTimeSecond() {self._mTimeSecond = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
-  fileprivate var _mOnline: Bool? = nil
+  fileprivate var _mOnline: UInt32? = nil
+  fileprivate var _mTimeSecond: UInt32? = nil
 }
 
-///跌倒提醒 pb有 文档没
+///跌倒          暂无需求
 struct Caring_r_set_caring_reminder_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -1636,7 +1671,7 @@ struct Caring_r_set_caring_reminder_t {
   fileprivate var _fallReminder: UInt32? = nil
 }
 
-///血压 pb有 文档没
+///血压            暂无需求
 struct Caring_r_get_bp {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -1681,8 +1716,8 @@ struct Caring_r_get_bp {
   fileprivate var _measureTime: UInt32? = nil
 }
 
-///获取历史数据。 pb有 文档没
-struct Caring_r_sync_health_data_t {
+/// 通知发布健康数据。 
+struct Caring_set_sync_health_data_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1715,7 +1750,7 @@ struct Caring_r_sync_health_data_t {
   fileprivate var _mDistanceToday: UInt32? = nil
 }
 
-///设置来电转移模式和号码  文档有。 pb没
+///设置来电转移模式和号码   暂无需求
 struct Caring_set_transfer_phone_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -1883,6 +1918,7 @@ struct Caring_set_notdisturb_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  ///YJ：类型是否正常？
   var mNotdisturbTime1: Data {
     get {return _mNotdisturbTime1 ?? Data()}
     set {_mNotdisturbTime1 = newValue}
@@ -1892,6 +1928,7 @@ struct Caring_set_notdisturb_t {
   /// Clears the value of `mNotdisturbTime1`. Subsequent reads from it will return its default value.
   mutating func clearMNotdisturbTime1() {self._mNotdisturbTime1 = nil}
 
+  ///YJ：类型是否正常？
   var mNotdisturbTime2: Data {
     get {return _mNotdisturbTime2 ?? Data()}
     set {_mNotdisturbTime2 = newValue}
@@ -3411,6 +3448,7 @@ struct Caring_set_menu_sequence_t {
   /// Clears the value of `mCount`. Subsequent reads from it will return its default value.
   mutating func clearMCount() {self._mCount = nil}
 
+  ///YJ：最长长度
   var mData: Data {
     get {return _mData ?? Data()}
     set {_mData = newValue}
@@ -3480,7 +3518,7 @@ struct Caring_r_get_menu_sequence_t {
   fileprivate var _mData: Data? = nil
 }
 
-///***********************app or fw send cmd****************/
+///***********************app or fw send cmd****************
 struct Caring_hl_cmds {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -3523,6 +3561,7 @@ struct Caring_hl_cmds {
   /// Clears the value of `timezone`. Subsequent reads from it will return its default value.
   mutating func clearTimezone() {_uniqueStorage()._timezone = nil}
 
+  ///YJ：最长长度
   var clientID: Data {
     get {return _storage._clientID ?? Data()}
     set {_uniqueStorage()._clientID = newValue}
@@ -3559,8 +3598,8 @@ struct Caring_hl_cmds {
   /// Clears the value of `rGetDeviceInfo`. Subsequent reads from it will return its default value.
   mutating func clearRGetDeviceInfo() {_uniqueStorage()._rGetDeviceInfo = nil}
 
-  var syncPhoneInfo: Caring_set_app_info_t {
-    get {return _storage._syncPhoneInfo ?? Caring_set_app_info_t()}
+  var syncPhoneInfo: Caring_set_device_info_t {
+    get {return _storage._syncPhoneInfo ?? Caring_set_device_info_t()}
     set {_uniqueStorage()._syncPhoneInfo = newValue}
   }
   /// Returns true if `syncPhoneInfo` has been explicitly set.
@@ -3712,8 +3751,8 @@ struct Caring_hl_cmds {
   /// Clears the value of `setNotifyWarnInfo`. Subsequent reads from it will return its default value.
   mutating func clearSetNotifyWarnInfo() {_uniqueStorage()._setNotifyWarnInfo = nil}
 
-  var setHealthDataInfo: Caring_r_sync_health_data_t {
-    get {return _storage._setHealthDataInfo ?? Caring_r_sync_health_data_t()}
+  var setHealthDataInfo: Caring_set_sync_health_data_t {
+    get {return _storage._setHealthDataInfo ?? Caring_set_sync_health_data_t()}
     set {_uniqueStorage()._setHealthDataInfo = newValue}
   }
   /// Returns true if `setHealthDataInfo` has been explicitly set.
@@ -4063,15 +4102,6 @@ struct Caring_hl_cmds {
   /// Clears the value of `setAuth`. Subsequent reads from it will return its default value.
   mutating func clearSetAuth() {_uniqueStorage()._setAuth = nil}
 
-  var rGet4GOnLine: Caring_r_get_4G_onLine_t {
-    get {return _storage._rGet4GOnLine ?? Caring_r_get_4G_onLine_t()}
-    set {_uniqueStorage()._rGet4GOnLine = newValue}
-  }
-  /// Returns true if `rGet4GOnLine` has been explicitly set.
-  var hasRGet4GOnLine: Bool {return _storage._rGet4GOnLine != nil}
-  /// Clears the value of `rGet4GOnLine`. Subsequent reads from it will return its default value.
-  mutating func clearRGet4GOnLine() {_uniqueStorage()._rGet4GOnLine = nil}
-
   var setTransferPhone: Caring_set_transfer_phone_t {
     get {return _storage._setTransferPhone ?? Caring_set_transfer_phone_t()}
     set {_uniqueStorage()._setTransferPhone = newValue}
@@ -4089,6 +4119,16 @@ struct Caring_hl_cmds {
   var hasSetAbnormalWarning: Bool {return _storage._setAbnormalWarning != nil}
   /// Clears the value of `setAbnormalWarning`. Subsequent reads from it will return its default value.
   mutating func clearSetAbnormalWarning() {_uniqueStorage()._setAbnormalWarning = nil}
+
+  ///4G在线下线状态通知
+  var rGet4GOnlineOff: Caring_r_get_4G_online_off_t {
+    get {return _storage._rGet4GOnlineOff ?? Caring_r_get_4G_online_off_t()}
+    set {_uniqueStorage()._rGet4GOnlineOff = newValue}
+  }
+  /// Returns true if `rGet4GOnlineOff` has been explicitly set.
+  var hasRGet4GOnlineOff: Bool {return _storage._rGet4GOnlineOff != nil}
+  /// Clears the value of `rGet4GOnlineOff`. Subsequent reads from it will return its default value.
+  mutating func clearRGet4GOnlineOff() {_uniqueStorage()._rGet4GOnlineOff = nil}
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -4111,7 +4151,7 @@ struct Caring_hl_cmds {
     ///实时心率采集间隔
     case cmdSetHrSampleSlot // = 6
 
-    ///设置手表设置
+    ///设置手表设置      (0x07)
     case cmdSetWatchSetting // = 7
     case cmdSetDrinkSlot // = 8
 
@@ -4119,32 +4159,32 @@ struct Caring_hl_cmds {
     case cmdSetAlarms // = 9
     case cmdSetNotdisturb // = 10
 
-    ///设置时区和国家
+    ///设置时区和国家  (0x0B)
     case cmdSetCountryInfo // = 11
 
-    ///内置表盘设置
+    ///内置表盘设置    (0x0C)
     case cmdSetUiStyle // = 12
 
-    ///设置记步目标
+    ///设置记步目标    (0x0D)
     case cmdSetSportTarget // = 13
 
-    ///设置时间制式
+    ///设置时间制式    (0x0E)
     case cmdSetTimeFormat // = 14
 
-    ///设置公英制
+    ///设置公英制      (0x0F)
     case cmdSetMetricInch // = 15
 
     ///异常提醒
     case cmdSetBrightTimes // = 16
 
-    ///设置心率预警值
+    ///设置心率预警值  (0x11)
     case cmdSetHrWarning // = 17
 
     ///设置异常提醒
     case cmdSetAbnormalWarning // = 18
     case cmdSetNotifyWarn // = 19
 
-    ///通知上传健康数据
+    ///通知发布健康数据  (0x14)
     case cmdSetSyncHealthData // = 20
     case cmdGetPowerValue // = 21
     case cmdSetUpdataFw // = 22
@@ -4152,10 +4192,10 @@ struct Caring_hl_cmds {
     case cmdSetFindPhone // = 24
     case cmdSetFindDev // = 25
 
-    ///设置天气
+    ///设置天气    (0x1A)
     case cmdSetWeatherInfo // = 26
 
-    ///恢复出厂设置
+    ///恢复出厂设置  (0x1B)
     case cmdSetResetMachine // = 27
     case cmdSetSportStatus // = 28
     case cmdGetHealthData // = 29
@@ -4191,18 +4231,26 @@ struct Caring_hl_cmds {
     case cmdGetUpdateSpo2Data // = 55
     case cmdGetDialConfigData // = 56
     case cmdSetWarmingData // = 57
-    case cmdGetMenuSequenceData // = 58
 
-    ///设置通讯录、紧急联系人
+    ///	设置一级页面的顺序
+    case cmdSetMenuSequenceData // = 58
+
+    ///设置通讯录、紧急联系人 (0x3B)
     case cmdSyncContacts // = 59
     case cmdGetWatchinfo // = 60
 
-    ///设置来电转移模式和号码
+    ///设置来电转移模式和号码//YJ：命名不妥
     case cmdSetCaringReminder // = 61
     case cmdGet4GOnline // = 62
     case cmdSet4GOnlind // = 63
     case cmdSetTransfer // = 64
     case cmdAbnormalWarining // = 65
+
+    ///4G在线下线状态通知
+    case cmdOnlineNotify // = 68
+
+    ///判断4G是否在线 (0x45)
+    case cmdOnlineOrNot // = 69
 
     init() {
       self = .cmdBindDevice
@@ -4267,7 +4315,7 @@ struct Caring_hl_cmds {
       case 55: self = .cmdGetUpdateSpo2Data
       case 56: self = .cmdGetDialConfigData
       case 57: self = .cmdSetWarmingData
-      case 58: self = .cmdGetMenuSequenceData
+      case 58: self = .cmdSetMenuSequenceData
       case 59: self = .cmdSyncContacts
       case 60: self = .cmdGetWatchinfo
       case 61: self = .cmdSetCaringReminder
@@ -4275,6 +4323,8 @@ struct Caring_hl_cmds {
       case 63: self = .cmdSet4GOnlind
       case 64: self = .cmdSetTransfer
       case 65: self = .cmdAbnormalWarining
+      case 68: self = .cmdOnlineNotify
+      case 69: self = .cmdOnlineOrNot
       default: return nil
       }
     }
@@ -4338,7 +4388,7 @@ struct Caring_hl_cmds {
       case .cmdGetUpdateSpo2Data: return 55
       case .cmdGetDialConfigData: return 56
       case .cmdSetWarmingData: return 57
-      case .cmdGetMenuSequenceData: return 58
+      case .cmdSetMenuSequenceData: return 58
       case .cmdSyncContacts: return 59
       case .cmdGetWatchinfo: return 60
       case .cmdSetCaringReminder: return 61
@@ -4346,6 +4396,8 @@ struct Caring_hl_cmds {
       case .cmdSet4GOnlind: return 63
       case .cmdSetTransfer: return 64
       case .cmdAbnormalWarining: return 65
+      case .cmdOnlineNotify: return 68
+      case .cmdOnlineOrNot: return 69
       }
     }
 
@@ -4368,8 +4420,8 @@ extension Caring_hl_cmds.cmd_t: CaseIterable {
 
 fileprivate let _protobuf_package = "Caring"
 
-extension Caring_set_app_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".set_app_info_t"
+extension Caring_set_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".set_device_info_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "m_phonemodel"),
     2: .standard(proto: "m_systemversion"),
@@ -4394,8 +4446,8 @@ extension Caring_set_app_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mPhonemodel) }()
-      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mSystemversion) }()
-      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mAppversion) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self._mSystemversion) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._mAppversion) }()
       case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mLanguage) }()
       case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mUid) }()
       default: break
@@ -4408,10 +4460,10 @@ extension Caring_set_app_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
     if let v = self._mSystemversion {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
     if let v = self._mAppversion {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
     }
     if let v = self._mLanguage {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
@@ -4422,7 +4474,7 @@ extension Caring_set_app_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Caring_set_app_info_t, rhs: Caring_set_app_info_t) -> Bool {
+  static func ==(lhs: Caring_set_device_info_t, rhs: Caring_set_device_info_t) -> Bool {
     if lhs._mPhonemodel != rhs._mPhonemodel {return false}
     if lhs._mSystemversion != rhs._mSystemversion {return false}
     if lhs._mAppversion != rhs._mAppversion {return false}
@@ -4721,7 +4773,7 @@ extension Caring_set_auth_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
 extension Caring_set_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".set_user_info_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "m_usrid"),
+    1: .standard(proto: "m_userid"),
     2: .standard(proto: "m_gender"),
     3: .standard(proto: "m_age"),
     4: .standard(proto: "m_height"),
@@ -4730,7 +4782,7 @@ extension Caring_set_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   ]
 
   public var isInitialized: Bool {
-    if self._mUsrid == nil {return false}
+    if self._mUserid == nil {return false}
     if self._mGender == nil {return false}
     if self._mAge == nil {return false}
     if self._mHeight == nil {return false}
@@ -4745,7 +4797,7 @@ extension Caring_set_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mUsrid) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mUserid) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mGender) }()
       case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mAge) }()
       case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mHeight) }()
@@ -4757,7 +4809,7 @@ extension Caring_set_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._mUsrid {
+    if let v = self._mUserid {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
     if let v = self._mGender {
@@ -4779,7 +4831,7 @@ extension Caring_set_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 
   static func ==(lhs: Caring_set_user_info_t, rhs: Caring_set_user_info_t) -> Bool {
-    if lhs._mUsrid != rhs._mUsrid {return false}
+    if lhs._mUserid != rhs._mUserid {return false}
     if lhs._mGender != rhs._mGender {return false}
     if lhs._mAge != rhs._mAge {return false}
     if lhs._mHeight != rhs._mHeight {return false}
@@ -4833,26 +4885,26 @@ extension Caring_set_watch_setting_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
     1: .standard(proto: "m_longsit_duration"),
     2: .standard(proto: "m_start_time"),
     3: .standard(proto: "m_end_time"),
-    4: .standard(proto: "m_disturb_state"),
-    5: .standard(proto: "m_sit_status"),
-    6: .standard(proto: "bright_screen_state"),
-    7: .standard(proto: "bright_screen_time"),
-    8: .standard(proto: "sit_disturb_state"),
-    9: .standard(proto: "sit_start_time"),
-    10: .standard(proto: "sit_end_time"),
+    4: .standard(proto: "m_nodisturb_state"),
+    5: .standard(proto: "m_longsit_state"),
+    6: .standard(proto: "m_flip_wrist_state"),
+    7: .standard(proto: "m_bright_screen_time"),
+    8: .standard(proto: "m_noon_nodisturb_state"),
+    9: .standard(proto: "m_nodisturb_time_start"),
+    10: .standard(proto: "m_nodisturb_time_end"),
   ]
 
   public var isInitialized: Bool {
     if self._mLongsitDuration == nil {return false}
     if self._mStartTime == nil {return false}
     if self._mEndTime == nil {return false}
-    if self._mDisturbState == nil {return false}
-    if self._mSitStatus == nil {return false}
-    if self._brightScreenState == nil {return false}
-    if self._brightScreenTime == nil {return false}
-    if self._sitDisturbState == nil {return false}
-    if self._sitStartTime == nil {return false}
-    if self._sitEndTime == nil {return false}
+    if self._mNodisturbState == nil {return false}
+    if self._mLongsitState == nil {return false}
+    if self._mFlipWristState == nil {return false}
+    if self._mBrightScreenTime == nil {return false}
+    if self._mNoonNodisturbState == nil {return false}
+    if self._mNodisturbTimeStart == nil {return false}
+    if self._mNodisturbTimeEnd == nil {return false}
     return true
   }
 
@@ -4865,13 +4917,13 @@ extension Caring_set_watch_setting_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
       case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mLongsitDuration) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mStartTime) }()
       case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mEndTime) }()
-      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mDisturbState) }()
-      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mSitStatus) }()
-      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._brightScreenState) }()
-      case 7: try { try decoder.decodeSingularUInt32Field(value: &self._brightScreenTime) }()
-      case 8: try { try decoder.decodeSingularUInt32Field(value: &self._sitDisturbState) }()
-      case 9: try { try decoder.decodeSingularUInt32Field(value: &self._sitStartTime) }()
-      case 10: try { try decoder.decodeSingularUInt32Field(value: &self._sitEndTime) }()
+      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mNodisturbState) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mLongsitState) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mFlipWristState) }()
+      case 7: try { try decoder.decodeSingularUInt32Field(value: &self._mBrightScreenTime) }()
+      case 8: try { try decoder.decodeSingularUInt32Field(value: &self._mNoonNodisturbState) }()
+      case 9: try { try decoder.decodeSingularUInt32Field(value: &self._mNodisturbTimeStart) }()
+      case 10: try { try decoder.decodeSingularUInt32Field(value: &self._mNodisturbTimeEnd) }()
       default: break
       }
     }
@@ -4887,25 +4939,25 @@ extension Caring_set_watch_setting_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if let v = self._mEndTime {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
     }
-    if let v = self._mDisturbState {
+    if let v = self._mNodisturbState {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
     }
-    if let v = self._mSitStatus {
+    if let v = self._mLongsitState {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
     }
-    if let v = self._brightScreenState {
+    if let v = self._mFlipWristState {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
     }
-    if let v = self._brightScreenTime {
+    if let v = self._mBrightScreenTime {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 7)
     }
-    if let v = self._sitDisturbState {
+    if let v = self._mNoonNodisturbState {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 8)
     }
-    if let v = self._sitStartTime {
+    if let v = self._mNodisturbTimeStart {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 9)
     }
-    if let v = self._sitEndTime {
+    if let v = self._mNodisturbTimeEnd {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 10)
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -4915,13 +4967,13 @@ extension Caring_set_watch_setting_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if lhs._mLongsitDuration != rhs._mLongsitDuration {return false}
     if lhs._mStartTime != rhs._mStartTime {return false}
     if lhs._mEndTime != rhs._mEndTime {return false}
-    if lhs._mDisturbState != rhs._mDisturbState {return false}
-    if lhs._mSitStatus != rhs._mSitStatus {return false}
-    if lhs._brightScreenState != rhs._brightScreenState {return false}
-    if lhs._brightScreenTime != rhs._brightScreenTime {return false}
-    if lhs._sitDisturbState != rhs._sitDisturbState {return false}
-    if lhs._sitStartTime != rhs._sitStartTime {return false}
-    if lhs._sitEndTime != rhs._sitEndTime {return false}
+    if lhs._mNodisturbState != rhs._mNodisturbState {return false}
+    if lhs._mLongsitState != rhs._mLongsitState {return false}
+    if lhs._mFlipWristState != rhs._mFlipWristState {return false}
+    if lhs._mBrightScreenTime != rhs._mBrightScreenTime {return false}
+    if lhs._mNoonNodisturbState != rhs._mNoonNodisturbState {return false}
+    if lhs._mNodisturbTimeStart != rhs._mNodisturbTimeStart {return false}
+    if lhs._mNodisturbTimeEnd != rhs._mNodisturbTimeEnd {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -4970,14 +5022,14 @@ extension Caring_alarm_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     1: .standard(proto: "m_alarm1_cfg"),
     2: .standard(proto: "m_alarm1_hour"),
     3: .standard(proto: "m_alarm1_min"),
-    4: .same(proto: "name"),
+    4: .standard(proto: "m_alarm1_name"),
   ]
 
   public var isInitialized: Bool {
     if self._mAlarm1Cfg == nil {return false}
     if self._mAlarm1Hour == nil {return false}
     if self._mAlarm1Min == nil {return false}
-    if self._name == nil {return false}
+    if self._mAlarm1Name == nil {return false}
     return true
   }
 
@@ -4990,7 +5042,7 @@ extension Caring_alarm_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       case 1: try { try decoder.decodeSingularBytesField(value: &self._mAlarm1Cfg) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mAlarm1Hour) }()
       case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mAlarm1Min) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self._name) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self._mAlarm1Name) }()
       default: break
       }
     }
@@ -5006,7 +5058,7 @@ extension Caring_alarm_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if let v = self._mAlarm1Min {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
     }
-    if let v = self._name {
+    if let v = self._mAlarm1Name {
       try visitor.visitSingularStringField(value: v, fieldNumber: 4)
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -5016,7 +5068,7 @@ extension Caring_alarm_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if lhs._mAlarm1Cfg != rhs._mAlarm1Cfg {return false}
     if lhs._mAlarm1Hour != rhs._mAlarm1Hour {return false}
     if lhs._mAlarm1Min != rhs._mAlarm1Min {return false}
-    if lhs._name != rhs._name {return false}
+    if lhs._mAlarm1Name != rhs._mAlarm1Name {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -5926,11 +5978,12 @@ extension Caring_weather_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
 extension Caring_set_reset_machine_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".set_reset_machine_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "m_factory_mode"),
-    2: .standard(proto: "m_captcha"),
+    1: .standard(proto: "m_auth"),
+    2: .standard(proto: "m_factory_mode"),
   ]
 
   public var isInitialized: Bool {
+    if self._mAuth == nil {return false}
     if self._mFactoryMode == nil {return false}
     return true
   }
@@ -5941,26 +5994,26 @@ extension Caring_set_reset_machine_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mFactoryMode) }()
-      case 2: try { try decoder.decodeRepeatedUInt32Field(value: &self.mCaptcha) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mAuth) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mFactoryMode) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._mFactoryMode {
+    if let v = self._mAuth {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
-    if !self.mCaptcha.isEmpty {
-      try visitor.visitRepeatedUInt32Field(value: self.mCaptcha, fieldNumber: 2)
+    if let v = self._mFactoryMode {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Caring_set_reset_machine_t, rhs: Caring_set_reset_machine_t) -> Bool {
+    if lhs._mAuth != rhs._mAuth {return false}
     if lhs._mFactoryMode != rhs._mFactoryMode {return false}
-    if lhs.mCaptcha != rhs.mCaptcha {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -6179,14 +6232,16 @@ extension Caring_get_menu_sequence_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension Caring_r_get_4G_onLine_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".r_get_4G_onLine_t"
+extension Caring_r_get_4G_online_off_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".r_get_4G_online_off_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "m_online"),
+    2: .standard(proto: "m_time_second"),
   ]
 
   public var isInitialized: Bool {
     if self._mOnline == nil {return false}
+    if self._mTimeSecond == nil {return false}
     return true
   }
 
@@ -6196,7 +6251,8 @@ extension Caring_r_get_4G_onLine_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularBoolField(value: &self._mOnline) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mOnline) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mTimeSecond) }()
       default: break
       }
     }
@@ -6204,13 +6260,17 @@ extension Caring_r_get_4G_onLine_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._mOnline {
-      try visitor.visitSingularBoolField(value: v, fieldNumber: 1)
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
+    }
+    if let v = self._mTimeSecond {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Caring_r_get_4G_onLine_t, rhs: Caring_r_get_4G_onLine_t) -> Bool {
+  static func ==(lhs: Caring_r_get_4G_online_off_t, rhs: Caring_r_get_4G_online_off_t) -> Bool {
     if lhs._mOnline != rhs._mOnline {return false}
+    if lhs._mTimeSecond != rhs._mTimeSecond {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -6304,8 +6364,8 @@ extension Caring_r_get_bp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
   }
 }
 
-extension Caring_r_sync_health_data_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".r_sync_health_data_t"
+extension Caring_set_sync_health_data_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".set_sync_health_data_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "m_sync_type"),
     2: .standard(proto: "m_distance_today"),
@@ -6340,7 +6400,7 @@ extension Caring_r_sync_health_data_t: SwiftProtobuf.Message, SwiftProtobuf._Mes
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Caring_r_sync_health_data_t, rhs: Caring_r_sync_health_data_t) -> Bool {
+  static func ==(lhs: Caring_set_sync_health_data_t, rhs: Caring_set_sync_health_data_t) -> Bool {
     if lhs._mSyncType != rhs._mSyncType {return false}
     if lhs._mDistanceToday != rhs._mDistanceToday {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -8628,9 +8688,9 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     62: .standard(proto: "r_get_watch_info"),
     63: .standard(proto: "r_set_caring_reminder"),
     64: .standard(proto: "set_auth"),
-    65: .standard(proto: "r_get_4G_onLine"),
     66: .standard(proto: "set_transfer_phone"),
     67: .standard(proto: "set_abnormal_warning"),
+    68: .standard(proto: "r_get_4G_online_off"),
   ]
 
   fileprivate class _StorageClass {
@@ -8642,7 +8702,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     var _setAppInfo: Caring_set_user_info_t? = nil
     var _rBindDevice: Caring_r_bind_device_t? = nil
     var _rGetDeviceInfo: Caring_get_device_info_t? = nil
-    var _syncPhoneInfo: Caring_set_app_info_t? = nil
+    var _syncPhoneInfo: Caring_set_device_info_t? = nil
     var _syncUserInfo: Caring_sync_user_info_t? = nil
     var _syncSwitch: Caring_sync_switch_t? = nil
     var _setHrSampleSlot: Caring_set_hr_sample_slot_t? = nil
@@ -8659,7 +8719,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     var _setSetHrWarning: Caring_set_hr_warning_t? = nil
     var _rGetHrValue: Caring_r_get_hr_value_t? = nil
     var _setNotifyWarnInfo: Caring_set_notify_warning_t? = nil
-    var _setHealthDataInfo: Caring_r_sync_health_data_t? = nil
+    var _setHealthDataInfo: Caring_set_sync_health_data_t? = nil
     var _rGetPowerValue: Caring_r_get_power_t? = nil
     var _setUpdataFw: Caring_set_updata_fw_t? = nil
     var _setWeatherInfo: Caring_set_weather_info_t? = nil
@@ -8698,9 +8758,9 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     var _rGetWatchInfo: Caring_r_get_watch_info_t? = nil
     var _rSetCaringReminder: Caring_r_set_caring_reminder_t? = nil
     var _setAuth: Caring_set_auth_t? = nil
-    var _rGet4GOnLine: Caring_r_get_4G_onLine_t? = nil
     var _setTransferPhone: Caring_set_transfer_phone_t? = nil
     var _setAbnormalWarning: Caring_set_abnormal_warning_t? = nil
+    var _rGet4GOnlineOff: Caring_r_get_4G_online_off_t? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -8771,9 +8831,9 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       _rGetWatchInfo = source._rGetWatchInfo
       _rSetCaringReminder = source._rSetCaringReminder
       _setAuth = source._setAuth
-      _rGet4GOnLine = source._rGet4GOnLine
       _setTransferPhone = source._setTransferPhone
       _setAbnormalWarning = source._setAbnormalWarning
+      _rGet4GOnlineOff = source._rGet4GOnlineOff
     }
   }
 
@@ -8849,9 +8909,9 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._rGetWatchInfo, !v.isInitialized {return false}
       if let v = _storage._rSetCaringReminder, !v.isInitialized {return false}
       if let v = _storage._setAuth, !v.isInitialized {return false}
-      if let v = _storage._rGet4GOnLine, !v.isInitialized {return false}
       if let v = _storage._setTransferPhone, !v.isInitialized {return false}
       if let v = _storage._setAbnormalWarning, !v.isInitialized {return false}
+      if let v = _storage._rGet4GOnlineOff, !v.isInitialized {return false}
       return true
     }
   }
@@ -8928,9 +8988,9 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         case 62: try { try decoder.decodeSingularMessageField(value: &_storage._rGetWatchInfo) }()
         case 63: try { try decoder.decodeSingularMessageField(value: &_storage._rSetCaringReminder) }()
         case 64: try { try decoder.decodeSingularMessageField(value: &_storage._setAuth) }()
-        case 65: try { try decoder.decodeSingularMessageField(value: &_storage._rGet4GOnLine) }()
         case 66: try { try decoder.decodeSingularMessageField(value: &_storage._setTransferPhone) }()
         case 67: try { try decoder.decodeSingularMessageField(value: &_storage._setAbnormalWarning) }()
+        case 68: try { try decoder.decodeSingularMessageField(value: &_storage._rGet4GOnlineOff) }()
         default: break
         }
       }
@@ -9131,14 +9191,14 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._setAuth {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 64)
       }
-      if let v = _storage._rGet4GOnLine {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 65)
-      }
       if let v = _storage._setTransferPhone {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 66)
       }
       if let v = _storage._setAbnormalWarning {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 67)
+      }
+      if let v = _storage._rGet4GOnlineOff {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 68)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -9213,9 +9273,9 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         if _storage._rGetWatchInfo != rhs_storage._rGetWatchInfo {return false}
         if _storage._rSetCaringReminder != rhs_storage._rSetCaringReminder {return false}
         if _storage._setAuth != rhs_storage._setAuth {return false}
-        if _storage._rGet4GOnLine != rhs_storage._rGet4GOnLine {return false}
         if _storage._setTransferPhone != rhs_storage._setTransferPhone {return false}
         if _storage._setAbnormalWarning != rhs_storage._setAbnormalWarning {return false}
+        if _storage._rGet4GOnlineOff != rhs_storage._rGet4GOnlineOff {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -9284,7 +9344,7 @@ extension Caring_hl_cmds.cmd_t: SwiftProtobuf._ProtoNameProviding {
     55: .same(proto: "CMD_GET_UPDATE_SPO2_DATA"),
     56: .same(proto: "CMD_GET_DIAL_CONFIG_DATA"),
     57: .same(proto: "CMD_SET_WARMING_DATA"),
-    58: .same(proto: "CMD_GET_MENU_SEQUENCE_DATA"),
+    58: .same(proto: "CMD_SET_MENU_SEQUENCE_DATA"),
     59: .same(proto: "CMD_SYNC_CONTACTS"),
     60: .same(proto: "CMD_GET_WATCHINFO"),
     61: .same(proto: "CMD_SET_CARING_REMINDER"),
@@ -9292,5 +9352,7 @@ extension Caring_hl_cmds.cmd_t: SwiftProtobuf._ProtoNameProviding {
     63: .same(proto: "CMD_SET_4G_ONLIND"),
     64: .same(proto: "CMD_SET_TRANSFER"),
     65: .same(proto: "CMD_ABNORMAL_WARINING"),
+    68: .same(proto: "CMD_ONLINE_NOTIFY"),
+    69: .same(proto: "CMD_ONLINE_OR_NOT"),
   ]
 }

@@ -4,11 +4,15 @@ option java_package = "com.ls.appserver.iot.health.vo";
 option java_outer_classname = "Caring";
 
 
-//手机信息
-message set_app_info_t {
-	required uint32 m_phonemodel		= 1; //手机型号。0：ios，1:android
-	required uint32 m_systemversion		= 2; //app版本
-	required uint32 m_appversion		= 3; //手机的系统版本
+//通信模式类似与c/s架构，app作为c, 手表作为s。
+//所有设置数据到手表是以set开头，当手表回数据到app时是以r开头。当app要主动获取时是以get开头。_t代表的是type。
+
+
+//手机信息下发给手表    
+message set_device_info_t {//
+	required uint32 m_phonemodel		= 1; //手机型号。0：ios，1:android  
+	required string m_systemversion		= 2; //app版本//YJ:       
+	required string m_appversion		= 3; //手机的系统版本//YJ:
 	required uint32	m_language			= 4;//语言。1:英文，2:中文
 	required uint32	m_uid				= 6;//用户uid
 }
@@ -52,13 +56,13 @@ message get_device_info_t {
 //set 鉴权值
 message set_auth_t{
 	required uint32 m_value = 1;
-	required string m_domain = 2;
+	required string m_domain = 2;//YJ： 40字节
 }
 
 
 //用户信息
 message set_user_info_t{
-	required uint32 m_usrid				= 1;
+	required uint32 m_userid				= 1;
 	required uint32 m_gender			= 2;
 	required uint32 m_age				= 3;
 	required uint32 m_height			= 4;
@@ -76,35 +80,35 @@ message set_hr_sample_slot_t{
 
 //手表设置
 message set_watch_setting_t{
-	required uint32 m_longsit_duration		= 1;
-	required uint32 m_start_time			= 2;
-	required uint32 m_end_time				= 3;
-	required uint32 m_disturb_state			= 4;
-	required uint32 m_sit_status			= 5;
+	required uint32 m_longsit_duration		= 1;//13800000000		设置久坐提醒判断的间隔 (单位：1min)
+	required uint32 m_start_time			= 2;//15:00	string	小时:高16bit 分钟：低16bit
+	required uint32 m_end_time				= 3;//string	小时:高16bit 分钟：低16bit
+	required uint32 m_nodisturb_state		= 4;//	勿扰模式开关
+	required uint32 m_longsit_state			= 5;//久坐提醒开关
 	
-	required uint32 bright_screen_state		= 6;
-	required uint32 bright_screen_time		= 7;
+	required uint32 m_flip_wrist_state		= 6;//抬腕亮屏状态
+	required uint32 m_bright_screen_time		= 7;//亮屏时长
 	
-	required uint32 sit_disturb_state 		= 8;
-	required uint32 sit_start_time			= 9;
-	required uint32 sit_end_time			= 10;
+	required uint32 m_noon_nodisturb_state 		= 8;//中午休息免打扰状态
+	required uint32 m_nodisturb_time_start			= 9;//勿扰模式开始时间
+	required uint32 m_nodisturb_time_end			= 10;//勿扰模式结束时间
 	
-	//required uint32 m_nodisturb_start_time	= 4;
-	//required uint32 m_nodisturb_end_time	= 5;
 	
+		
+		
 }
 
 
 //闹钟List
-message set_alarms_t{
+message set_alarms_t{//YJ:最多8个闹钟
 	repeated alarm_t alarms = 1;
 }
 //闹钟
 message alarm_t{
-	required bytes 		m_alarm1_cfg 			= 1;
+	required bytes 		m_alarm1_cfg 			= 1;//YJ：一个byte就可以了，不需要bytes？
 	required uint32		m_alarm1_hour 			= 2;
 	required uint32		m_alarm1_min	 		= 3;
-	required string		name	 				= 4;
+	required string		m_alarm1_name	 		= 4;//YJ:最长长度
 
 }
 
@@ -153,19 +157,23 @@ message set_abnormal_warning_t {
 }
 
 
+
+
 //----------------------------------------------
-//通知上传健康数据
+//上传健康数据
 message r_get_health_data_t{
 	required uint32		m_err_code			= 1;
-	required uint32		m_sn				= 2;
-	optional bytes      m_data				= 3;
+	required uint32		m_sn				= 2;//YJ:放什么数据？   长度1   sn = ffff 就是结束 65535
+	optional bytes      m_data				= 3;//YJ:放什么数据？   在4G 上没有用。在蓝牙上 根据DN 标识做data拼接 
 	
 	optional r_get_health_step_t  step         = 4; //步数
 	optional r_get_health_hrm_t   hrm          = 5;  //心率
 	optional r_get_health_bp_t    bp		   = 6;  //血压
 	optional r_get_health_sleep_t sleep        = 7;  //睡眠
-	optional r_get_health_spo2_t  spo2         = 8;  //睡眠
+	optional r_get_health_spo2_t  spo2         = 8;  //血氧
 }
+
+
 // 历史步数
 message r_get_health_step_t{
 	required uint32		totalSteps			= 1;
@@ -185,7 +193,7 @@ message r_get_health_hrm_t{
 }
 //历史血压
 message r_get_health_bp_t {
-    required r_get_bp maxBp = 1; //最高血压
+    required r_get_bp maxBp = 1; //最高血压//YJ：有舒张压和收缩压，如何定义最高最低？
     required r_get_bp minBp = 2; //最低血压
     required r_get_bp avgBp = 3; //平均血压
     repeated r_get_bp bpDetails  = 4; //血压明细
@@ -232,15 +240,16 @@ message weather_t{
 
 //恢复出厂设置
 message set_reset_machine_t{
-	required uint32 m_factory_mode		= 1;
-	repeated uint32 m_captcha 			= 2;
+           
+	required uint32 m_auth		= 1;
+	required uint32 m_factory_mode		= 2;
 }
 
 
 //联系人信息
 message sync_contacts_t{
-	required bytes m_contacts_num 	= 1; 
-	required string m_contacts_name  = 2;
+	required bytes m_contacts_num 	= 1; //YJ：最长长度20汉字
+	required string m_contacts_name  = 2;//YJ：最长长度30汉字
 	required uint32 m_contacts_sos  = 3;
 }
 //通讯录
@@ -268,33 +277,33 @@ message get_menu_sequence_t {
     required uint32 m_type                = 1;
 }
 
-
-//4g是否在线
-message r_get_4G_onLine_t {
-	required bool m_online	= 1; 
+//4G在线下线状态通知
+message r_get_4G_online_off_t {
+	required uint32  m_online	= 1; 
+	required uint32 m_time_second	= 2; 	
 }
 
 
 
-//跌倒提醒 pb有 文档没
+//跌倒          暂无需求
 message r_set_caring_reminder_t {
     required uint32 fallReminder                = 1; //跌倒提醒
 }
 
-//血压 pb有 文档没
+//血压            暂无需求
 message r_get_bp {
 	required uint32 sbp = 1; //收缩压
 	required uint32 dbp = 2; //舒张压
 	required uint32 measureTime = 3; //测量时间
 }
 
-//获取历史数据。 pb有 文档没
-message r_sync_health_data_t{
+// 通知发布健康数据。 
+message set_sync_health_data_t{
 	required uint32 	m_sync_type			= 1; //同步的数据类型。 步数(0)睡眠(1)心率(2)多运动记录(3)血氧(4)血压(5)
 	required uint32		m_distance_today	= 2; //指定距离今天天数的数据。0代表是今天， 1代表昨天 2代表大前天
 }
 
-//设置来电转移模式和号码  文档有。 pb没
+//设置来电转移模式和号码   暂无需求
 message set_transfer_phone_t {
 	required uint32 phone  = 1; //手机
 }
@@ -332,8 +341,8 @@ message set_drink_slot_t{
 
 //免打扰
 message set_notdisturb_t{
-	required bytes m_notdisturb_time_1	= 1;
-	required bytes m_notdisturb_time_2	= 2;
+	required bytes m_notdisturb_time_1	= 1;//YJ：类型是否正常？
+	required bytes m_notdisturb_time_2	= 2;//YJ：类型是否正常？
 }
 
 
@@ -561,10 +570,10 @@ message set_warming_data_t {
 	required uint32 m_max				  = 3;
 }
 
-message set_menu_sequence_t {
+message set_menu_sequence_t {//  
 	required uint32 m_type                = 1;
 	required uint32 m_count               = 2;
-	required bytes  m_data                = 3;
+	required bytes  m_data                = 3;//YJ：最长长度
 }
 
 
@@ -576,36 +585,36 @@ message r_get_menu_sequence_t {
 }
 
 
-//***********************app or fw send cmd****************/
+//***********************app or fw send cmd****************
 message hl_cmds {
   enum cmd_t { 
 		CMD_BIND_DEVICE 			= 1;//绑定激活
 	   	CMD_GET_DEVICE_INFO			= 2;//获取设备信息
 	    CMD_SET_AUTH_INFO			= 3;//设置Auth
 	    CMD_SYNC_USER_INFO			= 4;//同步用户信息
-		CMD_SYNC_SWITCH				= 5;
+		CMD_SYNC_SWITCH				= 5;   
 		CMD_SET_HR_SAMPLE_SLOT		= 6;//实时心率采集间隔
-		CMD_SET_WATCH_SETTING	 	= 7;//设置手表设置
+		CMD_SET_WATCH_SETTING	 	= 7;//设置手表设置      (0x07)
 		CMD_SET_DRINK_SLOT			= 8;
 		CMD_SET_ALARMS				= 9;//设置闹钟吃药提醒
 		CMD_SET_NOTDISTURB			= 10;
-		CMD_SET_COUNTRY_INFO		= 11;//设置时区和国家
-		CMD_SET_UI_STYLE			= 12;//内置表盘设置
-		CMD_SET_SPORT_TARGET		= 13;//设置记步目标
-		CMD_SET_TIME_FORMAT			= 14;//设置时间制式
-		CMD_SET_METRIC_INCH			= 15;//设置公英制
+		CMD_SET_COUNTRY_INFO		= 11;//设置时区和国家  (0x0B)
+		CMD_SET_UI_STYLE			= 12;//内置表盘设置    (0x0C)
+		CMD_SET_SPORT_TARGET		= 13;//设置记步目标    (0x0D)
+		CMD_SET_TIME_FORMAT			= 14;//设置时间制式    (0x0E)
+		CMD_SET_METRIC_INCH			= 15;//设置公英制      (0x0F)
 		CMD_SET_BRIGHT_TIMES		= 16;//异常提醒
-		CMD_SET_HR_WARNING			= 17;//设置心率预警值
+		CMD_SET_HR_WARNING			= 17;//设置心率预警值  (0x11)
 		CMD_SET_ABNORMAL_WARNING	= 18;//设置异常提醒
 		CMD_SET_NOTIFY_WARN			= 19;
-		CMD_SET_SYNC_HEALTH_DATA	= 20;//通知上传健康数据
+		CMD_SET_SYNC_HEALTH_DATA	= 20;//通知发布健康数据  (0x14)
 		CMD_GET_POWER_VALUE			= 21;
 		CMD_SET_UPDATA_FW			= 22;
 		CMD_SET_TAKE_PIC			= 23;
 		CMD_SET_FIND_PHONE			= 24;
 		CMD_SET_FIND_DEV			= 25;
-		CMD_SET_WEATHER_INFO		= 26;//设置天气
-		CMD_SET_RESET_MACHINE		= 27;//恢复出厂设置
+		CMD_SET_WEATHER_INFO		= 26;//设置天气    (0x1A)
+		CMD_SET_RESET_MACHINE		= 27;//恢复出厂设置  (0x1B)
 		CMD_SET_SPORT_STATUS		= 28;
 		CMD_GET_HEALTH_DATA			= 29;
 		CMD_SET_MUSIC_INFO			= 30;
@@ -636,14 +645,16 @@ message hl_cmds {
 		CMD_GET_UPDATE_SPO2_DATA	= 55;
 		CMD_GET_DIAL_CONFIG_DATA    = 56;
 		CMD_SET_WARMING_DATA        = 57;
-		CMD_GET_MENU_SEQUENCE_DATA  = 58;//
-		CMD_SYNC_CONTACTS           = 59;//设置通讯录、紧急联系人
+		CMD_SET_MENU_SEQUENCE_DATA  = 58;//	设置一级页面的顺序
+		CMD_SYNC_CONTACTS           = 59;//设置通讯录、紧急联系人 (0x3B)
 		CMD_GET_WATCHINFO           = 60;
-		CMD_SET_CARING_REMINDER 	= 61;//设置来电转移模式和号码
+		CMD_SET_CARING_REMINDER 	= 61;//设置来电转移模式和号码//YJ：命名不妥
 		CMD_GET_4G_ONLINE   		= 62;
 		CMD_SET_4G_ONLIND			= 63;
 		CMD_SET_TRANSFER  			= 64;
 		CMD_ABNORMAL_WARINING		= 65;
+		CMD_ONLINE_NOTIFY		    = 68; //4G在线下线状态通知
+	    CMD_ONLINE_OR_NOT		    = 69; //判断4G是否在线 (0x45)
 
 	}
  
@@ -651,12 +662,12 @@ message hl_cmds {
 	required bool 			response		= 2;
 	required uint32	 		seconds			= 3;  
 	required int32	 		timezone		= 45;
-	optional bytes         client_id        = 60; 
+	optional bytes         client_id        = 60; //YJ：最长长度
 
 	optional set_user_info_t		set_app_info			= 4;
 	optional r_bind_device_t		r_bind_device 			= 5;
 	optional get_device_info_t	r_get_device_info 		= 6;	
-	optional set_app_info_t		sync_phone_info 		= 7;	
+	optional set_device_info_t		sync_phone_info 		= 7;	
 	optional sync_user_info_t		sync_user_info 			= 8;
 	optional sync_switch_t			sync_switch 			= 9;
 	optional set_hr_sample_slot_t	set_hr_sample_slot 		= 10;
@@ -673,7 +684,7 @@ message hl_cmds {
 	optional set_hr_warning_t		set_set_hr_warning 		= 21;
 	optional r_get_hr_value_t		r_get_hr_value 			= 22;
 	optional set_notify_warning_t	set_notify_warn_info 	= 23;
-	optional r_sync_health_data_t	set_health_data_info	= 24;
+	optional set_sync_health_data_t	set_health_data_info	= 24;
 	optional r_get_power_t			r_get_power_value 		= 25;
 	optional set_updata_fw_t		set_updata_fw 	 		= 26;
 	optional set_weather_info_t		set_weather_info 	 	= 27;
@@ -712,9 +723,9 @@ message hl_cmds {
 	optional r_get_watch_info_t      r_get_watch_info       = 62;
 	optional r_set_caring_reminder_t r_set_caring_reminder  = 63;
 	optional set_auth_t 						 set_auth = 64;
-	optional r_get_4G_onLine_t          r_get_4G_onLine     = 65;
 	optional set_transfer_phone_t          set_transfer_phone     = 66;
-	optional set_abnormal_warning_t          set_abnormal_warning     = 67;	
+	optional set_abnormal_warning_t          set_abnormal_warning     = 67;		
+	optional r_get_4G_online_off_t          r_get_4G_online_off     = 68; //4G在线下线状态通知
 }
 
 
