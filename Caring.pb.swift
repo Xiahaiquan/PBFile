@@ -102,15 +102,6 @@ struct Caring_r_bind_device_t {
   /// Clears the value of `mProjno`. Subsequent reads from it will return its default value.
   mutating func clearMProjno() {self._mProjno = nil}
 
-  var mHwversion: UInt32 {
-    get {return _mHwversion ?? 0}
-    set {_mHwversion = newValue}
-  }
-  /// Returns true if `mHwversion` has been explicitly set.
-  var hasMHwversion: Bool {return self._mHwversion != nil}
-  /// Clears the value of `mHwversion`. Subsequent reads from it will return its default value.
-  mutating func clearMHwversion() {self._mHwversion = nil}
-
   var mFwversion: Data {
     get {return _mFwversion ?? Data()}
     set {_mFwversion = newValue}
@@ -224,7 +215,6 @@ struct Caring_r_bind_device_t {
   init() {}
 
   fileprivate var _mProjno: Data? = nil
-  fileprivate var _mHwversion: UInt32? = nil
   fileprivate var _mFwversion: Data? = nil
   fileprivate var _mFontversion: UInt32? = nil
   fileprivate var _mSdversion: UInt32? = nil
@@ -254,14 +244,14 @@ struct Caring_get_device_info_t {
   /// Clears the value of `mProjno`. Subsequent reads from it will return its default value.
   mutating func clearMProjno() {self._mProjno = nil}
 
-  var mHwversion: UInt32 {
-    get {return _mHwversion ?? 0}
-    set {_mHwversion = newValue}
+  var mUiversion: Data {
+    get {return _mUiversion ?? Data()}
+    set {_mUiversion = newValue}
   }
-  /// Returns true if `mHwversion` has been explicitly set.
-  var hasMHwversion: Bool {return self._mHwversion != nil}
-  /// Clears the value of `mHwversion`. Subsequent reads from it will return its default value.
-  mutating func clearMHwversion() {self._mHwversion = nil}
+  /// Returns true if `mUiversion` has been explicitly set.
+  var hasMUiversion: Bool {return self._mUiversion != nil}
+  /// Clears the value of `mUiversion`. Subsequent reads from it will return its default value.
+  mutating func clearMUiversion() {self._mUiversion = nil}
 
   var mFwversion: Data {
     get {return _mFwversion ?? Data()}
@@ -272,33 +262,6 @@ struct Caring_get_device_info_t {
   /// Clears the value of `mFwversion`. Subsequent reads from it will return its default value.
   mutating func clearMFwversion() {self._mFwversion = nil}
 
-  var mFontversion: UInt32 {
-    get {return _mFontversion ?? 0}
-    set {_mFontversion = newValue}
-  }
-  /// Returns true if `mFontversion` has been explicitly set.
-  var hasMFontversion: Bool {return self._mFontversion != nil}
-  /// Clears the value of `mFontversion`. Subsequent reads from it will return its default value.
-  mutating func clearMFontversion() {self._mFontversion = nil}
-
-  var mSdversion: UInt32 {
-    get {return _mSdversion ?? 0}
-    set {_mSdversion = newValue}
-  }
-  /// Returns true if `mSdversion` has been explicitly set.
-  var hasMSdversion: Bool {return self._mSdversion != nil}
-  /// Clears the value of `mSdversion`. Subsequent reads from it will return its default value.
-  mutating func clearMSdversion() {self._mSdversion = nil}
-
-  var mUiversion: UInt32 {
-    get {return _mUiversion ?? 0}
-    set {_mUiversion = newValue}
-  }
-  /// Returns true if `mUiversion` has been explicitly set.
-  var hasMUiversion: Bool {return self._mUiversion != nil}
-  /// Clears the value of `mUiversion`. Subsequent reads from it will return its default value.
-  mutating func clearMUiversion() {self._mUiversion = nil}
-
   var mDevicesn: UInt32 {
     get {return _mDevicesn ?? 0}
     set {_mDevicesn = newValue}
@@ -307,24 +270,6 @@ struct Caring_get_device_info_t {
   var hasMDevicesn: Bool {return self._mDevicesn != nil}
   /// Clears the value of `mDevicesn`. Subsequent reads from it will return its default value.
   mutating func clearMDevicesn() {self._mDevicesn = nil}
-
-  var mDevicename: UInt32 {
-    get {return _mDevicename ?? 0}
-    set {_mDevicename = newValue}
-  }
-  /// Returns true if `mDevicename` has been explicitly set.
-  var hasMDevicename: Bool {return self._mDevicename != nil}
-  /// Clears the value of `mDevicename`. Subsequent reads from it will return its default value.
-  mutating func clearMDevicename() {self._mDevicename = nil}
-
-  var mBattvalue: UInt32 {
-    get {return _mBattvalue ?? 0}
-    set {_mBattvalue = newValue}
-  }
-  /// Returns true if `mBattvalue` has been explicitly set.
-  var hasMBattvalue: Bool {return self._mBattvalue != nil}
-  /// Clears the value of `mBattvalue`. Subsequent reads from it will return its default value.
-  mutating func clearMBattvalue() {self._mBattvalue = nil}
 
   var mDevicemac: UInt32 {
     get {return _mDevicemac ?? 0}
@@ -335,7 +280,14 @@ struct Caring_get_device_info_t {
   /// Clears the value of `mDevicemac`. Subsequent reads from it will return its default value.
   mutating func clearMDevicemac() {self._mDevicemac = nil}
 
-  var mDeviceid: [UInt32] = []
+  var mPower: UInt32 {
+    get {return _mPower ?? 0}
+    set {_mPower = newValue}
+  }
+  /// Returns true if `mPower` has been explicitly set.
+  var hasMPower: Bool {return self._mPower != nil}
+  /// Clears the value of `mPower`. Subsequent reads from it will return its default value.
+  mutating func clearMPower() {self._mPower = nil}
 
   var mDeviceimei: UInt32 {
     get {return _mDeviceimei ?? 0}
@@ -346,21 +298,27 @@ struct Caring_get_device_info_t {
   /// Clears the value of `mDeviceimei`. Subsequent reads from it will return its default value.
   mutating func clearMDeviceimei() {self._mDeviceimei = nil}
 
+  var mDeviceid: UInt32 {
+    get {return _mDeviceid ?? 0}
+    set {_mDeviceid = newValue}
+  }
+  /// Returns true if `mDeviceid` has been explicitly set.
+  var hasMDeviceid: Bool {return self._mDeviceid != nil}
+  /// Clears the value of `mDeviceid`. Subsequent reads from it will return its default value.
+  mutating func clearMDeviceid() {self._mDeviceid = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
   fileprivate var _mProjno: Data? = nil
-  fileprivate var _mHwversion: UInt32? = nil
+  fileprivate var _mUiversion: Data? = nil
   fileprivate var _mFwversion: Data? = nil
-  fileprivate var _mFontversion: UInt32? = nil
-  fileprivate var _mSdversion: UInt32? = nil
-  fileprivate var _mUiversion: UInt32? = nil
   fileprivate var _mDevicesn: UInt32? = nil
-  fileprivate var _mDevicename: UInt32? = nil
-  fileprivate var _mBattvalue: UInt32? = nil
   fileprivate var _mDevicemac: UInt32? = nil
+  fileprivate var _mPower: UInt32? = nil
   fileprivate var _mDeviceimei: UInt32? = nil
+  fileprivate var _mDeviceid: UInt32? = nil
 }
 
 ///set 鉴权值
@@ -394,78 +352,6 @@ struct Caring_set_auth_t {
 
   fileprivate var _mValue: UInt32? = nil
   fileprivate var _mDomain: String? = nil
-}
-
-///用户信息
-struct Caring_set_user_info_t {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var mUserid: UInt32 {
-    get {return _mUserid ?? 0}
-    set {_mUserid = newValue}
-  }
-  /// Returns true if `mUserid` has been explicitly set.
-  var hasMUserid: Bool {return self._mUserid != nil}
-  /// Clears the value of `mUserid`. Subsequent reads from it will return its default value.
-  mutating func clearMUserid() {self._mUserid = nil}
-
-  var mGender: UInt32 {
-    get {return _mGender ?? 0}
-    set {_mGender = newValue}
-  }
-  /// Returns true if `mGender` has been explicitly set.
-  var hasMGender: Bool {return self._mGender != nil}
-  /// Clears the value of `mGender`. Subsequent reads from it will return its default value.
-  mutating func clearMGender() {self._mGender = nil}
-
-  var mAge: UInt32 {
-    get {return _mAge ?? 0}
-    set {_mAge = newValue}
-  }
-  /// Returns true if `mAge` has been explicitly set.
-  var hasMAge: Bool {return self._mAge != nil}
-  /// Clears the value of `mAge`. Subsequent reads from it will return its default value.
-  mutating func clearMAge() {self._mAge = nil}
-
-  var mHeight: UInt32 {
-    get {return _mHeight ?? 0}
-    set {_mHeight = newValue}
-  }
-  /// Returns true if `mHeight` has been explicitly set.
-  var hasMHeight: Bool {return self._mHeight != nil}
-  /// Clears the value of `mHeight`. Subsequent reads from it will return its default value.
-  mutating func clearMHeight() {self._mHeight = nil}
-
-  var mWeight: UInt32 {
-    get {return _mWeight ?? 0}
-    set {_mWeight = newValue}
-  }
-  /// Returns true if `mWeight` has been explicitly set.
-  var hasMWeight: Bool {return self._mWeight != nil}
-  /// Clears the value of `mWeight`. Subsequent reads from it will return its default value.
-  mutating func clearMWeight() {self._mWeight = nil}
-
-  var mWearstyle: UInt32 {
-    get {return _mWearstyle ?? 0}
-    set {_mWearstyle = newValue}
-  }
-  /// Returns true if `mWearstyle` has been explicitly set.
-  var hasMWearstyle: Bool {return self._mWearstyle != nil}
-  /// Clears the value of `mWearstyle`. Subsequent reads from it will return its default value.
-  mutating func clearMWearstyle() {self._mWearstyle = nil}
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  fileprivate var _mUserid: UInt32? = nil
-  fileprivate var _mGender: UInt32? = nil
-  fileprivate var _mAge: UInt32? = nil
-  fileprivate var _mHeight: UInt32? = nil
-  fileprivate var _mWeight: UInt32? = nil
-  fileprivate var _mWearstyle: UInt32? = nil
 }
 
 ///设置心率采样间隔
@@ -2079,19 +1965,20 @@ struct Caring_set_notify_warning_t {
   fileprivate var _mUtc: UInt32? = nil
 }
 
+///同步用户信息
 struct Caring_sync_user_info_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var mUsrid: UInt32 {
-    get {return _mUsrid ?? 0}
-    set {_mUsrid = newValue}
+  var mUserid: UInt32 {
+    get {return _mUserid ?? 0}
+    set {_mUserid = newValue}
   }
-  /// Returns true if `mUsrid` has been explicitly set.
-  var hasMUsrid: Bool {return self._mUsrid != nil}
-  /// Clears the value of `mUsrid`. Subsequent reads from it will return its default value.
-  mutating func clearMUsrid() {self._mUsrid = nil}
+  /// Returns true if `mUserid` has been explicitly set.
+  var hasMUserid: Bool {return self._mUserid != nil}
+  /// Clears the value of `mUserid`. Subsequent reads from it will return its default value.
+  mutating func clearMUserid() {self._mUserid = nil}
 
   var mGender: UInt32 {
     get {return _mGender ?? 0}
@@ -2142,7 +2029,7 @@ struct Caring_sync_user_info_t {
 
   init() {}
 
-  fileprivate var _mUsrid: UInt32? = nil
+  fileprivate var _mUserid: UInt32? = nil
   fileprivate var _mGender: UInt32? = nil
   fileprivate var _mAge: UInt32? = nil
   fileprivate var _mHeight: UInt32? = nil
@@ -3571,15 +3458,7 @@ struct Caring_hl_cmds {
   /// Clears the value of `clientID`. Subsequent reads from it will return its default value.
   mutating func clearClientID() {_uniqueStorage()._clientID = nil}
 
-  var setAppInfo: Caring_set_user_info_t {
-    get {return _storage._setAppInfo ?? Caring_set_user_info_t()}
-    set {_uniqueStorage()._setAppInfo = newValue}
-  }
-  /// Returns true if `setAppInfo` has been explicitly set.
-  var hasSetAppInfo: Bool {return _storage._setAppInfo != nil}
-  /// Clears the value of `setAppInfo`. Subsequent reads from it will return its default value.
-  mutating func clearSetAppInfo() {_uniqueStorage()._setAppInfo = nil}
-
+  /// optional set_user_info_t		set_app_info			= 4;
   var rBindDevice: Caring_r_bind_device_t {
     get {return _storage._rBindDevice ?? Caring_r_bind_device_t()}
     set {_uniqueStorage()._rBindDevice = newValue}
@@ -4075,15 +3954,7 @@ struct Caring_hl_cmds {
   /// Clears the value of `syncContactsInfo`. Subsequent reads from it will return its default value.
   mutating func clearSyncContactsInfo() {_uniqueStorage()._syncContactsInfo = nil}
 
-  var rGetWatchInfo: Caring_r_get_watch_info_t {
-    get {return _storage._rGetWatchInfo ?? Caring_r_get_watch_info_t()}
-    set {_uniqueStorage()._rGetWatchInfo = newValue}
-  }
-  /// Returns true if `rGetWatchInfo` has been explicitly set.
-  var hasRGetWatchInfo: Bool {return _storage._rGetWatchInfo != nil}
-  /// Clears the value of `rGetWatchInfo`. Subsequent reads from it will return its default value.
-  mutating func clearRGetWatchInfo() {_uniqueStorage()._rGetWatchInfo = nil}
-
+  /// optional r_get_watch_info_t      r_get_watch_info       = 62; 
   var rSetCaringReminder: Caring_r_set_caring_reminder_t {
     get {return _storage._rSetCaringReminder ?? Caring_r_set_caring_reminder_t()}
     set {_uniqueStorage()._rSetCaringReminder = newValue}
@@ -4237,6 +4108,8 @@ struct Caring_hl_cmds {
 
     ///设置通讯录、紧急联系人 (0x3B)
     case cmdSyncContacts // = 59
+
+    ///获取手表信息
     case cmdGetWatchinfo // = 60
 
     ///设置来电转移模式和号码//YJ：命名不妥
@@ -4427,7 +4300,7 @@ extension Caring_set_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
     2: .standard(proto: "m_systemversion"),
     3: .standard(proto: "m_appversion"),
     4: .standard(proto: "m_language"),
-    6: .standard(proto: "m_uid"),
+    5: .standard(proto: "m_uid"),
   ]
 
   public var isInitialized: Bool {
@@ -4449,7 +4322,7 @@ extension Caring_set_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 2: try { try decoder.decodeSingularStringField(value: &self._mSystemversion) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self._mAppversion) }()
       case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mLanguage) }()
-      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mUid) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mUid) }()
       default: break
       }
     }
@@ -4469,7 +4342,7 @@ extension Caring_set_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
     }
     if let v = self._mUid {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -4489,7 +4362,6 @@ extension Caring_r_bind_device_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   static let protoMessageName: String = _protobuf_package + ".r_bind_device_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "m_projno"),
-    2: .standard(proto: "m_hwversion"),
     3: .standard(proto: "m_fwversion"),
     4: .standard(proto: "m_fontversion"),
     5: .standard(proto: "m_sdversion"),
@@ -4506,7 +4378,6 @@ extension Caring_r_bind_device_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
 
   public var isInitialized: Bool {
     if self._mProjno == nil {return false}
-    if self._mHwversion == nil {return false}
     if self._mFwversion == nil {return false}
     if self._mFontversion == nil {return false}
     if self._mSdversion == nil {return false}
@@ -4529,7 +4400,6 @@ extension Caring_r_bind_device_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularBytesField(value: &self._mProjno) }()
-      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mHwversion) }()
       case 3: try { try decoder.decodeSingularBytesField(value: &self._mFwversion) }()
       case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mFontversion) }()
       case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mSdversion) }()
@@ -4550,9 +4420,6 @@ extension Caring_r_bind_device_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._mProjno {
       try visitor.visitSingularBytesField(value: v, fieldNumber: 1)
-    }
-    if let v = self._mHwversion {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
     }
     if let v = self._mFwversion {
       try visitor.visitSingularBytesField(value: v, fieldNumber: 3)
@@ -4595,7 +4462,6 @@ extension Caring_r_bind_device_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
 
   static func ==(lhs: Caring_r_bind_device_t, rhs: Caring_r_bind_device_t) -> Bool {
     if lhs._mProjno != rhs._mProjno {return false}
-    if lhs._mHwversion != rhs._mHwversion {return false}
     if lhs._mFwversion != rhs._mFwversion {return false}
     if lhs._mFontversion != rhs._mFontversion {return false}
     if lhs._mSdversion != rhs._mSdversion {return false}
@@ -4617,31 +4483,24 @@ extension Caring_get_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
   static let protoMessageName: String = _protobuf_package + ".get_device_info_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "m_projno"),
-    2: .standard(proto: "m_hwversion"),
+    2: .standard(proto: "m_uiversion"),
     3: .standard(proto: "m_fwversion"),
-    4: .standard(proto: "m_fontversion"),
-    5: .standard(proto: "m_sdversion"),
-    6: .standard(proto: "m_uiversion"),
-    7: .standard(proto: "m_devicesn"),
-    8: .standard(proto: "m_devicename"),
-    9: .standard(proto: "m_battvalue"),
-    10: .standard(proto: "m_devicemac"),
-    11: .standard(proto: "m_deviceid"),
-    12: .standard(proto: "m_deviceimei"),
+    4: .standard(proto: "m_devicesn"),
+    5: .standard(proto: "m_devicemac"),
+    6: .standard(proto: "m_power"),
+    7: .standard(proto: "m_deviceimei"),
+    8: .standard(proto: "m_deviceid"),
   ]
 
   public var isInitialized: Bool {
     if self._mProjno == nil {return false}
-    if self._mHwversion == nil {return false}
-    if self._mFwversion == nil {return false}
-    if self._mFontversion == nil {return false}
-    if self._mSdversion == nil {return false}
     if self._mUiversion == nil {return false}
+    if self._mFwversion == nil {return false}
     if self._mDevicesn == nil {return false}
-    if self._mDevicename == nil {return false}
-    if self._mBattvalue == nil {return false}
     if self._mDevicemac == nil {return false}
+    if self._mPower == nil {return false}
     if self._mDeviceimei == nil {return false}
+    if self._mDeviceid == nil {return false}
     return true
   }
 
@@ -4652,17 +4511,13 @@ extension Caring_get_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularBytesField(value: &self._mProjno) }()
-      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mHwversion) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self._mUiversion) }()
       case 3: try { try decoder.decodeSingularBytesField(value: &self._mFwversion) }()
-      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mFontversion) }()
-      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mSdversion) }()
-      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mUiversion) }()
-      case 7: try { try decoder.decodeSingularUInt32Field(value: &self._mDevicesn) }()
-      case 8: try { try decoder.decodeSingularUInt32Field(value: &self._mDevicename) }()
-      case 9: try { try decoder.decodeSingularUInt32Field(value: &self._mBattvalue) }()
-      case 10: try { try decoder.decodeSingularUInt32Field(value: &self._mDevicemac) }()
-      case 11: try { try decoder.decodeRepeatedUInt32Field(value: &self.mDeviceid) }()
-      case 12: try { try decoder.decodeSingularUInt32Field(value: &self._mDeviceimei) }()
+      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mDevicesn) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mDevicemac) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mPower) }()
+      case 7: try { try decoder.decodeSingularUInt32Field(value: &self._mDeviceimei) }()
+      case 8: try { try decoder.decodeSingularUInt32Field(value: &self._mDeviceid) }()
       default: break
       }
     }
@@ -4672,55 +4527,39 @@ extension Caring_get_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if let v = self._mProjno {
       try visitor.visitSingularBytesField(value: v, fieldNumber: 1)
     }
-    if let v = self._mHwversion {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
+    if let v = self._mUiversion {
+      try visitor.visitSingularBytesField(value: v, fieldNumber: 2)
     }
     if let v = self._mFwversion {
       try visitor.visitSingularBytesField(value: v, fieldNumber: 3)
     }
-    if let v = self._mFontversion {
+    if let v = self._mDevicesn {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
     }
-    if let v = self._mSdversion {
+    if let v = self._mDevicemac {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
     }
-    if let v = self._mUiversion {
+    if let v = self._mPower {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
     }
-    if let v = self._mDevicesn {
+    if let v = self._mDeviceimei {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 7)
     }
-    if let v = self._mDevicename {
+    if let v = self._mDeviceid {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 8)
-    }
-    if let v = self._mBattvalue {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 9)
-    }
-    if let v = self._mDevicemac {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 10)
-    }
-    if !self.mDeviceid.isEmpty {
-      try visitor.visitRepeatedUInt32Field(value: self.mDeviceid, fieldNumber: 11)
-    }
-    if let v = self._mDeviceimei {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 12)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Caring_get_device_info_t, rhs: Caring_get_device_info_t) -> Bool {
     if lhs._mProjno != rhs._mProjno {return false}
-    if lhs._mHwversion != rhs._mHwversion {return false}
-    if lhs._mFwversion != rhs._mFwversion {return false}
-    if lhs._mFontversion != rhs._mFontversion {return false}
-    if lhs._mSdversion != rhs._mSdversion {return false}
     if lhs._mUiversion != rhs._mUiversion {return false}
+    if lhs._mFwversion != rhs._mFwversion {return false}
     if lhs._mDevicesn != rhs._mDevicesn {return false}
-    if lhs._mDevicename != rhs._mDevicename {return false}
-    if lhs._mBattvalue != rhs._mBattvalue {return false}
     if lhs._mDevicemac != rhs._mDevicemac {return false}
-    if lhs.mDeviceid != rhs.mDeviceid {return false}
+    if lhs._mPower != rhs._mPower {return false}
     if lhs._mDeviceimei != rhs._mDeviceimei {return false}
+    if lhs._mDeviceid != rhs._mDeviceid {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -4765,78 +4604,6 @@ extension Caring_set_auth_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   static func ==(lhs: Caring_set_auth_t, rhs: Caring_set_auth_t) -> Bool {
     if lhs._mValue != rhs._mValue {return false}
     if lhs._mDomain != rhs._mDomain {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Caring_set_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".set_user_info_t"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "m_userid"),
-    2: .standard(proto: "m_gender"),
-    3: .standard(proto: "m_age"),
-    4: .standard(proto: "m_height"),
-    5: .standard(proto: "m_weight"),
-    6: .standard(proto: "m_wearstyle"),
-  ]
-
-  public var isInitialized: Bool {
-    if self._mUserid == nil {return false}
-    if self._mGender == nil {return false}
-    if self._mAge == nil {return false}
-    if self._mHeight == nil {return false}
-    if self._mWeight == nil {return false}
-    if self._mWearstyle == nil {return false}
-    return true
-  }
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mUserid) }()
-      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mGender) }()
-      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mAge) }()
-      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mHeight) }()
-      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mWeight) }()
-      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mWearstyle) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._mUserid {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
-    }
-    if let v = self._mGender {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
-    }
-    if let v = self._mAge {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
-    }
-    if let v = self._mHeight {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
-    }
-    if let v = self._mWeight {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
-    }
-    if let v = self._mWearstyle {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Caring_set_user_info_t, rhs: Caring_set_user_info_t) -> Bool {
-    if lhs._mUserid != rhs._mUserid {return false}
-    if lhs._mGender != rhs._mGender {return false}
-    if lhs._mAge != rhs._mAge {return false}
-    if lhs._mHeight != rhs._mHeight {return false}
-    if lhs._mWeight != rhs._mWeight {return false}
-    if lhs._mWearstyle != rhs._mWearstyle {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -6837,7 +6604,7 @@ extension Caring_set_notify_warning_t: SwiftProtobuf.Message, SwiftProtobuf._Mes
 extension Caring_sync_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".sync_user_info_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "m_usrid"),
+    1: .standard(proto: "m_userid"),
     2: .standard(proto: "m_gender"),
     3: .standard(proto: "m_age"),
     4: .standard(proto: "m_height"),
@@ -6846,7 +6613,7 @@ extension Caring_sync_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._Message
   ]
 
   public var isInitialized: Bool {
-    if self._mUsrid == nil {return false}
+    if self._mUserid == nil {return false}
     if self._mGender == nil {return false}
     if self._mAge == nil {return false}
     if self._mHeight == nil {return false}
@@ -6861,7 +6628,7 @@ extension Caring_sync_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._Message
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mUsrid) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mUserid) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mGender) }()
       case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mAge) }()
       case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mHeight) }()
@@ -6873,7 +6640,7 @@ extension Caring_sync_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._mUsrid {
+    if let v = self._mUserid {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
     if let v = self._mGender {
@@ -6895,7 +6662,7 @@ extension Caring_sync_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 
   static func ==(lhs: Caring_sync_user_info_t, rhs: Caring_sync_user_info_t) -> Bool {
-    if lhs._mUsrid != rhs._mUsrid {return false}
+    if lhs._mUserid != rhs._mUserid {return false}
     if lhs._mGender != rhs._mGender {return false}
     if lhs._mAge != rhs._mAge {return false}
     if lhs._mHeight != rhs._mHeight {return false}
@@ -8629,7 +8396,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     3: .same(proto: "seconds"),
     45: .same(proto: "timezone"),
     60: .standard(proto: "client_id"),
-    4: .standard(proto: "set_app_info"),
     5: .standard(proto: "r_bind_device"),
     6: .standard(proto: "r_get_device_info"),
     7: .standard(proto: "sync_phone_info"),
@@ -8685,7 +8451,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     58: .standard(proto: "r_get_menu_seq_data"),
     59: .standard(proto: "r_get_weather_info"),
     61: .standard(proto: "sync_contacts_info"),
-    62: .standard(proto: "r_get_watch_info"),
     63: .standard(proto: "r_set_caring_reminder"),
     64: .standard(proto: "set_auth"),
     66: .standard(proto: "set_transfer_phone"),
@@ -8699,7 +8464,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     var _seconds: UInt32? = nil
     var _timezone: Int32? = nil
     var _clientID: Data? = nil
-    var _setAppInfo: Caring_set_user_info_t? = nil
     var _rBindDevice: Caring_r_bind_device_t? = nil
     var _rGetDeviceInfo: Caring_get_device_info_t? = nil
     var _syncPhoneInfo: Caring_set_device_info_t? = nil
@@ -8755,7 +8519,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     var _rGetMenuSeqData: Caring_r_get_menu_sequence_t? = nil
     var _rGetWeatherInfo: Caring_r_get_weather_info_t? = nil
     var _syncContactsInfo: Caring_set_contacts_t? = nil
-    var _rGetWatchInfo: Caring_r_get_watch_info_t? = nil
     var _rSetCaringReminder: Caring_r_set_caring_reminder_t? = nil
     var _setAuth: Caring_set_auth_t? = nil
     var _setTransferPhone: Caring_set_transfer_phone_t? = nil
@@ -8772,7 +8535,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       _seconds = source._seconds
       _timezone = source._timezone
       _clientID = source._clientID
-      _setAppInfo = source._setAppInfo
       _rBindDevice = source._rBindDevice
       _rGetDeviceInfo = source._rGetDeviceInfo
       _syncPhoneInfo = source._syncPhoneInfo
@@ -8828,7 +8590,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       _rGetMenuSeqData = source._rGetMenuSeqData
       _rGetWeatherInfo = source._rGetWeatherInfo
       _syncContactsInfo = source._syncContactsInfo
-      _rGetWatchInfo = source._rGetWatchInfo
       _rSetCaringReminder = source._rSetCaringReminder
       _setAuth = source._setAuth
       _setTransferPhone = source._setTransferPhone
@@ -8850,7 +8611,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if _storage._response == nil {return false}
       if _storage._seconds == nil {return false}
       if _storage._timezone == nil {return false}
-      if let v = _storage._setAppInfo, !v.isInitialized {return false}
       if let v = _storage._rBindDevice, !v.isInitialized {return false}
       if let v = _storage._rGetDeviceInfo, !v.isInitialized {return false}
       if let v = _storage._syncPhoneInfo, !v.isInitialized {return false}
@@ -8906,7 +8666,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._rGetMenuSeqData, !v.isInitialized {return false}
       if let v = _storage._rGetWeatherInfo, !v.isInitialized {return false}
       if let v = _storage._syncContactsInfo, !v.isInitialized {return false}
-      if let v = _storage._rGetWatchInfo, !v.isInitialized {return false}
       if let v = _storage._rSetCaringReminder, !v.isInitialized {return false}
       if let v = _storage._setAuth, !v.isInitialized {return false}
       if let v = _storage._setTransferPhone, !v.isInitialized {return false}
@@ -8927,7 +8686,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         case 1: try { try decoder.decodeSingularEnumField(value: &_storage._cmd) }()
         case 2: try { try decoder.decodeSingularBoolField(value: &_storage._response) }()
         case 3: try { try decoder.decodeSingularUInt32Field(value: &_storage._seconds) }()
-        case 4: try { try decoder.decodeSingularMessageField(value: &_storage._setAppInfo) }()
         case 5: try { try decoder.decodeSingularMessageField(value: &_storage._rBindDevice) }()
         case 6: try { try decoder.decodeSingularMessageField(value: &_storage._rGetDeviceInfo) }()
         case 7: try { try decoder.decodeSingularMessageField(value: &_storage._syncPhoneInfo) }()
@@ -8985,7 +8743,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         case 59: try { try decoder.decodeSingularMessageField(value: &_storage._rGetWeatherInfo) }()
         case 60: try { try decoder.decodeSingularBytesField(value: &_storage._clientID) }()
         case 61: try { try decoder.decodeSingularMessageField(value: &_storage._syncContactsInfo) }()
-        case 62: try { try decoder.decodeSingularMessageField(value: &_storage._rGetWatchInfo) }()
         case 63: try { try decoder.decodeSingularMessageField(value: &_storage._rSetCaringReminder) }()
         case 64: try { try decoder.decodeSingularMessageField(value: &_storage._setAuth) }()
         case 66: try { try decoder.decodeSingularMessageField(value: &_storage._setTransferPhone) }()
@@ -9007,9 +8764,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       }
       if let v = _storage._seconds {
         try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
-      }
-      if let v = _storage._setAppInfo {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
       }
       if let v = _storage._rBindDevice {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
@@ -9182,9 +8936,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._syncContactsInfo {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 61)
       }
-      if let v = _storage._rGetWatchInfo {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 62)
-      }
       if let v = _storage._rSetCaringReminder {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 63)
       }
@@ -9214,7 +8965,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         if _storage._seconds != rhs_storage._seconds {return false}
         if _storage._timezone != rhs_storage._timezone {return false}
         if _storage._clientID != rhs_storage._clientID {return false}
-        if _storage._setAppInfo != rhs_storage._setAppInfo {return false}
         if _storage._rBindDevice != rhs_storage._rBindDevice {return false}
         if _storage._rGetDeviceInfo != rhs_storage._rGetDeviceInfo {return false}
         if _storage._syncPhoneInfo != rhs_storage._syncPhoneInfo {return false}
@@ -9270,7 +9020,6 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         if _storage._rGetMenuSeqData != rhs_storage._rGetMenuSeqData {return false}
         if _storage._rGetWeatherInfo != rhs_storage._rGetWeatherInfo {return false}
         if _storage._syncContactsInfo != rhs_storage._syncContactsInfo {return false}
-        if _storage._rGetWatchInfo != rhs_storage._rGetWatchInfo {return false}
         if _storage._rSetCaringReminder != rhs_storage._rSetCaringReminder {return false}
         if _storage._setAuth != rhs_storage._setAuth {return false}
         if _storage._setTransferPhone != rhs_storage._setTransferPhone {return false}

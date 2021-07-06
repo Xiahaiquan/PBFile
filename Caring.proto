@@ -14,14 +14,14 @@ message set_device_info_t {//
 	required string m_systemversion		= 2; //app版本//YJ:       
 	required string m_appversion		= 3; //手机的系统版本//YJ:
 	required uint32	m_language			= 4;//语言。1:英文，2:中文
-	required uint32	m_uid				= 6;//用户uid
+	required uint32	m_uid				= 5;//用户uid
 }
 
 
 //设备信息
 message r_bind_device_t{
 	required bytes m_projno			= 1;
-	required uint32 m_hwversion		= 2;
+
 	required bytes m_fwversion		= 3;
 	required uint32 m_fontversion	= 4;
 	required uint32 m_sdversion		= 5;
@@ -39,17 +39,13 @@ message r_bind_device_t{
 //获取设备信息
 message get_device_info_t {
 	required bytes m_projno			= 1;
-	required uint32 m_hwversion		= 2;
+	required bytes m_uiversion		= 2;
 	required bytes m_fwversion		= 3;
-	required uint32 m_fontversion	= 4;
-	required uint32 m_sdversion		= 5;
-	required uint32 m_uiversion		= 6;
-	required uint32 m_devicesn		= 7;
-	required uint32 m_devicename	= 8;
-	required uint32 m_battvalue		= 9;
-	required uint32 m_devicemac		= 10;
-	repeated uint32 m_deviceid 		= 11;
-	required uint32	m_deviceimei	= 12;
+	required uint32 m_devicesn		= 4;
+	required uint32 m_devicemac		= 5;
+	required uint32	m_power			= 6;
+	required uint32	m_deviceimei	= 7;
+	required uint32	m_deviceid		= 8;
 
 }
 
@@ -57,18 +53,6 @@ message get_device_info_t {
 message set_auth_t{
 	required uint32 m_value = 1;
 	required string m_domain = 2;//YJ： 40字节
-}
-
-
-//用户信息
-message set_user_info_t{
-	required uint32 m_userid				= 1;
-	required uint32 m_gender			= 2;
-	required uint32 m_age				= 3;
-	required uint32 m_height			= 4;
-	required uint32 m_weight			= 5;
-	required uint32 m_wearstyle			= 6;
-
 }
 
 
@@ -93,9 +77,6 @@ message set_watch_setting_t{
 	required uint32 m_nodisturb_time_start			= 9;//勿扰模式开始时间
 	required uint32 m_nodisturb_time_end			= 10;//勿扰模式结束时间
 	
-	
-		
-		
 }
 
 
@@ -366,9 +347,9 @@ message set_notify_warning_t{
 	required uint32 	m_utc				= 7;
 
 }
-
+//同步用户信息
 message sync_user_info_t{
-	required uint32 m_usrid			= 1;
+	required uint32 m_userid			= 1;
 	required uint32 m_gender		= 2;
 	required uint32 m_age			= 3;
 	required uint32 m_height		= 4;
@@ -647,7 +628,7 @@ message hl_cmds {
 		CMD_SET_WARMING_DATA        = 57;
 		CMD_SET_MENU_SEQUENCE_DATA  = 58;//	设置一级页面的顺序
 		CMD_SYNC_CONTACTS           = 59;//设置通讯录、紧急联系人 (0x3B)
-		CMD_GET_WATCHINFO           = 60;
+		CMD_GET_WATCHINFO           = 60; //获取手表信息
 		CMD_SET_CARING_REMINDER 	= 61;//设置来电转移模式和号码//YJ：命名不妥
 		CMD_GET_4G_ONLINE   		= 62;
 		CMD_SET_4G_ONLIND			= 63;
@@ -664,7 +645,7 @@ message hl_cmds {
 	required int32	 		timezone		= 45;
 	optional bytes         client_id        = 60; //YJ：最长长度
 
-	optional set_user_info_t		set_app_info			= 4;
+	// optional set_user_info_t		set_app_info			= 4;
 	optional r_bind_device_t		r_bind_device 			= 5;
 	optional get_device_info_t	r_get_device_info 		= 6;	
 	optional set_device_info_t		sync_phone_info 		= 7;	
@@ -720,7 +701,7 @@ message hl_cmds {
 	optional r_get_menu_sequence_t    r_get_menu_seq_data   = 58;
 	optional r_get_weather_info_t 	  r_get_weather_info    = 59;
 	optional set_contacts_t		sync_contacts_info 		    = 61;
-	optional r_get_watch_info_t      r_get_watch_info       = 62;
+	// optional r_get_watch_info_t      r_get_watch_info       = 62; 
 	optional r_set_caring_reminder_t r_set_caring_reminder  = 63;
 	optional set_auth_t 						 set_auth = 64;
 	optional set_transfer_phone_t          set_transfer_phone     = 66;
