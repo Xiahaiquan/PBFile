@@ -36,7 +36,7 @@ message r_bind_device_t{
 	required uint32	m_deviceid		= 14;
 }
 
-//获取设备信息
+//获取推送设备信息
 message get_device_info_t {
 	required bytes m_projno			= 1;
 	required bytes m_uiversion		= 2;
@@ -258,10 +258,18 @@ message get_menu_sequence_t {
     required uint32 m_type                = 1;
 }
 
-//4G在线下线状态通知
+//发布4G在线下线状态通知
 message r_get_4G_online_off_t {
 	required uint32  m_online	= 1; 
 	required uint32 m_time_second	= 2; 	
+	required uint32 client_id	= 3; 	
+	
+}
+
+//发布4G在线下线状态通知
+message r_get_4G_online_or_not_t {
+	required uint32  m_online	= 1; 
+	
 }
 
 
@@ -299,7 +307,8 @@ message set_update_spo2_data_t{
 
 
 message r_sleep_detail_t {
-	repeated uint32 sleep = 1;
+	repeated  uint32 sleep_state = 1; // 1深睡   2 浅睡  3 清醒
+	repeated  uint32 sleep_time=2 ; //睡眠时间，单位分钟
 }
 
 
@@ -634,8 +643,10 @@ message hl_cmds {
 		CMD_SET_4G_ONLIND			= 63;
 		CMD_SET_TRANSFER  			= 64;
 		CMD_ABNORMAL_WARINING		= 65;
-		CMD_ONLINE_NOTIFY		    = 68; //4G在线下线状态通知
-	    CMD_ONLINE_OR_NOT		    = 69; //判断4G是否在线 (0x45)
+		CMD_ONLINE_NOTIFY		    = 68; //发布4G在线下线状态通知(0x44)
+	    CMD_ONLINE_OR_NOT		    = 69; //发布4G在线 (0x45)
+		CMD_4G_IS_IT_ONLINE		    = 70; // 判断4G是否在线(0x46)
+		 CMD_SET_WATCHINFO		    = 71; //推送设备信息 (0x47)
 
 	}
  
@@ -706,7 +717,9 @@ message hl_cmds {
 	optional set_auth_t 						 set_auth = 64;
 	optional set_transfer_phone_t          set_transfer_phone     = 66;
 	optional set_abnormal_warning_t          set_abnormal_warning     = 67;		
-	optional r_get_4G_online_off_t          r_get_4G_online_off     = 68; //4G在线下线状态通知
+	optional r_get_4G_online_off_t          r_get_4G_online_off     = 68; //发布4G在线下线状态通知
+	optional r_get_4G_online_or_not_t          r_get_4G_online_or_not     = 69; //发布4G在线
+
 }
 
 

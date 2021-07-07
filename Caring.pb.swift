@@ -229,7 +229,7 @@ struct Caring_r_bind_device_t {
   fileprivate var _mDeviceid: UInt32? = nil
 }
 
-///获取设备信息
+///获取推送设备信息
 struct Caring_get_device_info_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -1502,7 +1502,7 @@ struct Caring_get_menu_sequence_t {
   fileprivate var _mType: UInt32? = nil
 }
 
-///4G在线下线状态通知
+///发布4G在线下线状态通知
 struct Caring_r_get_4G_online_off_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -1526,12 +1526,44 @@ struct Caring_r_get_4G_online_off_t {
   /// Clears the value of `mTimeSecond`. Subsequent reads from it will return its default value.
   mutating func clearMTimeSecond() {self._mTimeSecond = nil}
 
+  var clientID: UInt32 {
+    get {return _clientID ?? 0}
+    set {_clientID = newValue}
+  }
+  /// Returns true if `clientID` has been explicitly set.
+  var hasClientID: Bool {return self._clientID != nil}
+  /// Clears the value of `clientID`. Subsequent reads from it will return its default value.
+  mutating func clearClientID() {self._clientID = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
   fileprivate var _mOnline: UInt32? = nil
   fileprivate var _mTimeSecond: UInt32? = nil
+  fileprivate var _clientID: UInt32? = nil
+}
+
+///发布4G在线下线状态通知
+struct Caring_r_get_4G_online_or_not_t {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var mOnline: UInt32 {
+    get {return _mOnline ?? 0}
+    set {_mOnline = newValue}
+  }
+  /// Returns true if `mOnline` has been explicitly set.
+  var hasMOnline: Bool {return self._mOnline != nil}
+  /// Clears the value of `mOnline`. Subsequent reads from it will return its default value.
+  mutating func clearMOnline() {self._mOnline = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _mOnline: UInt32? = nil
 }
 
 ///跌倒          暂无需求
@@ -1695,7 +1727,11 @@ struct Caring_r_sleep_detail_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var sleep: [UInt32] = []
+  /// 1深睡   2 浅睡  3 清醒
+  var sleepState: [UInt32] = []
+
+  ///睡眠时间，单位分钟
+  var sleepTime: [UInt32] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -3991,7 +4027,7 @@ struct Caring_hl_cmds {
   /// Clears the value of `setAbnormalWarning`. Subsequent reads from it will return its default value.
   mutating func clearSetAbnormalWarning() {_uniqueStorage()._setAbnormalWarning = nil}
 
-  ///4G在线下线状态通知
+  ///发布4G在线下线状态通知
   var rGet4GOnlineOff: Caring_r_get_4G_online_off_t {
     get {return _storage._rGet4GOnlineOff ?? Caring_r_get_4G_online_off_t()}
     set {_uniqueStorage()._rGet4GOnlineOff = newValue}
@@ -4000,6 +4036,16 @@ struct Caring_hl_cmds {
   var hasRGet4GOnlineOff: Bool {return _storage._rGet4GOnlineOff != nil}
   /// Clears the value of `rGet4GOnlineOff`. Subsequent reads from it will return its default value.
   mutating func clearRGet4GOnlineOff() {_uniqueStorage()._rGet4GOnlineOff = nil}
+
+  ///发布4G在线
+  var rGet4GOnlineOrNot: Caring_r_get_4G_online_or_not_t {
+    get {return _storage._rGet4GOnlineOrNot ?? Caring_r_get_4G_online_or_not_t()}
+    set {_uniqueStorage()._rGet4GOnlineOrNot = newValue}
+  }
+  /// Returns true if `rGet4GOnlineOrNot` has been explicitly set.
+  var hasRGet4GOnlineOrNot: Bool {return _storage._rGet4GOnlineOrNot != nil}
+  /// Clears the value of `rGet4GOnlineOrNot`. Subsequent reads from it will return its default value.
+  mutating func clearRGet4GOnlineOrNot() {_uniqueStorage()._rGet4GOnlineOrNot = nil}
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -4119,11 +4165,17 @@ struct Caring_hl_cmds {
     case cmdSetTransfer // = 64
     case cmdAbnormalWarining // = 65
 
-    ///4G在线下线状态通知
+    ///发布4G在线下线状态通知(0x44)
     case cmdOnlineNotify // = 68
 
-    ///判断4G是否在线 (0x45)
+    ///发布4G在线 (0x45)
     case cmdOnlineOrNot // = 69
+
+    /// 判断4G是否在线(0x46)
+    case cmd4GIsItOnline // = 70
+
+    ///推送设备信息 (0x47)
+    case cmdSetWatchinfo // = 71
 
     init() {
       self = .cmdBindDevice
@@ -4198,6 +4250,8 @@ struct Caring_hl_cmds {
       case 65: self = .cmdAbnormalWarining
       case 68: self = .cmdOnlineNotify
       case 69: self = .cmdOnlineOrNot
+      case 70: self = .cmd4GIsItOnline
+      case 71: self = .cmdSetWatchinfo
       default: return nil
       }
     }
@@ -4271,6 +4325,8 @@ struct Caring_hl_cmds {
       case .cmdAbnormalWarining: return 65
       case .cmdOnlineNotify: return 68
       case .cmdOnlineOrNot: return 69
+      case .cmd4GIsItOnline: return 70
+      case .cmdSetWatchinfo: return 71
       }
     }
 
@@ -6004,11 +6060,13 @@ extension Caring_r_get_4G_online_off_t: SwiftProtobuf.Message, SwiftProtobuf._Me
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "m_online"),
     2: .standard(proto: "m_time_second"),
+    3: .standard(proto: "client_id"),
   ]
 
   public var isInitialized: Bool {
     if self._mOnline == nil {return false}
     if self._mTimeSecond == nil {return false}
+    if self._clientID == nil {return false}
     return true
   }
 
@@ -6020,6 +6078,7 @@ extension Caring_r_get_4G_online_off_t: SwiftProtobuf.Message, SwiftProtobuf._Me
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mOnline) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mTimeSecond) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._clientID) }()
       default: break
       }
     }
@@ -6032,12 +6091,53 @@ extension Caring_r_get_4G_online_off_t: SwiftProtobuf.Message, SwiftProtobuf._Me
     if let v = self._mTimeSecond {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
     }
+    if let v = self._clientID {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Caring_r_get_4G_online_off_t, rhs: Caring_r_get_4G_online_off_t) -> Bool {
     if lhs._mOnline != rhs._mOnline {return false}
     if lhs._mTimeSecond != rhs._mTimeSecond {return false}
+    if lhs._clientID != rhs._clientID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Caring_r_get_4G_online_or_not_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".r_get_4G_online_or_not_t"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "m_online"),
+  ]
+
+  public var isInitialized: Bool {
+    if self._mOnline == nil {return false}
+    return true
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mOnline) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._mOnline {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Caring_r_get_4G_online_or_not_t, rhs: Caring_r_get_4G_online_or_not_t) -> Bool {
+    if lhs._mOnline != rhs._mOnline {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -6259,7 +6359,8 @@ extension Caring_set_update_spo2_data_t: SwiftProtobuf.Message, SwiftProtobuf._M
 extension Caring_r_sleep_detail_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".r_sleep_detail_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "sleep"),
+    1: .standard(proto: "sleep_state"),
+    2: .standard(proto: "sleep_time"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -6268,21 +6369,26 @@ extension Caring_r_sleep_detail_t: SwiftProtobuf.Message, SwiftProtobuf._Message
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeRepeatedUInt32Field(value: &self.sleep) }()
+      case 1: try { try decoder.decodeRepeatedUInt32Field(value: &self.sleepState) }()
+      case 2: try { try decoder.decodeRepeatedUInt32Field(value: &self.sleepTime) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.sleep.isEmpty {
-      try visitor.visitRepeatedUInt32Field(value: self.sleep, fieldNumber: 1)
+    if !self.sleepState.isEmpty {
+      try visitor.visitRepeatedUInt32Field(value: self.sleepState, fieldNumber: 1)
+    }
+    if !self.sleepTime.isEmpty {
+      try visitor.visitRepeatedUInt32Field(value: self.sleepTime, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Caring_r_sleep_detail_t, rhs: Caring_r_sleep_detail_t) -> Bool {
-    if lhs.sleep != rhs.sleep {return false}
+    if lhs.sleepState != rhs.sleepState {return false}
+    if lhs.sleepTime != rhs.sleepTime {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -8456,6 +8562,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     66: .standard(proto: "set_transfer_phone"),
     67: .standard(proto: "set_abnormal_warning"),
     68: .standard(proto: "r_get_4G_online_off"),
+    69: .standard(proto: "r_get_4G_online_or_not"),
   ]
 
   fileprivate class _StorageClass {
@@ -8524,6 +8631,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     var _setTransferPhone: Caring_set_transfer_phone_t? = nil
     var _setAbnormalWarning: Caring_set_abnormal_warning_t? = nil
     var _rGet4GOnlineOff: Caring_r_get_4G_online_off_t? = nil
+    var _rGet4GOnlineOrNot: Caring_r_get_4G_online_or_not_t? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -8595,6 +8703,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       _setTransferPhone = source._setTransferPhone
       _setAbnormalWarning = source._setAbnormalWarning
       _rGet4GOnlineOff = source._rGet4GOnlineOff
+      _rGet4GOnlineOrNot = source._rGet4GOnlineOrNot
     }
   }
 
@@ -8671,6 +8780,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._setTransferPhone, !v.isInitialized {return false}
       if let v = _storage._setAbnormalWarning, !v.isInitialized {return false}
       if let v = _storage._rGet4GOnlineOff, !v.isInitialized {return false}
+      if let v = _storage._rGet4GOnlineOrNot, !v.isInitialized {return false}
       return true
     }
   }
@@ -8748,6 +8858,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         case 66: try { try decoder.decodeSingularMessageField(value: &_storage._setTransferPhone) }()
         case 67: try { try decoder.decodeSingularMessageField(value: &_storage._setAbnormalWarning) }()
         case 68: try { try decoder.decodeSingularMessageField(value: &_storage._rGet4GOnlineOff) }()
+        case 69: try { try decoder.decodeSingularMessageField(value: &_storage._rGet4GOnlineOrNot) }()
         default: break
         }
       }
@@ -8951,6 +9062,9 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._rGet4GOnlineOff {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 68)
       }
+      if let v = _storage._rGet4GOnlineOrNot {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 69)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -9025,6 +9139,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         if _storage._setTransferPhone != rhs_storage._setTransferPhone {return false}
         if _storage._setAbnormalWarning != rhs_storage._setAbnormalWarning {return false}
         if _storage._rGet4GOnlineOff != rhs_storage._rGet4GOnlineOff {return false}
+        if _storage._rGet4GOnlineOrNot != rhs_storage._rGet4GOnlineOrNot {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -9103,5 +9218,7 @@ extension Caring_hl_cmds.cmd_t: SwiftProtobuf._ProtoNameProviding {
     65: .same(proto: "CMD_ABNORMAL_WARINING"),
     68: .same(proto: "CMD_ONLINE_NOTIFY"),
     69: .same(proto: "CMD_ONLINE_OR_NOT"),
+    70: .same(proto: "CMD_4G_IS_IT_ONLINE"),
+    71: .same(proto: "CMD_SET_WATCHINFO"),
   ]
 }
