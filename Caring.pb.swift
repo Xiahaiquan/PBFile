@@ -890,6 +890,16 @@ struct Caring_r_get_health_step_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  ///该天0时的时间戳
+  var timeStamp: UInt32 {
+    get {return _timeStamp ?? 0}
+    set {_timeStamp = newValue}
+  }
+  /// Returns true if `timeStamp` has been explicitly set.
+  var hasTimeStamp: Bool {return self._timeStamp != nil}
+  /// Clears the value of `timeStamp`. Subsequent reads from it will return its default value.
+  mutating func clearTimeStamp() {self._timeStamp = nil}
+
   var totalSteps: UInt32 {
     get {return _totalSteps ?? 0}
     set {_totalSteps = newValue}
@@ -941,6 +951,7 @@ struct Caring_r_get_health_step_t {
 
   init() {}
 
+  fileprivate var _timeStamp: UInt32? = nil
   fileprivate var _totalSteps: UInt32? = nil
   fileprivate var _totalDistance: UInt64? = nil
   fileprivate var _totalKcal: UInt32? = nil
@@ -953,6 +964,16 @@ struct Caring_r_get_health_hrm_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  ///该天0时的时间戳
+  var timeStamp: UInt32 {
+    get {return _timeStamp ?? 0}
+    set {_timeStamp = newValue}
+  }
+  /// Returns true if `timeStamp` has been explicitly set.
+  var hasTimeStamp: Bool {return self._timeStamp != nil}
+  /// Clears the value of `timeStamp`. Subsequent reads from it will return its default value.
+  mutating func clearTimeStamp() {self._timeStamp = nil}
 
   var maxHeartRate: UInt32 {
     get {return _maxHeartRate ?? 0}
@@ -996,6 +1017,7 @@ struct Caring_r_get_health_hrm_t {
 
   init() {}
 
+  fileprivate var _timeStamp: UInt32? = nil
   fileprivate var _maxHeartRate: UInt32? = nil
   fileprivate var _minHeartRate: UInt32? = nil
   fileprivate var _averageHeartRate: UInt32? = nil
@@ -1007,6 +1029,16 @@ struct Caring_r_get_health_bp_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  ///该天0时的时间戳
+  var timeStamp: UInt32 {
+    get {return _timeStamp ?? 0}
+    set {_timeStamp = newValue}
+  }
+  /// Returns true if `timeStamp` has been explicitly set.
+  var hasTimeStamp: Bool {return self._timeStamp != nil}
+  /// Clears the value of `timeStamp`. Subsequent reads from it will return its default value.
+  mutating func clearTimeStamp() {self._timeStamp = nil}
 
   ///最高血压//YJ：有舒张压和收缩压，如何定义最高最低？
   var maxBp: Caring_r_get_bp {
@@ -1055,6 +1087,7 @@ struct Caring_r_get_health_bp_t {
 
   init() {}
 
+  fileprivate var _timeStamp: UInt32? = nil
   fileprivate var _maxBp: Caring_r_get_bp? = nil
   fileprivate var _minBp: Caring_r_get_bp? = nil
   fileprivate var _avgBp: Caring_r_get_bp? = nil
@@ -1066,6 +1099,16 @@ struct Caring_r_get_health_sleep_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  ///该天0时的时间戳
+  var timeStamp: UInt32 {
+    get {return _timeStamp ?? 0}
+    set {_timeStamp = newValue}
+  }
+  /// Returns true if `timeStamp` has been explicitly set.
+  var hasTimeStamp: Bool {return self._timeStamp != nil}
+  /// Clears the value of `timeStamp`. Subsequent reads from it will return its default value.
+  mutating func clearTimeStamp() {self._timeStamp = nil}
 
   ///睡眠开始时间
   var startTime: UInt32 {
@@ -1154,6 +1197,7 @@ struct Caring_r_get_health_sleep_t {
 
   init() {}
 
+  fileprivate var _timeStamp: UInt32? = nil
   fileprivate var _startTime: UInt32? = nil
   fileprivate var _endTime: UInt32? = nil
   fileprivate var _totalMinutes: UInt32? = nil
@@ -1169,6 +1213,16 @@ struct Caring_r_get_health_spo2_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  ///该天0时的时间戳
+  var timeStamp: UInt32 {
+    get {return _timeStamp ?? 0}
+    set {_timeStamp = newValue}
+  }
+  /// Returns true if `timeStamp` has been explicitly set.
+  var hasTimeStamp: Bool {return self._timeStamp != nil}
+  /// Clears the value of `timeStamp`. Subsequent reads from it will return its default value.
+  mutating func clearTimeStamp() {self._timeStamp = nil}
 
   ///最大血氧度
   var maxSpo2: UInt32 {
@@ -1207,6 +1261,7 @@ struct Caring_r_get_health_spo2_t {
 
   init() {}
 
+  fileprivate var _timeStamp: UInt32? = nil
   fileprivate var _maxSpo2: UInt32? = nil
   fileprivate var _minSpo2: UInt32? = nil
   fileprivate var _recordDate: UInt32? = nil
@@ -1668,27 +1723,101 @@ struct Caring_set_sync_health_data_t {
   fileprivate var _mDistanceToday: UInt32? = nil
 }
 
-///设置来电转移模式和号码   暂无需求
+///设置来电转移模式和号码   
 struct Caring_set_transfer_phone_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  ///手机
-  var phone: UInt32 {
-    get {return _phone ?? 0}
-    set {_phone = newValue}
+  ///1 开启 0 关闭
+  var mPhone: UInt32 {
+    get {return _mPhone ?? 0}
+    set {_mPhone = newValue}
   }
-  /// Returns true if `phone` has been explicitly set.
-  var hasPhone: Bool {return self._phone != nil}
-  /// Clears the value of `phone`. Subsequent reads from it will return its default value.
-  mutating func clearPhone() {self._phone = nil}
+  /// Returns true if `mPhone` has been explicitly set.
+  var hasMPhone: Bool {return self._mPhone != nil}
+  /// Clears the value of `mPhone`. Subsequent reads from it will return its default value.
+  mutating func clearMPhone() {self._mPhone = nil}
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
-  fileprivate var _phone: UInt32? = nil
+  fileprivate var _mPhone: UInt32? = nil
+}
+
+///查询是否可以发送该表盘。
+struct Caring_set_check_dail_t {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var mType: UInt32 {
+    get {return _mType ?? 0}
+    set {_mType = newValue}
+  }
+  /// Returns true if `mType` has been explicitly set.
+  var hasMType: Bool {return self._mType != nil}
+  /// Clears the value of `mType`. Subsequent reads from it will return its default value.
+  mutating func clearMType() {self._mType = nil}
+
+  var mDataLength: UInt32 {
+    get {return _mDataLength ?? 0}
+    set {_mDataLength = newValue}
+  }
+  /// Returns true if `mDataLength` has been explicitly set.
+  var hasMDataLength: Bool {return self._mDataLength != nil}
+  /// Clears the value of `mDataLength`. Subsequent reads from it will return its default value.
+  mutating func clearMDataLength() {self._mDataLength = nil}
+
+  var mCrcCode: UInt32 {
+    get {return _mCrcCode ?? 0}
+    set {_mCrcCode = newValue}
+  }
+  /// Returns true if `mCrcCode` has been explicitly set.
+  var hasMCrcCode: Bool {return self._mCrcCode != nil}
+  /// Clears the value of `mCrcCode`. Subsequent reads from it will return its default value.
+  mutating func clearMCrcCode() {self._mCrcCode = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _mType: UInt32? = nil
+  fileprivate var _mDataLength: UInt32? = nil
+  fileprivate var _mCrcCode: UInt32? = nil
+}
+
+///发送表盘数据。
+struct Caring_set_bin_data_t {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var mSn: UInt32 {
+    get {return _mSn ?? 0}
+    set {_mSn = newValue}
+  }
+  /// Returns true if `mSn` has been explicitly set.
+  var hasMSn: Bool {return self._mSn != nil}
+  /// Clears the value of `mSn`. Subsequent reads from it will return its default value.
+  mutating func clearMSn() {self._mSn = nil}
+
+  var mData: Data {
+    get {return _mData ?? Data()}
+    set {_mData = newValue}
+  }
+  /// Returns true if `mData` has been explicitly set.
+  var hasMData: Bool {return self._mData != nil}
+  /// Clears the value of `mData`. Subsequent reads from it will return its default value.
+  mutating func clearMData() {self._mData = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _mSn: UInt32? = nil
+  fileprivate var _mData: Data? = nil
 }
 
 struct Caring_set_update_spo2_data_t {
@@ -1728,14 +1857,31 @@ struct Caring_r_sleep_detail_t {
   // methods supported on all messages.
 
   /// 1深睡   2 浅睡  3 清醒
-  var sleepState: [UInt32] = []
+  var sleepState: UInt32 {
+    get {return _sleepState ?? 0}
+    set {_sleepState = newValue}
+  }
+  /// Returns true if `sleepState` has been explicitly set.
+  var hasSleepState: Bool {return self._sleepState != nil}
+  /// Clears the value of `sleepState`. Subsequent reads from it will return its default value.
+  mutating func clearSleepState() {self._sleepState = nil}
 
   ///睡眠时间，单位分钟
-  var sleepTime: [UInt32] = []
+  var sleepTime: UInt32 {
+    get {return _sleepTime ?? 0}
+    set {_sleepTime = newValue}
+  }
+  /// Returns true if `sleepTime` has been explicitly set.
+  var hasSleepTime: Bool {return self._sleepTime != nil}
+  /// Clears the value of `sleepTime`. Subsequent reads from it will return its default value.
+  mutating func clearSleepTime() {self._sleepTime = nil}
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
+
+  fileprivate var _sleepState: UInt32? = nil
+  fileprivate var _sleepTime: UInt32? = nil
 }
 
 /// 血氧
@@ -2409,88 +2555,6 @@ struct Caring_r_get_watch_info_t {
 
   fileprivate var _mErrCode: UInt32? = nil
   fileprivate var _id: UInt32? = nil
-}
-
-struct Caring_set_bin_data_t {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var mSn: UInt32 {
-    get {return _mSn ?? 0}
-    set {_mSn = newValue}
-  }
-  /// Returns true if `mSn` has been explicitly set.
-  var hasMSn: Bool {return self._mSn != nil}
-  /// Clears the value of `mSn`. Subsequent reads from it will return its default value.
-  mutating func clearMSn() {self._mSn = nil}
-
-  var mData: Data {
-    get {return _mData ?? Data()}
-    set {_mData = newValue}
-  }
-  /// Returns true if `mData` has been explicitly set.
-  var hasMData: Bool {return self._mData != nil}
-  /// Clears the value of `mData`. Subsequent reads from it will return its default value.
-  mutating func clearMData() {self._mData = nil}
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  fileprivate var _mSn: UInt32? = nil
-  fileprivate var _mData: Data? = nil
-}
-
-struct Caring_set_big_data_t {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var mType: UInt32 {
-    get {return _mType ?? 0}
-    set {_mType = newValue}
-  }
-  /// Returns true if `mType` has been explicitly set.
-  var hasMType: Bool {return self._mType != nil}
-  /// Clears the value of `mType`. Subsequent reads from it will return its default value.
-  mutating func clearMType() {self._mType = nil}
-
-  var mDataLenth: UInt32 {
-    get {return _mDataLenth ?? 0}
-    set {_mDataLenth = newValue}
-  }
-  /// Returns true if `mDataLenth` has been explicitly set.
-  var hasMDataLenth: Bool {return self._mDataLenth != nil}
-  /// Clears the value of `mDataLenth`. Subsequent reads from it will return its default value.
-  mutating func clearMDataLenth() {self._mDataLenth = nil}
-
-  var mPicID: UInt32 {
-    get {return _mPicID ?? 0}
-    set {_mPicID = newValue}
-  }
-  /// Returns true if `mPicID` has been explicitly set.
-  var hasMPicID: Bool {return self._mPicID != nil}
-  /// Clears the value of `mPicID`. Subsequent reads from it will return its default value.
-  mutating func clearMPicID() {self._mPicID = nil}
-
-  var mCrcCode: UInt32 {
-    get {return _mCrcCode ?? 0}
-    set {_mCrcCode = newValue}
-  }
-  /// Returns true if `mCrcCode` has been explicitly set.
-  var hasMCrcCode: Bool {return self._mCrcCode != nil}
-  /// Clears the value of `mCrcCode`. Subsequent reads from it will return its default value.
-  mutating func clearMCrcCode() {self._mCrcCode = nil}
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  fileprivate var _mType: UInt32? = nil
-  fileprivate var _mDataLenth: UInt32? = nil
-  fileprivate var _mPicID: UInt32? = nil
-  fileprivate var _mCrcCode: UInt32? = nil
 }
 
 struct Caring_set_rtimehr_dur_t {
@@ -3747,6 +3811,7 @@ struct Caring_hl_cmds {
   /// Clears the value of `rGetMtuSize`. Subsequent reads from it will return its default value.
   mutating func clearRGetMtuSize() {_uniqueStorage()._rGetMtuSize = nil}
 
+  ///正式发送表盘数据
   var setBinData: Caring_set_bin_data_t {
     get {return _storage._setBinData ?? Caring_set_bin_data_t()}
     set {_uniqueStorage()._setBinData = newValue}
@@ -3756,14 +3821,15 @@ struct Caring_hl_cmds {
   /// Clears the value of `setBinData`. Subsequent reads from it will return its default value.
   mutating func clearSetBinData() {_uniqueStorage()._setBinData = nil}
 
-  var setBigData: Caring_set_big_data_t {
-    get {return _storage._setBigData ?? Caring_set_big_data_t()}
-    set {_uniqueStorage()._setBigData = newValue}
+  ///询问是否可以发送表盘数据
+  var setCheckDail: Caring_set_check_dail_t {
+    get {return _storage._setCheckDail ?? Caring_set_check_dail_t()}
+    set {_uniqueStorage()._setCheckDail = newValue}
   }
-  /// Returns true if `setBigData` has been explicitly set.
-  var hasSetBigData: Bool {return _storage._setBigData != nil}
-  /// Clears the value of `setBigData`. Subsequent reads from it will return its default value.
-  mutating func clearSetBigData() {_uniqueStorage()._setBigData = nil}
+  /// Returns true if `setCheckDail` has been explicitly set.
+  var hasSetCheckDail: Bool {return _storage._setCheckDail != nil}
+  /// Clears the value of `setCheckDail`. Subsequent reads from it will return its default value.
+  mutating func clearSetCheckDail() {_uniqueStorage()._setCheckDail = nil}
 
   var rFindPhone: Caring_r_find_phone_t {
     get {return _storage._rFindPhone ?? Caring_r_find_phone_t()}
@@ -4117,12 +4183,18 @@ struct Caring_hl_cmds {
     case cmdSetSportStatus // = 28
     case cmdGetHealthData // = 29
     case cmdSetMusicInfo // = 30
+
+    ///获取MTU
     case cmdGetSyncMtu // = 31
+
+    ///设置表盘（正式升级表盘）
     case cmdSetBinDataUpdate // = 32
 
     ///进入厂测模式
     case cmdFactoryTestMode // = 33
-    case cmdSendBigData // = 34
+
+    ///询问是否可以发送表盘
+    case cmdSendCheckDail // = 34
     case cmdGetRealtimeHr // = 35
     case cmdSyncRealtimeHr // = 36
     case cmdHandUpPhone // = 37
@@ -4158,8 +4230,8 @@ struct Caring_hl_cmds {
     ///获取手表信息
     case cmdGetWatchinfo // = 60
 
-    ///设置来电转移模式和号码//YJ：命名不妥
-    case cmdSetCaringReminder // = 61
+    ///设置来电转移模式和号码 
+    case cmdSetTransferPhone // = 61
     case cmdGet4GOnline // = 62
     case cmdSet4GOnlind // = 63
     case cmdSetTransfer // = 64
@@ -4216,7 +4288,7 @@ struct Caring_hl_cmds {
       case 31: self = .cmdGetSyncMtu
       case 32: self = .cmdSetBinDataUpdate
       case 33: self = .cmdFactoryTestMode
-      case 34: self = .cmdSendBigData
+      case 34: self = .cmdSendCheckDail
       case 35: self = .cmdGetRealtimeHr
       case 36: self = .cmdSyncRealtimeHr
       case 37: self = .cmdHandUpPhone
@@ -4243,7 +4315,7 @@ struct Caring_hl_cmds {
       case 58: self = .cmdSetMenuSequenceData
       case 59: self = .cmdSyncContacts
       case 60: self = .cmdGetWatchinfo
-      case 61: self = .cmdSetCaringReminder
+      case 61: self = .cmdSetTransferPhone
       case 62: self = .cmdGet4GOnline
       case 63: self = .cmdSet4GOnlind
       case 64: self = .cmdSetTransfer
@@ -4291,7 +4363,7 @@ struct Caring_hl_cmds {
       case .cmdGetSyncMtu: return 31
       case .cmdSetBinDataUpdate: return 32
       case .cmdFactoryTestMode: return 33
-      case .cmdSendBigData: return 34
+      case .cmdSendCheckDail: return 34
       case .cmdGetRealtimeHr: return 35
       case .cmdSyncRealtimeHr: return 36
       case .cmdHandUpPhone: return 37
@@ -4318,7 +4390,7 @@ struct Caring_hl_cmds {
       case .cmdSetMenuSequenceData: return 58
       case .cmdSyncContacts: return 59
       case .cmdGetWatchinfo: return 60
-      case .cmdSetCaringReminder: return 61
+      case .cmdSetTransferPhone: return 61
       case .cmdGet4GOnline: return 62
       case .cmdSet4GOnlind: return 63
       case .cmdSetTransfer: return 64
@@ -5318,15 +5390,17 @@ extension Caring_r_get_health_data_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
 extension Caring_r_get_health_step_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".r_get_health_step_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "totalSteps"),
-    2: .same(proto: "totalDistance"),
-    3: .same(proto: "totalKcal"),
-    4: .same(proto: "duration"),
-    5: .same(proto: "stepDetails"),
-    6: .same(proto: "recordDate"),
+    1: .same(proto: "timeStamp"),
+    2: .same(proto: "totalSteps"),
+    3: .same(proto: "totalDistance"),
+    4: .same(proto: "totalKcal"),
+    5: .same(proto: "duration"),
+    6: .same(proto: "stepDetails"),
+    7: .same(proto: "recordDate"),
   ]
 
   public var isInitialized: Bool {
+    if self._timeStamp == nil {return false}
     if self._totalSteps == nil {return false}
     if self._totalDistance == nil {return false}
     if self._totalKcal == nil {return false}
@@ -5341,40 +5415,45 @@ extension Caring_r_get_health_step_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._totalSteps) }()
-      case 2: try { try decoder.decodeSingularUInt64Field(value: &self._totalDistance) }()
-      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._totalKcal) }()
-      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._duration) }()
-      case 5: try { try decoder.decodeRepeatedUInt32Field(value: &self.stepDetails) }()
-      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._recordDate) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._timeStamp) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._totalSteps) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self._totalDistance) }()
+      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._totalKcal) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._duration) }()
+      case 6: try { try decoder.decodeRepeatedUInt32Field(value: &self.stepDetails) }()
+      case 7: try { try decoder.decodeSingularUInt32Field(value: &self._recordDate) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._totalSteps {
+    if let v = self._timeStamp {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
+    if let v = self._totalSteps {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
+    }
     if let v = self._totalDistance {
-      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 2)
+      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 3)
     }
     if let v = self._totalKcal {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
-    }
-    if let v = self._duration {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
     }
+    if let v = self._duration {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
+    }
     if !self.stepDetails.isEmpty {
-      try visitor.visitRepeatedUInt32Field(value: self.stepDetails, fieldNumber: 5)
+      try visitor.visitRepeatedUInt32Field(value: self.stepDetails, fieldNumber: 6)
     }
     if let v = self._recordDate {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 7)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Caring_r_get_health_step_t, rhs: Caring_r_get_health_step_t) -> Bool {
+    if lhs._timeStamp != rhs._timeStamp {return false}
     if lhs._totalSteps != rhs._totalSteps {return false}
     if lhs._totalDistance != rhs._totalDistance {return false}
     if lhs._totalKcal != rhs._totalKcal {return false}
@@ -5389,14 +5468,16 @@ extension Caring_r_get_health_step_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
 extension Caring_r_get_health_hrm_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".r_get_health_hrm_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "maxHeartRate"),
-    2: .same(proto: "minHeartRate"),
-    3: .same(proto: "averageHeartRate"),
-    4: .same(proto: "hrsDetails"),
-    5: .same(proto: "recordDate"),
+    1: .same(proto: "timeStamp"),
+    2: .same(proto: "maxHeartRate"),
+    3: .same(proto: "minHeartRate"),
+    4: .same(proto: "averageHeartRate"),
+    5: .same(proto: "hrsDetails"),
+    6: .same(proto: "recordDate"),
   ]
 
   public var isInitialized: Bool {
+    if self._timeStamp == nil {return false}
     if self._maxHeartRate == nil {return false}
     if self._minHeartRate == nil {return false}
     if self._averageHeartRate == nil {return false}
@@ -5410,36 +5491,41 @@ extension Caring_r_get_health_hrm_t: SwiftProtobuf.Message, SwiftProtobuf._Messa
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._maxHeartRate) }()
-      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._minHeartRate) }()
-      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._averageHeartRate) }()
-      case 4: try { try decoder.decodeRepeatedUInt32Field(value: &self.hrsDetails) }()
-      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._recordDate) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._timeStamp) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._maxHeartRate) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._minHeartRate) }()
+      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._averageHeartRate) }()
+      case 5: try { try decoder.decodeRepeatedUInt32Field(value: &self.hrsDetails) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._recordDate) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._maxHeartRate {
+    if let v = self._timeStamp {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
-    if let v = self._minHeartRate {
+    if let v = self._maxHeartRate {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
     }
-    if let v = self._averageHeartRate {
+    if let v = self._minHeartRate {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
     }
+    if let v = self._averageHeartRate {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
+    }
     if !self.hrsDetails.isEmpty {
-      try visitor.visitRepeatedUInt32Field(value: self.hrsDetails, fieldNumber: 4)
+      try visitor.visitRepeatedUInt32Field(value: self.hrsDetails, fieldNumber: 5)
     }
     if let v = self._recordDate {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Caring_r_get_health_hrm_t, rhs: Caring_r_get_health_hrm_t) -> Bool {
+    if lhs._timeStamp != rhs._timeStamp {return false}
     if lhs._maxHeartRate != rhs._maxHeartRate {return false}
     if lhs._minHeartRate != rhs._minHeartRate {return false}
     if lhs._averageHeartRate != rhs._averageHeartRate {return false}
@@ -5453,14 +5539,16 @@ extension Caring_r_get_health_hrm_t: SwiftProtobuf.Message, SwiftProtobuf._Messa
 extension Caring_r_get_health_bp_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".r_get_health_bp_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "maxBp"),
-    2: .same(proto: "minBp"),
-    3: .same(proto: "avgBp"),
-    4: .same(proto: "bpDetails"),
-    5: .same(proto: "recordDate"),
+    1: .same(proto: "timeStamp"),
+    2: .same(proto: "maxBp"),
+    3: .same(proto: "minBp"),
+    4: .same(proto: "avgBp"),
+    5: .same(proto: "bpDetails"),
+    6: .same(proto: "recordDate"),
   ]
 
   public var isInitialized: Bool {
+    if self._timeStamp == nil {return false}
     if self._maxBp == nil {return false}
     if self._minBp == nil {return false}
     if self._avgBp == nil {return false}
@@ -5478,36 +5566,41 @@ extension Caring_r_get_health_bp_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._maxBp) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._minBp) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._avgBp) }()
-      case 4: try { try decoder.decodeRepeatedMessageField(value: &self.bpDetails) }()
-      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._recordDate) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._timeStamp) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._maxBp) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._minBp) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._avgBp) }()
+      case 5: try { try decoder.decodeRepeatedMessageField(value: &self.bpDetails) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._recordDate) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._maxBp {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    if let v = self._timeStamp {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
-    if let v = self._minBp {
+    if let v = self._maxBp {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }
-    if let v = self._avgBp {
+    if let v = self._minBp {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     }
+    if let v = self._avgBp {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    }
     if !self.bpDetails.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.bpDetails, fieldNumber: 4)
+      try visitor.visitRepeatedMessageField(value: self.bpDetails, fieldNumber: 5)
     }
     if let v = self._recordDate {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Caring_r_get_health_bp_t, rhs: Caring_r_get_health_bp_t) -> Bool {
+    if lhs._timeStamp != rhs._timeStamp {return false}
     if lhs._maxBp != rhs._maxBp {return false}
     if lhs._minBp != rhs._minBp {return false}
     if lhs._avgBp != rhs._avgBp {return false}
@@ -5521,18 +5614,20 @@ extension Caring_r_get_health_bp_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
 extension Caring_r_get_health_sleep_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".r_get_health_sleep_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "startTime"),
-    2: .same(proto: "endTime"),
-    3: .same(proto: "totalMinutes"),
-    4: .same(proto: "lightSleepMinutes"),
-    5: .same(proto: "deepSleepMinutes"),
-    6: .same(proto: "awakeSleepMinutes"),
-    7: .same(proto: "awakeTimes"),
-    8: .same(proto: "sleepDetails"),
-    9: .same(proto: "recordDate"),
+    1: .same(proto: "timeStamp"),
+    2: .same(proto: "startTime"),
+    3: .same(proto: "endTime"),
+    4: .same(proto: "totalMinutes"),
+    5: .same(proto: "lightSleepMinutes"),
+    6: .same(proto: "deepSleepMinutes"),
+    7: .same(proto: "awakeSleepMinutes"),
+    8: .same(proto: "awakeTimes"),
+    9: .same(proto: "sleepDetails"),
+    10: .same(proto: "recordDate"),
   ]
 
   public var isInitialized: Bool {
+    if self._timeStamp == nil {return false}
     if self._startTime == nil {return false}
     if self._endTime == nil {return false}
     if self._totalMinutes == nil {return false}
@@ -5541,6 +5636,7 @@ extension Caring_r_get_health_sleep_t: SwiftProtobuf.Message, SwiftProtobuf._Mes
     if self._awakeSleepMinutes == nil {return false}
     if self._awakeTimes == nil {return false}
     if self._recordDate == nil {return false}
+    if !SwiftProtobuf.Internal.areAllInitialized(self.sleepDetails) {return false}
     return true
   }
 
@@ -5550,52 +5646,57 @@ extension Caring_r_get_health_sleep_t: SwiftProtobuf.Message, SwiftProtobuf._Mes
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._startTime) }()
-      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._endTime) }()
-      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._totalMinutes) }()
-      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._lightSleepMinutes) }()
-      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._deepSleepMinutes) }()
-      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._awakeSleepMinutes) }()
-      case 7: try { try decoder.decodeSingularUInt32Field(value: &self._awakeTimes) }()
-      case 8: try { try decoder.decodeRepeatedMessageField(value: &self.sleepDetails) }()
-      case 9: try { try decoder.decodeSingularUInt32Field(value: &self._recordDate) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._timeStamp) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._startTime) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._endTime) }()
+      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._totalMinutes) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._lightSleepMinutes) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._deepSleepMinutes) }()
+      case 7: try { try decoder.decodeSingularUInt32Field(value: &self._awakeSleepMinutes) }()
+      case 8: try { try decoder.decodeSingularUInt32Field(value: &self._awakeTimes) }()
+      case 9: try { try decoder.decodeRepeatedMessageField(value: &self.sleepDetails) }()
+      case 10: try { try decoder.decodeSingularUInt32Field(value: &self._recordDate) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._startTime {
+    if let v = self._timeStamp {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
-    if let v = self._endTime {
+    if let v = self._startTime {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
     }
-    if let v = self._totalMinutes {
+    if let v = self._endTime {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
     }
-    if let v = self._lightSleepMinutes {
+    if let v = self._totalMinutes {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
     }
-    if let v = self._deepSleepMinutes {
+    if let v = self._lightSleepMinutes {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
     }
-    if let v = self._awakeSleepMinutes {
+    if let v = self._deepSleepMinutes {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
     }
-    if let v = self._awakeTimes {
+    if let v = self._awakeSleepMinutes {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 7)
     }
+    if let v = self._awakeTimes {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 8)
+    }
     if !self.sleepDetails.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.sleepDetails, fieldNumber: 8)
+      try visitor.visitRepeatedMessageField(value: self.sleepDetails, fieldNumber: 9)
     }
     if let v = self._recordDate {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 9)
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 10)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Caring_r_get_health_sleep_t, rhs: Caring_r_get_health_sleep_t) -> Bool {
+    if lhs._timeStamp != rhs._timeStamp {return false}
     if lhs._startTime != rhs._startTime {return false}
     if lhs._endTime != rhs._endTime {return false}
     if lhs._totalMinutes != rhs._totalMinutes {return false}
@@ -5613,13 +5714,15 @@ extension Caring_r_get_health_sleep_t: SwiftProtobuf.Message, SwiftProtobuf._Mes
 extension Caring_r_get_health_spo2_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".r_get_health_spo2_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "maxSpo2"),
-    2: .same(proto: "minSpo2"),
-    3: .same(proto: "spo2Details"),
-    4: .same(proto: "recordDate"),
+    1: .same(proto: "timeStamp"),
+    2: .same(proto: "maxSpo2"),
+    3: .same(proto: "minSpo2"),
+    4: .same(proto: "spo2Details"),
+    5: .same(proto: "recordDate"),
   ]
 
   public var isInitialized: Bool {
+    if self._timeStamp == nil {return false}
     if self._maxSpo2 == nil {return false}
     if self._minSpo2 == nil {return false}
     if self._recordDate == nil {return false}
@@ -5633,32 +5736,37 @@ extension Caring_r_get_health_spo2_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._maxSpo2) }()
-      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._minSpo2) }()
-      case 3: try { try decoder.decodeRepeatedMessageField(value: &self.spo2Details) }()
-      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._recordDate) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._timeStamp) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._maxSpo2) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._minSpo2) }()
+      case 4: try { try decoder.decodeRepeatedMessageField(value: &self.spo2Details) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._recordDate) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._maxSpo2 {
+    if let v = self._timeStamp {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
-    if let v = self._minSpo2 {
+    if let v = self._maxSpo2 {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
     }
+    if let v = self._minSpo2 {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
+    }
     if !self.spo2Details.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.spo2Details, fieldNumber: 3)
+      try visitor.visitRepeatedMessageField(value: self.spo2Details, fieldNumber: 4)
     }
     if let v = self._recordDate {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Caring_r_get_health_spo2_t, rhs: Caring_r_get_health_spo2_t) -> Bool {
+    if lhs._timeStamp != rhs._timeStamp {return false}
     if lhs._maxSpo2 != rhs._maxSpo2 {return false}
     if lhs._minSpo2 != rhs._minSpo2 {return false}
     if lhs.spo2Details != rhs.spo2Details {return false}
@@ -6278,11 +6386,11 @@ extension Caring_set_sync_health_data_t: SwiftProtobuf.Message, SwiftProtobuf._M
 extension Caring_set_transfer_phone_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".set_transfer_phone_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "phone"),
+    1: .standard(proto: "m_phone"),
   ]
 
   public var isInitialized: Bool {
-    if self._phone == nil {return false}
+    if self._mPhone == nil {return false}
     return true
   }
 
@@ -6292,21 +6400,116 @@ extension Caring_set_transfer_phone_t: SwiftProtobuf.Message, SwiftProtobuf._Mes
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._phone) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mPhone) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._phone {
+    if let v = self._mPhone {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Caring_set_transfer_phone_t, rhs: Caring_set_transfer_phone_t) -> Bool {
-    if lhs._phone != rhs._phone {return false}
+    if lhs._mPhone != rhs._mPhone {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Caring_set_check_dail_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".set_check_dail_t"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "m_type"),
+    2: .standard(proto: "m_data_length"),
+    3: .standard(proto: "m_crc_code"),
+  ]
+
+  public var isInitialized: Bool {
+    if self._mType == nil {return false}
+    if self._mDataLength == nil {return false}
+    if self._mCrcCode == nil {return false}
+    return true
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mType) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mDataLength) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mCrcCode) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._mType {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
+    }
+    if let v = self._mDataLength {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
+    }
+    if let v = self._mCrcCode {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Caring_set_check_dail_t, rhs: Caring_set_check_dail_t) -> Bool {
+    if lhs._mType != rhs._mType {return false}
+    if lhs._mDataLength != rhs._mDataLength {return false}
+    if lhs._mCrcCode != rhs._mCrcCode {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Caring_set_bin_data_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".set_bin_data_t"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "m_sn"),
+    2: .standard(proto: "m_data"),
+  ]
+
+  public var isInitialized: Bool {
+    if self._mSn == nil {return false}
+    if self._mData == nil {return false}
+    return true
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mSn) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self._mData) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._mSn {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
+    }
+    if let v = self._mData {
+      try visitor.visitSingularBytesField(value: v, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Caring_set_bin_data_t, rhs: Caring_set_bin_data_t) -> Bool {
+    if lhs._mSn != rhs._mSn {return false}
+    if lhs._mData != rhs._mData {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -6363,32 +6566,38 @@ extension Caring_r_sleep_detail_t: SwiftProtobuf.Message, SwiftProtobuf._Message
     2: .standard(proto: "sleep_time"),
   ]
 
+  public var isInitialized: Bool {
+    if self._sleepState == nil {return false}
+    if self._sleepTime == nil {return false}
+    return true
+  }
+
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeRepeatedUInt32Field(value: &self.sleepState) }()
-      case 2: try { try decoder.decodeRepeatedUInt32Field(value: &self.sleepTime) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._sleepState) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._sleepTime) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.sleepState.isEmpty {
-      try visitor.visitRepeatedUInt32Field(value: self.sleepState, fieldNumber: 1)
+    if let v = self._sleepState {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
-    if !self.sleepTime.isEmpty {
-      try visitor.visitRepeatedUInt32Field(value: self.sleepTime, fieldNumber: 2)
+    if let v = self._sleepTime {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Caring_r_sleep_detail_t, rhs: Caring_r_sleep_detail_t) -> Bool {
-    if lhs.sleepState != rhs.sleepState {return false}
-    if lhs.sleepTime != rhs.sleepTime {return false}
+    if lhs._sleepState != rhs._sleepState {return false}
+    if lhs._sleepTime != rhs._sleepTime {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -7187,108 +7396,6 @@ extension Caring_r_get_watch_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messa
   static func ==(lhs: Caring_r_get_watch_info_t, rhs: Caring_r_get_watch_info_t) -> Bool {
     if lhs._mErrCode != rhs._mErrCode {return false}
     if lhs._id != rhs._id {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Caring_set_bin_data_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".set_bin_data_t"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "m_sn"),
-    2: .standard(proto: "m_data"),
-  ]
-
-  public var isInitialized: Bool {
-    if self._mSn == nil {return false}
-    if self._mData == nil {return false}
-    return true
-  }
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mSn) }()
-      case 2: try { try decoder.decodeSingularBytesField(value: &self._mData) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._mSn {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
-    }
-    if let v = self._mData {
-      try visitor.visitSingularBytesField(value: v, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Caring_set_bin_data_t, rhs: Caring_set_bin_data_t) -> Bool {
-    if lhs._mSn != rhs._mSn {return false}
-    if lhs._mData != rhs._mData {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Caring_set_big_data_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".set_big_data_t"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "m_type"),
-    2: .standard(proto: "m_data_lenth"),
-    3: .standard(proto: "m_pic_id"),
-    4: .standard(proto: "m_crc_code"),
-  ]
-
-  public var isInitialized: Bool {
-    if self._mType == nil {return false}
-    if self._mDataLenth == nil {return false}
-    if self._mPicID == nil {return false}
-    if self._mCrcCode == nil {return false}
-    return true
-  }
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mType) }()
-      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mDataLenth) }()
-      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mPicID) }()
-      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mCrcCode) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._mType {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
-    }
-    if let v = self._mDataLenth {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
-    }
-    if let v = self._mPicID {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
-    }
-    if let v = self._mCrcCode {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Caring_set_big_data_t, rhs: Caring_set_big_data_t) -> Bool {
-    if lhs._mType != rhs._mType {return false}
-    if lhs._mDataLenth != rhs._mDataLenth {return false}
-    if lhs._mPicID != rhs._mPicID {return false}
-    if lhs._mCrcCode != rhs._mCrcCode {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -8531,7 +8638,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     31: .standard(proto: "set_music_info"),
     32: .standard(proto: "r_get_mtu_size"),
     33: .standard(proto: "set_bin_data"),
-    34: .standard(proto: "set_big_data"),
+    34: .standard(proto: "set_check_dail"),
     35: .standard(proto: "r_find_phone"),
     36: .standard(proto: "set_hr_dur"),
     37: .standard(proto: "r_hr_value"),
@@ -8600,7 +8707,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     var _setMusicInfo: Caring_set_music_info_t? = nil
     var _rGetMtuSize: Caring_r_get_mtu_size_t? = nil
     var _setBinData: Caring_set_bin_data_t? = nil
-    var _setBigData: Caring_set_big_data_t? = nil
+    var _setCheckDail: Caring_set_check_dail_t? = nil
     var _rFindPhone: Caring_r_find_phone_t? = nil
     var _setHrDur: Caring_set_rtimehr_dur_t? = nil
     var _rHrValue: Caring_r_rtimehr_value_t? = nil
@@ -8672,7 +8779,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       _setMusicInfo = source._setMusicInfo
       _rGetMtuSize = source._rGetMtuSize
       _setBinData = source._setBinData
-      _setBigData = source._setBigData
+      _setCheckDail = source._setCheckDail
       _rFindPhone = source._rFindPhone
       _setHrDur = source._setHrDur
       _rHrValue = source._rHrValue
@@ -8749,7 +8856,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._setMusicInfo, !v.isInitialized {return false}
       if let v = _storage._rGetMtuSize, !v.isInitialized {return false}
       if let v = _storage._setBinData, !v.isInitialized {return false}
-      if let v = _storage._setBigData, !v.isInitialized {return false}
+      if let v = _storage._setCheckDail, !v.isInitialized {return false}
       if let v = _storage._rFindPhone, !v.isInitialized {return false}
       if let v = _storage._setHrDur, !v.isInitialized {return false}
       if let v = _storage._rHrValue, !v.isInitialized {return false}
@@ -8825,7 +8932,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         case 31: try { try decoder.decodeSingularMessageField(value: &_storage._setMusicInfo) }()
         case 32: try { try decoder.decodeSingularMessageField(value: &_storage._rGetMtuSize) }()
         case 33: try { try decoder.decodeSingularMessageField(value: &_storage._setBinData) }()
-        case 34: try { try decoder.decodeSingularMessageField(value: &_storage._setBigData) }()
+        case 34: try { try decoder.decodeSingularMessageField(value: &_storage._setCheckDail) }()
         case 35: try { try decoder.decodeSingularMessageField(value: &_storage._rFindPhone) }()
         case 36: try { try decoder.decodeSingularMessageField(value: &_storage._setHrDur) }()
         case 37: try { try decoder.decodeSingularMessageField(value: &_storage._rHrValue) }()
@@ -8963,7 +9070,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._setBinData {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 33)
       }
-      if let v = _storage._setBigData {
+      if let v = _storage._setCheckDail {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 34)
       }
       if let v = _storage._rFindPhone {
@@ -9108,7 +9215,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         if _storage._setMusicInfo != rhs_storage._setMusicInfo {return false}
         if _storage._rGetMtuSize != rhs_storage._rGetMtuSize {return false}
         if _storage._setBinData != rhs_storage._setBinData {return false}
-        if _storage._setBigData != rhs_storage._setBigData {return false}
+        if _storage._setCheckDail != rhs_storage._setCheckDail {return false}
         if _storage._rFindPhone != rhs_storage._rFindPhone {return false}
         if _storage._setHrDur != rhs_storage._setHrDur {return false}
         if _storage._rHrValue != rhs_storage._rHrValue {return false}
@@ -9184,7 +9291,7 @@ extension Caring_hl_cmds.cmd_t: SwiftProtobuf._ProtoNameProviding {
     31: .same(proto: "CMD_GET_SYNC_MTU"),
     32: .same(proto: "CMD_SET_BIN_DATA_UPDATE"),
     33: .same(proto: "CMD_FACTORY_TEST_MODE"),
-    34: .same(proto: "CMD_SEND_BIG_DATA"),
+    34: .same(proto: "CMD_SEND_CHECK_DAIL"),
     35: .same(proto: "CMD_GET_REALTIME_HR"),
     36: .same(proto: "CMD_SYNC_REALTIME_HR"),
     37: .same(proto: "CMD_HAND_UP_PHONE"),
@@ -9211,7 +9318,7 @@ extension Caring_hl_cmds.cmd_t: SwiftProtobuf._ProtoNameProviding {
     58: .same(proto: "CMD_SET_MENU_SEQUENCE_DATA"),
     59: .same(proto: "CMD_SYNC_CONTACTS"),
     60: .same(proto: "CMD_GET_WATCHINFO"),
-    61: .same(proto: "CMD_SET_CARING_REMINDER"),
+    61: .same(proto: "CMD_SET_TRANSFER_PHONE"),
     62: .same(proto: "CMD_GET_4G_ONLINE"),
     63: .same(proto: "CMD_SET_4G_ONLIND"),
     64: .same(proto: "CMD_SET_TRANSFER"),

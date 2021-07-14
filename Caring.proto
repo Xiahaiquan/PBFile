@@ -157,47 +157,52 @@ message r_get_health_data_t{
 
 // 历史步数
 message r_get_health_step_t{
-	required uint32		totalSteps			= 1;
-	required uint64		totalDistance		= 2;
-	required uint32		totalKcal			= 3;
-	required uint32     duration			= 4;
-	repeated uint32  	stepDetails			= 5;
-	required uint32     recordDate 			= 6;
+	required uint32		timeStamp			= 1; //该天0时的时间戳
+	required uint32		totalSteps			= 2;
+	required uint64		totalDistance		= 3;
+	required uint32		totalKcal			= 4;
+	required uint32     duration			= 5;
+	repeated uint32  	stepDetails			= 6;
+	required uint32     recordDate 			= 7;
 }
 // 历史心率
 message r_get_health_hrm_t{
-	required uint32		maxHeartRate			= 1;
-	required uint32		minHeartRate			= 2;
-	required uint32		averageHeartRate		= 3;
-	repeated uint32 	hrsDetails				= 4;
-	required uint32     recordDate 				= 5;
+	required uint32		timeStamp			= 1; //该天0时的时间戳
+	required uint32		maxHeartRate			= 2;
+	required uint32		minHeartRate			= 3;
+	required uint32		averageHeartRate		= 4;
+	repeated uint32 	hrsDetails				= 5;
+	required uint32     recordDate 				= 6;
 }
 //历史血压
 message r_get_health_bp_t {
-    required r_get_bp maxBp = 1; //最高血压//YJ：有舒张压和收缩压，如何定义最高最低？
-    required r_get_bp minBp = 2; //最低血压
-    required r_get_bp avgBp = 3; //平均血压
-    repeated r_get_bp bpDetails  = 4; //血压明细
-    required uint32 recordDate = 5; // 记录日期
+	required uint32		timeStamp			= 1; //该天0时的时间戳
+    required r_get_bp maxBp = 2; //最高血压//YJ：有舒张压和收缩压，如何定义最高最低？
+    required r_get_bp minBp = 3; //最低血压
+    required r_get_bp avgBp = 4; //平均血压
+    repeated r_get_bp bpDetails  = 5; //血压明细
+    required uint32 recordDate = 6; // 记录日期
 }
 // 历史睡眠
 message r_get_health_sleep_t {
-    required uint32 startTime = 1; //睡眠开始时间
-    required uint32 endTime = 2; //睡眠结束时间
-    required uint32 totalMinutes = 3; //睡眠总时长
-    required uint32 lightSleepMinutes  = 4; //浅睡时长
-    required uint32 deepSleepMinutes = 5; // 深睡时长
-	required uint32 awakeSleepMinutes = 6; // 清醒时长
-	required uint32 awakeTimes = 7; // 清醒次数
-	repeated r_sleep_detail_t sleepDetails = 8; // 睡眠状态明细
-	required uint32     recordDate 				= 9; // 记录日期
+	required uint32		timeStamp			= 1; //该天0时的时间戳
+    required uint32 startTime = 2; //睡眠开始时间
+    required uint32 endTime = 3; //睡眠结束时间
+    required uint32 totalMinutes = 4; //睡眠总时长
+    required uint32 lightSleepMinutes  = 5; //浅睡时长
+    required uint32 deepSleepMinutes = 6; // 深睡时长
+	required uint32 awakeSleepMinutes = 7; // 清醒时长
+	required uint32 awakeTimes = 8; // 清醒次数
+	repeated r_sleep_detail_t sleepDetails = 9; // 睡眠状态明细
+	required uint32     recordDate 				= 10; // 记录日期
 }
 // 历史血氧
 message r_get_health_spo2_t {
-    required uint32 maxSpo2 = 1; //最大血氧度
-    required uint32 minSpo2 = 2; //最小血氧度
-    repeated r_get_spo2 spo2Details = 3; //血氧度明细
-    required uint32 recordDate = 4; // 记录日期
+	required uint32		timeStamp			= 1; //该天0时的时间戳
+    required uint32 maxSpo2 = 2; //最大血氧度
+    required uint32 minSpo2 = 3; //最小血氧度
+    repeated r_get_spo2 spo2Details = 4; //血氧度明细
+    required uint32 recordDate = 5; // 记录日期
 }
 //----------------------------------------------
 
@@ -292,10 +297,24 @@ message set_sync_health_data_t{
 	required uint32		m_distance_today	= 2; //指定距离今天天数的数据。0代表是今天， 1代表昨天 2代表大前天
 }
 
-//设置来电转移模式和号码   暂无需求
+//设置来电转移模式和号码   
 message set_transfer_phone_t {
-	required uint32 phone  = 1; //手机
+	required uint32 m_phone  = 1; //1 开启 0 关闭
 }
+
+//查询是否可以发送该表盘。
+message set_check_dail_t{
+	required uint32		m_type				= 1;
+	required uint32     m_data_length		= 2;
+	required uint32     m_crc_code			= 3;
+}
+//发送表盘数据。
+message set_bin_data_t{
+	required uint32		m_sn				= 1;
+	required bytes      m_data				= 2;
+	
+}
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -307,8 +326,8 @@ message set_update_spo2_data_t{
 
 
 message r_sleep_detail_t {
-	repeated  uint32 sleep_state = 1; // 1深睡   2 浅睡  3 清醒
-	repeated  uint32 sleep_time=2 ; //睡眠时间，单位分钟
+	required  uint32 sleep_state = 1; // 1深睡   2 浅睡  3 清醒
+	required  uint32 sleep_time=2 ; //睡眠时间，单位分钟
 }
 
 
@@ -419,19 +438,6 @@ message r_get_watch_info_t{
 	required uint32		id				= 2;
 	
 }
-message set_bin_data_t{
-	required uint32		m_sn				= 1;
-	required bytes      m_data				= 2;
-	
-}
-
-message set_big_data_t{
-	required uint32		m_type				= 1;
-	required uint32     m_data_lenth		= 2;
-	required uint32     m_pic_id			= 3;
-	required uint32     m_crc_code			= 4;
-}
-
 
 message set_rtimehr_dur_t{
 	required uint32		m_hr_duration		= 1;
@@ -608,10 +614,10 @@ message hl_cmds {
 		CMD_SET_SPORT_STATUS		= 28;
 		CMD_GET_HEALTH_DATA			= 29;
 		CMD_SET_MUSIC_INFO			= 30;
-		CMD_GET_SYNC_MTU			= 31;
-		CMD_SET_BIN_DATA_UPDATE		= 32;
+		CMD_GET_SYNC_MTU			= 31;//获取MTU
+		CMD_SET_BIN_DATA_UPDATE		= 32;//设置表盘（正式升级表盘）
 		CMD_FACTORY_TEST_MODE		= 33;//进入厂测模式
-		CMD_SEND_BIG_DATA			= 34;
+		CMD_SEND_CHECK_DAIL			= 34;//询问是否可以发送表盘
 		CMD_GET_REALTIME_HR			= 35;
 		CMD_SYNC_REALTIME_HR		= 36;
 		CMD_HAND_UP_PHONE			= 37;
@@ -638,7 +644,7 @@ message hl_cmds {
 		CMD_SET_MENU_SEQUENCE_DATA  = 58;//	设置一级页面的顺序
 		CMD_SYNC_CONTACTS           = 59;//设置通讯录、紧急联系人 (0x3B)
 		CMD_GET_WATCHINFO           = 60; //获取手表信息
-		CMD_SET_CARING_REMINDER 	= 61;//设置来电转移模式和号码//YJ：命名不妥
+		CMD_SET_TRANSFER_PHONE 	    = 61;//设置来电转移模式和号码 
 		CMD_GET_4G_ONLINE   		= 62;
 		CMD_SET_4G_ONLIND			= 63;
 		CMD_SET_TRANSFER  			= 64;
@@ -685,8 +691,8 @@ message hl_cmds {
 	optional r_get_health_data_t	r_get_health_data 		= 30;
 	optional set_music_info_t		set_music_info 			= 31;
 	optional r_get_mtu_size_t		r_get_mtu_size 			= 32;
-	optional set_bin_data_t			set_bin_data 			= 33;
-	optional set_big_data_t			set_big_data 			= 34;
+	optional set_bin_data_t			set_bin_data 			= 33; //正式发送表盘数据
+	optional set_check_dail_t	    set_check_dail			= 34; //询问是否可以发送表盘数据
 	optional r_find_phone_t			r_find_phone 			= 35;
 	optional set_rtimehr_dur_t		set_hr_dur 				= 36;
 	optional r_rtimehr_value_t		r_hr_value 				= 37;
