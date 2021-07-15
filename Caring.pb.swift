@@ -2599,11 +2599,13 @@ struct Caring_r_rtimehr_value_t {
   fileprivate var _mHrValue: UInt32? = nil
 }
 
+///回复手机是否可以发送该表盘
 struct Caring_r_error_code_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  ///0 代表可以升级 1 代表该表盘已存在
   var err: UInt32 {
     get {return _err ?? 0}
     set {_err = newValue}
@@ -3802,6 +3804,7 @@ struct Caring_hl_cmds {
   /// Clears the value of `setMusicInfo`. Subsequent reads from it will return its default value.
   mutating func clearSetMusicInfo() {_uniqueStorage()._setMusicInfo = nil}
 
+  /// 推送MTU
   var rGetMtuSize: Caring_r_get_mtu_size_t {
     get {return _storage._rGetMtuSize ?? Caring_r_get_mtu_size_t()}
     set {_uniqueStorage()._rGetMtuSize = newValue}
@@ -4249,6 +4252,12 @@ struct Caring_hl_cmds {
     ///推送设备信息 (0x47)
     case cmdSetWatchinfo // = 71
 
+    ///推送MTU
+    case cmdSetSyncMtu // = 72
+
+    ///推送是否可以发送该表盘
+    case cmdSetClockDial // = 73
+
     init() {
       self = .cmdBindDevice
     }
@@ -4324,6 +4333,8 @@ struct Caring_hl_cmds {
       case 69: self = .cmdOnlineOrNot
       case 70: self = .cmd4GIsItOnline
       case 71: self = .cmdSetWatchinfo
+      case 72: self = .cmdSetSyncMtu
+      case 73: self = .cmdSetClockDial
       default: return nil
       }
     }
@@ -4399,6 +4410,8 @@ struct Caring_hl_cmds {
       case .cmdOnlineOrNot: return 69
       case .cmd4GIsItOnline: return 70
       case .cmdSetWatchinfo: return 71
+      case .cmdSetSyncMtu: return 72
+      case .cmdSetClockDial: return 73
       }
     }
 
@@ -9327,5 +9340,7 @@ extension Caring_hl_cmds.cmd_t: SwiftProtobuf._ProtoNameProviding {
     69: .same(proto: "CMD_ONLINE_OR_NOT"),
     70: .same(proto: "CMD_4G_IS_IT_ONLINE"),
     71: .same(proto: "CMD_SET_WATCHINFO"),
+    72: .same(proto: "CMD_SET_SYNC_MTU"),
+    73: .same(proto: "CMD_SET_CLOCK_DIAL"),
   ]
 }

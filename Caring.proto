@@ -447,8 +447,8 @@ message r_rtimehr_value_t{
 	required uint32		m_hr_value		= 1;
 
 }
-message r_error_code_t{
-	required uint32 err = 1;
+message r_error_code_t{           //回复手机是否可以发送该表盘
+	required uint32 err = 1;  //0 代表可以升级 1 代表该表盘已存在
 }
 
 message r_find_phone_t{
@@ -653,6 +653,8 @@ message hl_cmds {
 	    CMD_ONLINE_OR_NOT		    = 69; //发布4G在线 (0x45)
 		CMD_4G_IS_IT_ONLINE		    = 70; // 判断4G是否在线(0x46)
 		 CMD_SET_WATCHINFO		    = 71; //推送设备信息 (0x47)
+		 CMD_SET_SYNC_MTU			= 72;//推送MTU
+		 CMD_SET_CLOCK_DIAL          =73;//推送是否可以发送该表盘
 
 	}
  
@@ -690,7 +692,7 @@ message hl_cmds {
 	optional set_sport_status_t		set_sport_status 	 	= 29;
 	optional r_get_health_data_t	r_get_health_data 		= 30;
 	optional set_music_info_t		set_music_info 			= 31;
-	optional r_get_mtu_size_t		r_get_mtu_size 			= 32;
+	optional r_get_mtu_size_t		r_get_mtu_size 			= 32;  // 推送MTU
 	optional set_bin_data_t			set_bin_data 			= 33; //正式发送表盘数据
 	optional set_check_dail_t	    set_check_dail			= 34; //询问是否可以发送表盘数据
 	optional r_find_phone_t			r_find_phone 			= 35;
