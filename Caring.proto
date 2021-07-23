@@ -61,12 +61,17 @@ message set_hr_sample_slot_t{
     required uint32 m_hr_slot        = 1;
 }
 
+//设置数据（记步、APGS..）采集的间隔
+message set_data_collection_slot_t{
+    required uint32 type          = 1; //要采集的数类型
+    required uint32 slot          = 2; //设置的间隔
+} 
 
 //手表设置
 message set_watch_setting_t{
     required uint32 m_longsit_duration        = 1;//13800000000        设置久坐提醒判断的间隔 (单位：1min)
-    required uint32 m_start_time            = 2;//15:00    string    小时:高16bit 分钟：低16bit
-    required uint32 m_end_time                = 3;//string    小时:高16bit 分钟：低16bit
+    required uint32 m_start_time            = 2;//150     当前时间距当天0点的分钟数
+    required uint32 m_end_time                = 3;//260  当前时间距当天0点的分钟数
     required uint32 m_nodisturb_state        = 4;//    勿扰模式开关
     required uint32 m_longsit_state            = 5;//久坐提醒开关
     
@@ -138,8 +143,6 @@ message set_abnormal_warning_t {
 }
 
 
-
-
 //----------------------------------------------
 //上传健康数据
 message r_get_health_data_t{
@@ -147,40 +150,40 @@ message r_get_health_data_t{
     required uint32        m_sn                = 2;//YJ:放什么数据？   长度1   sn = ffff 就是结束 65535
     optional bytes      m_data                = 3;//YJ:放什么数据？   在4G 上没有用。在蓝牙上 根据DN 标识做data拼接
     
-    optional r_get_health_step_t  step         = 4; //步数
-    optional r_get_health_hrm_t   hrm          = 5;  //心率
-    optional r_get_health_bp_t    bp           = 6;  //血压
-    optional r_get_health_sleep_t sleep        = 7;  //睡眠
-    optional r_get_health_spo2_t  spo2         = 8;  //血氧
+    repeated r_get_health_step_t  step         = 4; //步数
+    repeated r_get_health_hr_t   hrs          = 5;  //心率
+    repeated r_get_health_bp_t    bp           = 6;  //血压
+    repeated r_get_health_sleep_t sleep        = 7;  //睡眠
+    repeated r_get_health_spo2_t  spo2         = 8;  //血氧
 }
 
 
-// 历史步数
+// 一天内历史步数
 message r_get_health_step_t{
     required uint32        totalSteps            = 1;
     required uint64        totalDistance        = 2;
     required uint32        totalKcal            = 3;
     required uint32     duration            = 4;
-    repeated uint32      stepDetails            = 5;
-    required uint32     recordDate             = 6;
+    repeated r_get_step      stepDetails            = 5;
+    required uint32     timeStamp             = 6;
 }
-// 历史心率
-message r_get_health_hrm_t{
+// 一天内历史心率
+message r_get_health_hr_t {
     required uint32        maxHeartRate            = 1;
     required uint32        minHeartRate            = 2;
     required uint32        averageHeartRate        = 3;
-    repeated uint32     hrsDetails                = 4;
-    required uint32     recordDate                 = 5;
+    repeated r_get_hr     hrsDetails                = 4;
+    required uint32     timeStamp                 = 5;
 }
-//历史血压
+//一天内历史血压
 message r_get_health_bp_t {
     required r_get_bp maxBp = 1; //最高血压//YJ：有舒张压和收缩压，如何定义最高最低？
     required r_get_bp minBp = 2; //最低血压
     required r_get_bp avgBp = 3; //平均血压
     repeated r_get_bp bpDetails  = 4; //血压明细
-    required uint32 recordDate = 5; // 记录日期
+    required uint32 timeStamp = 5; // 该天0时的时间戳
 }
-// 历史睡眠
+// 一天内历史睡眠
 message r_get_health_sleep_t {
     required uint32 startTime = 1; //睡眠开始时间
     required uint32 endTime = 2; //睡眠结束时间
@@ -190,32 +193,62 @@ message r_get_health_sleep_t {
     required uint32 awakeSleepMinutes = 6; // 清醒时长
     required uint32 awakeTimes = 7; // 清醒次数
     repeated r_sleep_detail_t sleepDetails = 8; // 睡眠状态明细
-    required uint32     recordDate                 = 9; // 记录日期
+    required uint32     timeStamp                 = 9; // 该天0时的时间戳
 }
-// 历史血氧
+// 一天内的历史血氧
 message r_get_health_spo2_t {
     required uint32 maxSpo2 = 1; //最大血氧度
     required uint32 minSpo2 = 2; //最小血氧度
     repeated r_get_spo2 spo2Details = 3; //血氧度明细
-    required uint32 recordDate = 4; // 记录日期
+    required uint32 timeStamp = 4; // 该天0时的时间戳
 }
+//血压点            
+message r_get_bp {
+    required uint32 sbp = 1; //收缩压
+    required uint32 dbp = 2; //舒张压
+    required uint32 timeStamp = 3; //测量时间戳(整点分钟)
+}
+
+//心率点              
+message r_get_hr {
+    required uint32 value = 1; //心率值
+    required uint32 timestamp = 3; //该条数据生成时的时间戳(整点分钟)
+}
+
+//步数点             
+message r_get_step {
+    required uint32 value = 1; //步数值
+    required uint32 timeStamp = 3; //该条数据生成时的时间戳(整点分钟)
+}
+//睡眠详情段
+message r_sleep_detail_t {
+    required  uint32 sleep_state = 1; // 1深睡   2 浅睡  3 清醒
+    required  uint32 sleep_druation = 2 ; //睡眠持续时间，单位分钟
+    required  uint32 startTimeStamp = 3 ; //开始睡眠数据的时间戳
+}
+
+// 血氧点  
+message r_get_spo2 {
+    required uint32 spo2 = 1; //血氧度
+    required uint32 timeStamp = 2; //测量时间戳
+}
+
 //----------------------------------------------
 
 //设置天气
 message set_weather_info_t{
-    repeated weather_t weathers = 1;
-}
-//天气
+    required string city = 1;
+    repeated weather_t weathers = 2;
+  }
+  //天气
 message weather_t{
-    required uint32     m_weather_num             = 1;
-    required uint32        m_climate                 = 2;
-    required uint32        m_temperature             = 3;
-    required uint32     m_pm25                     = 4;
-    required uint32        m_aqi                     = 5;
-    required uint32        m_city                     = 6;
-    required uint32        m_max_temp                = 7;
-    required uint32        m_min_temp                = 8;
-    required uint32        m_seconds                = 9;
+    required uint32        m_weather_num             = 1;
+    optional uint32        m_climate                 = 2;
+    optional uint32        m_temperature             = 3;
+    optional uint32        m_humidity                     = 4;
+    optional uint32        m_uvIndex                     = 5;
+    optional uint32        m_max_temp                = 6;
+    optional uint32        m_min_temp                = 7;
 }
 
 
@@ -257,7 +290,7 @@ message sync_switch_t{
 message r_get_4G_online_off_t {
     required uint32  m_online    = 1;
     required uint32 m_time_second    = 2;
-    required uint32 client_id    = 3;
+    required bytes client_id    = 3;
     
 }
 
@@ -274,22 +307,17 @@ message r_set_caring_reminder_t {
     required uint32 fallReminder                = 1; //跌倒提醒
 }
 
-//血压            暂无需求
-message r_get_bp {
-    required uint32 sbp = 1; //收缩压
-    required uint32 dbp = 2; //舒张压
-    required uint32 measureTime = 3; //测量时间
-}
-
 // 通知发布健康数据。
 message set_sync_health_data_t{
     required uint32     m_sync_type            = 1; //同步的数据类型。 步数(0)睡眠(1)心率(2)多运动记录(3)血氧(4)血压(5)
-    required uint32        m_distance_today    = 2; //指定距离今天天数的数据。0代表是今天， 1代表昨天 2代表大前天
+    required uint32        m_distance_today    = 2; //指定距离今天天数的所有数据。0代表是今天， 1代表昨天 2代表大前天
 }
 
 //设置来电转移模式和号码
 message set_transfer_phone_t {
-    required uint32 m_phone  = 1; //1 开启 0 关闭
+    required uint32 m_state  = 1; //1 开启 0 关闭
+    required string m_phone  = 2; // 手机号码
+
 }
 
 //查询是否可以发送该表盘。
@@ -297,6 +325,10 @@ message set_check_dail_t{
     required uint32        m_type                = 1;
     required uint32     m_data_length        = 2;
     required uint32     m_crc_code            = 3;
+}
+message r_check_dial_t {           //回复手机是否可以发送该表盘
+    required uint32 is_exist = 1;  //0 代表可以升级 1 代表该表盘已存在
+    required uint32 page_size = 2;  //手表能接收处理的包大小
 }
 //发送表盘数据。
 message set_bin_data_t{
@@ -315,17 +347,6 @@ message set_update_spo2_data_t{
 }
 
 
-message r_sleep_detail_t {
-    required  uint32 sleep_state = 1; // 1深睡   2 浅睡  3 清醒
-    required  uint32 sleep_time=2 ; //睡眠时间，单位分钟
-}
-
-
-// 血氧
-message r_get_spo2 {
-    required uint32 spo2 = 1; //血氧度
-    required uint32 measureTime = 2; //测量时间
-}
 
 
 //喝水提醒
@@ -437,8 +458,8 @@ message r_rtimehr_value_t{
     required uint32        m_hr_value        = 1;
 
 }
-message r_error_code_t{           //回复手机是否可以发送该表盘
-    required uint32 err = 1;  //0 代表可以升级 1 代表该表盘已存在
+message r_error_code_t{           
+    required uint32 err = 1;  
 }
 
 message r_find_phone_t{
@@ -650,9 +671,10 @@ message hl_cmds {
         CMD_SET_SYNC_MTU            = 72;//推送MTU
         CMD_SET_CLOCK_DIAL          =73;//推送是否可以发送该表盘
         CMD_GET_MENU_SEQUENCE_DATA  = 74;// 获取一级页面的顺序
+        CMD_SET_DATA_COLLECTION_SLOT = 75;//设置数据采集间隔
 
     }
- 
+
     required cmd_t            cmd                = 1;//cmd
     required bool             response        = 2;
     required uint32             seconds            = 3;
@@ -722,6 +744,8 @@ message hl_cmds {
     optional set_abnormal_warning_t          set_abnormal_warning     = 67;
     optional r_get_4G_online_off_t          r_get_4G_online_off     = 68; //发布4G在线下线状态通知
     optional r_get_4G_online_or_not_t          r_get_4G_online_or_not     = 69; //发布4G在线
+    optional r_check_dial_t              r_check_dial_data = 70; //查询表盘是否存在是，手表回复的
+    optional set_data_collection_slot_t  set_data_collection_slot_data = 71; //设置数据采集间隔
 
 }
 
