@@ -733,23 +733,41 @@ struct Caring_set_hr_warning_t {
   /// Clears the value of `mHrLower`. Subsequent reads from it will return its default value.
   mutating func clearMHrLower() {self._mHrLower = nil}
 
-  var mBpUpper: UInt32 {
-    get {return _mBpUpper ?? 0}
-    set {_mBpUpper = newValue}
+  var mBpUpperMax: UInt32 {
+    get {return _mBpUpperMax ?? 0}
+    set {_mBpUpperMax = newValue}
   }
-  /// Returns true if `mBpUpper` has been explicitly set.
-  var hasMBpUpper: Bool {return self._mBpUpper != nil}
-  /// Clears the value of `mBpUpper`. Subsequent reads from it will return its default value.
-  mutating func clearMBpUpper() {self._mBpUpper = nil}
+  /// Returns true if `mBpUpperMax` has been explicitly set.
+  var hasMBpUpperMax: Bool {return self._mBpUpperMax != nil}
+  /// Clears the value of `mBpUpperMax`. Subsequent reads from it will return its default value.
+  mutating func clearMBpUpperMax() {self._mBpUpperMax = nil}
 
-  var mBpLower: UInt32 {
-    get {return _mBpLower ?? 0}
-    set {_mBpLower = newValue}
+  var mBpUpperMin: UInt32 {
+    get {return _mBpUpperMin ?? 0}
+    set {_mBpUpperMin = newValue}
   }
-  /// Returns true if `mBpLower` has been explicitly set.
-  var hasMBpLower: Bool {return self._mBpLower != nil}
-  /// Clears the value of `mBpLower`. Subsequent reads from it will return its default value.
-  mutating func clearMBpLower() {self._mBpLower = nil}
+  /// Returns true if `mBpUpperMin` has been explicitly set.
+  var hasMBpUpperMin: Bool {return self._mBpUpperMin != nil}
+  /// Clears the value of `mBpUpperMin`. Subsequent reads from it will return its default value.
+  mutating func clearMBpUpperMin() {self._mBpUpperMin = nil}
+
+  var mBpLowerMax: UInt32 {
+    get {return _mBpLowerMax ?? 0}
+    set {_mBpLowerMax = newValue}
+  }
+  /// Returns true if `mBpLowerMax` has been explicitly set.
+  var hasMBpLowerMax: Bool {return self._mBpLowerMax != nil}
+  /// Clears the value of `mBpLowerMax`. Subsequent reads from it will return its default value.
+  mutating func clearMBpLowerMax() {self._mBpLowerMax = nil}
+
+  var mBpLowerMin: UInt32 {
+    get {return _mBpLowerMin ?? 0}
+    set {_mBpLowerMin = newValue}
+  }
+  /// Returns true if `mBpLowerMin` has been explicitly set.
+  var hasMBpLowerMin: Bool {return self._mBpLowerMin != nil}
+  /// Clears the value of `mBpLowerMin`. Subsequent reads from it will return its default value.
+  mutating func clearMBpLowerMin() {self._mBpLowerMin = nil}
 
   var mDetectState: UInt32 {
     get {return _mDetectState ?? 0}
@@ -766,8 +784,10 @@ struct Caring_set_hr_warning_t {
 
   fileprivate var _mHrUpper: UInt32? = nil
   fileprivate var _mHrLower: UInt32? = nil
-  fileprivate var _mBpUpper: UInt32? = nil
-  fileprivate var _mBpLower: UInt32? = nil
+  fileprivate var _mBpUpperMax: UInt32? = nil
+  fileprivate var _mBpUpperMin: UInt32? = nil
+  fileprivate var _mBpLowerMax: UInt32? = nil
+  fileprivate var _mBpLowerMin: UInt32? = nil
   fileprivate var _mDetectState: UInt32? = nil
 }
 
@@ -796,8 +816,8 @@ struct Caring_set_abnormal_warning_t {
   /// Clears the value of `mTimeSecond`. Subsequent reads from it will return its default value.
   mutating func clearMTimeSecond() {self._mTimeSecond = nil}
 
-  var mWarningLongitude: UInt32 {
-    get {return _mWarningLongitude ?? 0}
+  var mWarningLongitude: String {
+    get {return _mWarningLongitude ?? String()}
     set {_mWarningLongitude = newValue}
   }
   /// Returns true if `mWarningLongitude` has been explicitly set.
@@ -805,8 +825,8 @@ struct Caring_set_abnormal_warning_t {
   /// Clears the value of `mWarningLongitude`. Subsequent reads from it will return its default value.
   mutating func clearMWarningLongitude() {self._mWarningLongitude = nil}
 
-  var mWarningLatitude: Data {
-    get {return _mWarningLatitude ?? Data()}
+  var mWarningLatitude: String {
+    get {return _mWarningLatitude ?? String()}
     set {_mWarningLatitude = newValue}
   }
   /// Returns true if `mWarningLatitude` has been explicitly set.
@@ -820,8 +840,8 @@ struct Caring_set_abnormal_warning_t {
 
   fileprivate var _mWarningType: UInt32? = nil
   fileprivate var _mTimeSecond: UInt32? = nil
-  fileprivate var _mWarningLongitude: UInt32? = nil
-  fileprivate var _mWarningLatitude: Data? = nil
+  fileprivate var _mWarningLongitude: String? = nil
+  fileprivate var _mWarningLatitude: String? = nil
 }
 
 ///----------------------------------------------
@@ -1213,7 +1233,7 @@ struct Caring_r_get_health_spo2_t {
   fileprivate var _timeStamp: UInt32? = nil
 }
 
-///血压点            
+///血压点
 struct Caring_r_get_bp {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -1258,7 +1278,7 @@ struct Caring_r_get_bp {
   fileprivate var _timeStamp: UInt32? = nil
 }
 
-///心率点              
+///心率点
 struct Caring_r_get_hr {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -1292,7 +1312,7 @@ struct Caring_r_get_hr {
   fileprivate var _timestamp: UInt32? = nil
 }
 
-///步数点             
+///步数点
 struct Caring_r_get_step {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -1371,7 +1391,7 @@ struct Caring_r_sleep_detail_t {
   fileprivate var _startTimeStamp: UInt32? = nil
 }
 
-/// 血氧点  
+/// 血氧点
 struct Caring_r_get_spo2 {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -1517,14 +1537,14 @@ struct Caring_set_reset_machine_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var mAuth: UInt32 {
-    get {return _mAuth ?? 0}
-    set {_mAuth = newValue}
+  var mUserid: UInt32 {
+    get {return _mUserid ?? 0}
+    set {_mUserid = newValue}
   }
-  /// Returns true if `mAuth` has been explicitly set.
-  var hasMAuth: Bool {return self._mAuth != nil}
-  /// Clears the value of `mAuth`. Subsequent reads from it will return its default value.
-  mutating func clearMAuth() {self._mAuth = nil}
+  /// Returns true if `mUserid` has been explicitly set.
+  var hasMUserid: Bool {return self._mUserid != nil}
+  /// Clears the value of `mUserid`. Subsequent reads from it will return its default value.
+  mutating func clearMUserid() {self._mUserid = nil}
 
   var mFactoryMode: UInt32 {
     get {return _mFactoryMode ?? 0}
@@ -1539,7 +1559,7 @@ struct Caring_set_reset_machine_t {
 
   init() {}
 
-  fileprivate var _mAuth: UInt32? = nil
+  fileprivate var _mUserid: UInt32? = nil
   fileprivate var _mFactoryMode: UInt32? = nil
 }
 
@@ -3452,6 +3472,7 @@ struct Caring_set_warming_data_t {
   fileprivate var _mMax: UInt32? = nil
 }
 
+///APP向手表设置菜单序列
 struct Caring_set_menu_sequence_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -3466,6 +3487,26 @@ struct Caring_set_menu_sequence_t {
   var hasMType: Bool {return self._mType != nil}
   /// Clears the value of `mType`. Subsequent reads from it will return its default value.
   mutating func clearMType() {self._mType = nil}
+
+  ///支持多少个菜单页面
+  var mSupportCount: UInt32 {
+    get {return _mSupportCount ?? 0}
+    set {_mSupportCount = newValue}
+  }
+  /// Returns true if `mSupportCount` has been explicitly set.
+  var hasMSupportCount: Bool {return self._mSupportCount != nil}
+  /// Clears the value of `mSupportCount`. Subsequent reads from it will return its default value.
+  mutating func clearMSupportCount() {self._mSupportCount = nil}
+
+  ///支持的菜单序列，每个bit对应对应的页面，支持置1，否则置0
+  var mSupport: UInt32 {
+    get {return _mSupport ?? 0}
+    set {_mSupport = newValue}
+  }
+  /// Returns true if `mSupport` has been explicitly set.
+  var hasMSupport: Bool {return self._mSupport != nil}
+  /// Clears the value of `mSupport`. Subsequent reads from it will return its default value.
+  mutating func clearMSupport() {self._mSupport = nil}
 
   ///页面数量
   var mCount: UInt32 {
@@ -3492,6 +3533,8 @@ struct Caring_set_menu_sequence_t {
   init() {}
 
   fileprivate var _mType: UInt32? = nil
+  fileprivate var _mSupportCount: UInt32? = nil
+  fileprivate var _mSupport: UInt32? = nil
   fileprivate var _mCount: UInt32? = nil
   fileprivate var _mData: Data? = nil
 }
@@ -3543,7 +3586,7 @@ struct Caring_r_get_menu_sequence_t {
   /// Clears the value of `mSupportCount`. Subsequent reads from it will return its default value.
   mutating func clearMSupportCount() {self._mSupportCount = nil}
 
-  ///支持的菜单序列，每个bit对应对应的页面，支持置1，否则置0 
+  ///支持的菜单序列，每个bit对应对应的页面，支持置1，否则置0
   var mSupport: UInt32 {
     get {return _mSupport ?? 0}
     set {_mSupport = newValue}
@@ -4361,6 +4404,9 @@ struct Caring_hl_cmds {
     ///设置数据采集间隔
     case cmdSetDataCollectionSlot // = 75
 
+    ///关怀提醒开关
+    case cmdSetCaring // = 76
+
     init() {
       self = .cmdBindDevice
     }
@@ -4440,6 +4486,7 @@ struct Caring_hl_cmds {
       case 73: self = .cmdSetClockDial
       case 74: self = .cmdGetMenuSequenceData
       case 75: self = .cmdSetDataCollectionSlot
+      case 76: self = .cmdSetCaring
       default: return nil
       }
     }
@@ -4519,6 +4566,7 @@ struct Caring_hl_cmds {
       case .cmdSetClockDial: return 73
       case .cmdGetMenuSequenceData: return 74
       case .cmdSetDataCollectionSlot: return 75
+      case .cmdSetCaring: return 76
       }
     }
 
@@ -5300,16 +5348,20 @@ extension Caring_set_hr_warning_t: SwiftProtobuf.Message, SwiftProtobuf._Message
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "m_hr_upper"),
     2: .standard(proto: "m_hr_lower"),
-    3: .standard(proto: "m_bp_upper"),
-    4: .standard(proto: "m_bp_lower"),
-    5: .standard(proto: "m_detect_state"),
+    3: .standard(proto: "m_bp_upper_max"),
+    4: .standard(proto: "m_bp_upper_min"),
+    5: .standard(proto: "m_bp_lower_max"),
+    6: .standard(proto: "m_bp_lower_min"),
+    7: .standard(proto: "m_detect_state"),
   ]
 
   public var isInitialized: Bool {
     if self._mHrUpper == nil {return false}
     if self._mHrLower == nil {return false}
-    if self._mBpUpper == nil {return false}
-    if self._mBpLower == nil {return false}
+    if self._mBpUpperMax == nil {return false}
+    if self._mBpUpperMin == nil {return false}
+    if self._mBpLowerMax == nil {return false}
+    if self._mBpLowerMin == nil {return false}
     if self._mDetectState == nil {return false}
     return true
   }
@@ -5322,9 +5374,11 @@ extension Caring_set_hr_warning_t: SwiftProtobuf.Message, SwiftProtobuf._Message
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mHrUpper) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mHrLower) }()
-      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mBpUpper) }()
-      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mBpLower) }()
-      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mDetectState) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mBpUpperMax) }()
+      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mBpUpperMin) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mBpLowerMax) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mBpLowerMin) }()
+      case 7: try { try decoder.decodeSingularUInt32Field(value: &self._mDetectState) }()
       default: break
       }
     }
@@ -5337,14 +5391,20 @@ extension Caring_set_hr_warning_t: SwiftProtobuf.Message, SwiftProtobuf._Message
     if let v = self._mHrLower {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
     }
-    if let v = self._mBpUpper {
+    if let v = self._mBpUpperMax {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
     }
-    if let v = self._mBpLower {
+    if let v = self._mBpUpperMin {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
     }
-    if let v = self._mDetectState {
+    if let v = self._mBpLowerMax {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
+    }
+    if let v = self._mBpLowerMin {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
+    }
+    if let v = self._mDetectState {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 7)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -5352,8 +5412,10 @@ extension Caring_set_hr_warning_t: SwiftProtobuf.Message, SwiftProtobuf._Message
   static func ==(lhs: Caring_set_hr_warning_t, rhs: Caring_set_hr_warning_t) -> Bool {
     if lhs._mHrUpper != rhs._mHrUpper {return false}
     if lhs._mHrLower != rhs._mHrLower {return false}
-    if lhs._mBpUpper != rhs._mBpUpper {return false}
-    if lhs._mBpLower != rhs._mBpLower {return false}
+    if lhs._mBpUpperMax != rhs._mBpUpperMax {return false}
+    if lhs._mBpUpperMin != rhs._mBpUpperMin {return false}
+    if lhs._mBpLowerMax != rhs._mBpLowerMax {return false}
+    if lhs._mBpLowerMin != rhs._mBpLowerMin {return false}
     if lhs._mDetectState != rhs._mDetectState {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -5385,8 +5447,8 @@ extension Caring_set_abnormal_warning_t: SwiftProtobuf.Message, SwiftProtobuf._M
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mWarningType) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mTimeSecond) }()
-      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mWarningLongitude) }()
-      case 4: try { try decoder.decodeSingularBytesField(value: &self._mWarningLatitude) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._mWarningLongitude) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self._mWarningLatitude) }()
       default: break
       }
     }
@@ -5400,10 +5462,10 @@ extension Caring_set_abnormal_warning_t: SwiftProtobuf.Message, SwiftProtobuf._M
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
     }
     if let v = self._mWarningLongitude {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
     }
     if let v = self._mWarningLatitude {
-      try visitor.visitSingularBytesField(value: v, fieldNumber: 4)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -6213,12 +6275,12 @@ extension Caring_weather_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
 extension Caring_set_reset_machine_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".set_reset_machine_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "m_auth"),
+    1: .standard(proto: "m_userid"),
     2: .standard(proto: "m_factory_mode"),
   ]
 
   public var isInitialized: Bool {
-    if self._mAuth == nil {return false}
+    if self._mUserid == nil {return false}
     if self._mFactoryMode == nil {return false}
     return true
   }
@@ -6229,7 +6291,7 @@ extension Caring_set_reset_machine_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mAuth) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mUserid) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mFactoryMode) }()
       default: break
       }
@@ -6237,7 +6299,7 @@ extension Caring_set_reset_machine_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._mAuth {
+    if let v = self._mUserid {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
     if let v = self._mFactoryMode {
@@ -6247,7 +6309,7 @@ extension Caring_set_reset_machine_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 
   static func ==(lhs: Caring_set_reset_machine_t, rhs: Caring_set_reset_machine_t) -> Bool {
-    if lhs._mAuth != rhs._mAuth {return false}
+    if lhs._mUserid != rhs._mUserid {return false}
     if lhs._mFactoryMode != rhs._mFactoryMode {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -8675,12 +8737,16 @@ extension Caring_set_menu_sequence_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
   static let protoMessageName: String = _protobuf_package + ".set_menu_sequence_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "m_type"),
-    2: .standard(proto: "m_count"),
-    3: .standard(proto: "m_data"),
+    2: .standard(proto: "m_support_count"),
+    3: .standard(proto: "m_support"),
+    4: .standard(proto: "m_count"),
+    5: .standard(proto: "m_data"),
   ]
 
   public var isInitialized: Bool {
     if self._mType == nil {return false}
+    if self._mSupportCount == nil {return false}
+    if self._mSupport == nil {return false}
     if self._mCount == nil {return false}
     if self._mData == nil {return false}
     return true
@@ -8693,8 +8759,10 @@ extension Caring_set_menu_sequence_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mType) }()
-      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mCount) }()
-      case 3: try { try decoder.decodeSingularBytesField(value: &self._mData) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mSupportCount) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mSupport) }()
+      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mCount) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self._mData) }()
       default: break
       }
     }
@@ -8704,17 +8772,25 @@ extension Caring_set_menu_sequence_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if let v = self._mType {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
-    if let v = self._mCount {
+    if let v = self._mSupportCount {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
     }
+    if let v = self._mSupport {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
+    }
+    if let v = self._mCount {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
+    }
     if let v = self._mData {
-      try visitor.visitSingularBytesField(value: v, fieldNumber: 3)
+      try visitor.visitSingularBytesField(value: v, fieldNumber: 5)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Caring_set_menu_sequence_t, rhs: Caring_set_menu_sequence_t) -> Bool {
     if lhs._mType != rhs._mType {return false}
+    if lhs._mSupportCount != rhs._mSupportCount {return false}
+    if lhs._mSupport != rhs._mSupport {return false}
     if lhs._mCount != rhs._mCount {return false}
     if lhs._mData != rhs._mData {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -9572,5 +9648,6 @@ extension Caring_hl_cmds.cmd_t: SwiftProtobuf._ProtoNameProviding {
     73: .same(proto: "CMD_SET_CLOCK_DIAL"),
     74: .same(proto: "CMD_GET_MENU_SEQUENCE_DATA"),
     75: .same(proto: "CMD_SET_DATA_COLLECTION_SLOT"),
+    76: .same(proto: "CMD_SET_CARING"),
   ]
 }

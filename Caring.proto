@@ -65,7 +65,7 @@ message set_hr_sample_slot_t{
 message set_data_collection_slot_t{
     required uint32 type          = 1; //要采集的数类型
     required uint32 slot          = 2; //设置的间隔
-} 
+}
 
 //手表设置
 message set_watch_setting_t{
@@ -127,19 +127,21 @@ message set_metric_inch_t{
 
 //设置心率预警值
 message set_hr_warning_t{
-    required uint32     m_hr_upper                 = 1;
-    required uint32     m_hr_lower                = 2;
-    required uint32     m_bp_upper                = 3;
-    required uint32     m_bp_lower                = 4;
-    required uint32     m_detect_state          = 5;
+    required uint32     m_hr_upper                  = 1;
+    required uint32     m_hr_lower                  = 2;
+    required uint32     m_bp_upper_max                = 3;
+    required uint32     m_bp_upper_min                = 4;
+    required uint32     m_bp_lower_max                = 5;
+    required uint32     m_bp_lower_min                = 6;
+    required uint32     m_detect_state             = 7;
 }
 
 //异常提醒
 message set_abnormal_warning_t {
     required uint32 m_warning_type              = 1; //1 心率预警，2:跌倒预警
     required uint32 m_time_second                 = 2;
-    required uint32 m_warning_longitude         = 3;
-    required bytes     m_warning_latitude          = 4;
+    required string m_warning_longitude         = 3;
+    required string m_warning_latitude          = 4;
 }
 
 
@@ -202,20 +204,20 @@ message r_get_health_spo2_t {
     repeated r_get_spo2 spo2Details = 3; //血氧度明细
     required uint32 timeStamp = 4; // 该天0时的时间戳
 }
-//血压点            
+//血压点
 message r_get_bp {
     required uint32 sbp = 1; //收缩压
     required uint32 dbp = 2; //舒张压
     required uint32 timeStamp = 3; //测量时间戳(整点分钟)
 }
 
-//心率点              
+//心率点
 message r_get_hr {
     required uint32 value = 1; //心率值
     required uint32 timestamp = 3; //该条数据生成时的时间戳(整点分钟)
 }
 
-//步数点             
+//步数点
 message r_get_step {
     required uint32 value = 1; //步数值
     required uint32 timeStamp = 3; //该条数据生成时的时间戳(整点分钟)
@@ -227,7 +229,7 @@ message r_sleep_detail_t {
     required  uint32 startTimeStamp = 3 ; //开始睡眠数据的时间戳
 }
 
-// 血氧点  
+// 血氧点
 message r_get_spo2 {
     required uint32 spo2 = 1; //血氧度
     required uint32 timeStamp = 2; //测量时间戳
@@ -255,7 +257,7 @@ message weather_t{
 //恢复出厂设置
 message set_reset_machine_t{
            
-    required uint32 m_auth        = 1;
+    required uint32 m_userid        = 1;
     required uint32 m_factory_mode        = 2;
 }
 
@@ -458,8 +460,8 @@ message r_rtimehr_value_t{
     required uint32        m_hr_value        = 1;
 
 }
-message r_error_code_t{           
-    required uint32 err = 1;  
+message r_error_code_t{
+    required uint32 err = 1;
 }
 
 message r_find_phone_t{
@@ -576,11 +578,13 @@ message set_warming_data_t {
     required uint32 m_min                  = 2;
     required uint32 m_max                  = 3;
 }
-
+  //APP向手表设置菜单序列
 message set_menu_sequence_t {//
     required uint32 m_type                = 1; // 菜单类型：1：一级左右滑动菜单
-    required uint32 m_count               = 2; //页面数量
-    required bytes  m_data                = 3; //菜单页面类型数组
+    required uint32 m_support_count       = 2; //支持多少个菜单页面
+    required uint32 m_support             = 3; //支持的菜单序列，每个bit对应对应的页面，支持置1，否则置0
+    required uint32 m_count               = 4; //页面数量
+    required bytes  m_data                = 5; //菜单页面类型数组
 }
 
 //设置一级页面的顺序
@@ -589,10 +593,10 @@ message get_menu_sequence_t {
 }
 message r_get_menu_sequence_t {
     required uint32 m_type                = 1; //菜单类型：1：一级左右滑动菜单
-	required uint32 m_support_count       = 2; //支持多少个菜单页面
-    required uint32 m_support             = 3; //支持的菜单序列，每个bit对应对应的页面，支持置1，否则置0 
-	required uint32 m_count               = 4; //当前页面数量
-	required bytes m_data                 = 5; //菜单页面类型数组 {0， 2， 3，4  }，
+    required uint32 m_support_count       = 2; //支持多少个菜单页面
+    required uint32 m_support             = 3; //支持的菜单序列，每个bit对应对应的页面，支持置1，否则置0
+    required uint32 m_count               = 4; //当前页面数量
+    required bytes m_data                 = 5; //菜单页面类型数组 {0， 2， 3，4  }，
 }
 
 
@@ -672,6 +676,7 @@ message hl_cmds {
         CMD_SET_CLOCK_DIAL          =73;//推送是否可以发送该表盘
         CMD_GET_MENU_SEQUENCE_DATA  = 74;// 获取一级页面的顺序
         CMD_SET_DATA_COLLECTION_SLOT = 75;//设置数据采集间隔
+        CMD_SET_CARING                 =76;//关怀提醒开关
 
     }
 
