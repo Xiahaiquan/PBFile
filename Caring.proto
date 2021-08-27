@@ -14,26 +14,31 @@ message set_device_info_t {//
     required string m_systemversion        = 2; //app版本//YJ:
     required string m_appversion        = 3; //手机的系统版本//YJ:
     required uint32    m_language            = 4;//语言。1:英文，2:中文
-    required uint32    m_uid                = 5;//用户uid
+    
 }
 
 
 //设备信息
 message r_bind_device_t{
     required bytes m_projno            = 1;
-
+    
     required bytes m_fwversion        = 3;
-    required uint32 m_fontversion    = 4;
-    required uint32 m_sdversion        = 5;
-    required uint32 m_uiversion        = 6;
-    required uint32 m_devicesn        = 7;
-    required uint32 m_devicename    = 8;
+    required string m_fontversion    = 4;
+    required string m_sdversion        = 5;
+    required string m_uiversion        = 6;
+    optional string m_devicesn        = 7;
+    required string m_devicename    = 8;
     required uint32 m_battvalue        = 9;
-    required uint32 m_devicemac        = 10;
-    required uint32 m_bind_operate    = 11;
-    required uint32    m_power            = 12;
-    required uint32    m_deviceimei    = 13;
-    required uint32    m_deviceid        = 14;
+    required string m_devicemac        = 10;
+    required uint32 m_bind_operate    = 11;// 1表示用户选√ 。 2表示用户取消。 3表示 。  4表示超时。 5表示开始
+    optional uint32    m_power            = 12;
+    required string    m_deviceimei    = 13;
+    required string    m_deviceid        = 14;
+}
+
+message r_bind_device_confirm_t{
+    required uint32 m_bind_operate    = 1;// 1表示用户选√ 。 2表示用户取消
+    required string    m_userId        = 2;
 }
 
 //获取推送设备信息
@@ -41,18 +46,29 @@ message get_device_info_t {
     required bytes m_projno            = 1;
     required bytes m_uiversion        = 2;
     required bytes m_fwversion        = 3;
-    required uint32 m_devicesn        = 4;
-    required uint32 m_devicemac        = 5;
-    required uint32    m_power            = 6;
-    required uint32    m_deviceimei    = 7;
-    required uint32    m_deviceid        = 8;
-
+    optional string m_devicesn        = 4;
+    required string m_devicemac        = 5;
+    optional uint32    m_power            = 6;
+    required string    m_deviceimei    = 7;
+    required string    m_deviceid        = 8;
+    
 }
 
 //set 鉴权值
 message set_auth_t{
-    required uint32 m_value = 1;
+    
+    required string m_clientid = 1;   //厂测软件下发的auth
     required string m_domain = 2;//YJ： 40字节
+}
+
+//set m_privatekey证书
+message set_privatekey_t{
+    required string m_privatekey = 1;//
+}
+
+//set  m_certificatepem
+message set_certificatepem_t{
+    required string m_certificatepem = 1;//
 }
 
 
@@ -91,18 +107,18 @@ message set_alarms_t{//YJ:最多8个闹钟
 }
 //闹钟
 message alarm_t{
-    required bytes         m_alarm1_cfg             = 1;//YJ：一个byte就可以了，不需要bytes？
+    required uint32         m_alarm1_cfg             = 1;//
     required uint32        m_alarm1_hour             = 2;
     required uint32        m_alarm1_min             = 3;
     required string        m_alarm1_name             = 4;//YJ:最长长度
-
+    
 }
 
 
 //国家信息
 message set_country_info_t{
     required uint32 m_country_code            = 1; //国家码。86
-    required uint32 m_country_timezone        = 2; //时区 8，最高为0代表正时区。1代表负时区
+    required float m_country_timezone        = 2; //时区 8，最高为0代表正时区。1代表负时区
 }
 
 
@@ -127,13 +143,13 @@ message set_metric_inch_t{
 
 //设置心率预警值
 message set_hr_warning_t{
-    required uint32     m_hr_upper                  = 1;
-    required uint32     m_hr_lower                  = 2;
-    required uint32     m_bp_upper_max                = 3;
-    required uint32     m_bp_upper_min                = 4;
-    required uint32     m_bp_lower_max                = 5;
-    required uint32     m_bp_lower_min                = 6;
-    required uint32     m_detect_state             = 7;
+    required uint32     m_hr_upper                 = 1;
+    required uint32     m_hr_lower                 = 2;
+    required uint32     m_sbp_upper                = 3;  //收缩压上限
+    required uint32     m_sbp_lower                = 4;   //收缩压下限
+    required uint32     m_dbp_upper                = 5;   //舒张压上限
+    required uint32     m_dbp_lower                = 6;   //舒张压下限
+    required uint32     m_detect_state              = 7;
 }
 
 //异常提醒
@@ -157,6 +173,11 @@ message r_get_health_data_t{
     repeated r_get_health_bp_t    bp           = 6;  //血压
     repeated r_get_health_sleep_t sleep        = 7;  //睡眠
     repeated r_get_health_spo2_t  spo2         = 8;  //血氧
+    
+    required string m_deviceid                   = 9; //设备id
+    required string m_userid                   = 10; //用户id
+    required string m_clientid                   = 11;
+    
 }
 
 
@@ -241,8 +262,8 @@ message r_get_spo2 {
 message set_weather_info_t{
     required string city = 1;
     repeated weather_t weathers = 2;
-  }
-  //天气
+}
+//天气
 message weather_t{
     required uint32        m_weather_num             = 1;
     optional uint32        m_climate                 = 2;
@@ -256,8 +277,8 @@ message weather_t{
 
 //恢复出厂设置
 message set_reset_machine_t{
-           
-    required uint32 m_userid        = 1;
+    
+    required string m_deviceid        = 1;
     required uint32 m_factory_mode        = 2;
 }
 
@@ -319,7 +340,7 @@ message set_sync_health_data_t{
 message set_transfer_phone_t {
     required uint32 m_state  = 1; //1 开启 0 关闭
     required string m_phone  = 2; // 手机号码
-
+    
 }
 
 //查询是否可以发送该表盘。
@@ -386,16 +407,17 @@ message set_notify_warning_t{
     required bytes         m_title                = 5;
     required bytes         m_msg                = 6;
     required uint32     m_utc                = 7;
-
+    
 }
 //同步用户信息
 message sync_user_info_t{
-    required uint32 m_userid            = 1;
+    required string m_userid            = 1; //用户id
     required uint32 m_gender        = 2;
     required uint32 m_age            = 3;
     required uint32 m_height        = 4;
     required uint32 m_weight        = 5;
     required uint32 m_wearstyle        = 6;
+    required string m_deviceid        = 7;  //设备id 用来区分弹窗
 }
 
 message r_get_power_t{
@@ -405,14 +427,37 @@ message r_get_power_t{
 
 message set_updata_fw_t{
     required uint32        m_new_version        = 1;
-
+    
 }
 
 message r_get_weather_info_t {
+    optional uint32 m_lat = 1;
+    optional uint32 m_lng = 2;
+    required uint32  m_type = 3;// type=1 为经纬度定位，type=2为基站定位
+    optional uint32 m_ci = 4; //cellid(电信对应bid)，十进制
+    optional uint32 m_lac = 5;//位置编码(area_code)，lac(电信对应nid)，十进制
+    optional uint32 m_mcc = 6;//mcc国家代码：中国代码 460
+    optional uint32 m_mnc = 7;//mnc网络类型：0移动，1联通(电信对应sid)，十进制
+}
+
+
+message r_get_last_location_t {//保存最后一次的位置信息
+    repeated  r_lat_lng_t m_lat_lng = 1;
+    repeated  r_base_station_t m_base_station = 2;
+    required uint32 m_type = 3;// type=1 为经纬度定位，type=2为基站定位
+    required uint32 timeStamp = 4;
+}
+message r_lat_lng_t { //经纬度
     required uint32 m_lat = 1;
     required uint32 m_lng = 2;
 }
 
+message r_base_station_t {//基站
+    required uint32 m_ci = 4; //cellid(电信对应bid)，十进制
+    required uint32 m_lac = 5;//位置编码(area_code)，lac(电信对应nid)，十进制
+    required uint32 m_mcc = 6;//mcc国家代码：中国代码 460
+    required uint32 m_mnc = 7;//mnc网络类型：0移动，1联通(电信对应sid)，十进制
+}
 
 message set_sport_status_t{
     required uint32 m_sport_mode        = 1;
@@ -438,7 +483,7 @@ message set_music_info_t{
     required uint32 m_music_ctr_code        = 1;
     optional uint32 m_music_volume            = 2;
     optional bytes     m_music_title            = 3;
-
+    
 }
 
 message r_get_mtu_size_t{
@@ -458,9 +503,10 @@ message set_rtimehr_dur_t{
 
 message r_rtimehr_value_t{
     required uint32        m_hr_value        = 1;
-
+    
 }
-message r_error_code_t{
+
+message r_error_code_t{//0,1  正式发送表盘数据询问下一包
     required uint32 err = 1;
 }
 
@@ -476,17 +522,17 @@ message r_get_step_count_t{
     required uint32 m_step_calorie         = 3;
     required uint32 m_step_distance     = 4;
     optional uint32    m_activeduration     = 5;
-
+    
 }
 
 message r_get_current_hr_t{
-  required uint32 m_current_hr             = 1;
-  optional uint32    m_cur_sport_status    = 2;
-
+    required uint32 m_current_hr             = 1;
+    optional uint32    m_cur_sport_status    = 2;
+    
 }
 message r_set_light_leak_result_t{
-  required uint32 m_check_result         = 1;
-
+    required uint32 m_check_result         = 1;
+    
 }
 message r_get_log_info_t{
     required uint32 m_log_length     = 1;
@@ -524,7 +570,7 @@ message r_get_active_record_data_t{
     required uint32 m_active_skip_times            = 22;
     required uint32 m_active_gps_count            = 23;
     optional uint32 m_total_gps_num                = 24;
-
+    
 }
 
 message r_get_ui_hrs_t{
@@ -543,7 +589,7 @@ message set_nfc_operate_t{
     optional uint32 m_nfc_city              = 5;
 }
 message set_page_switch_t{
-
+    
     required uint32 m_operate_type             = 1;
     required uint32 m_page_switch             = 2;
 }
@@ -578,7 +624,7 @@ message set_warming_data_t {
     required uint32 m_min                  = 2;
     required uint32 m_max                  = 3;
 }
-  //APP向手表设置菜单序列
+//APP向手表设置菜单序列
 message set_menu_sequence_t {//
     required uint32 m_type                = 1; // 菜单类型：1：一级左右滑动菜单
     required uint32 m_support_count       = 2; //支持多少个菜单页面
@@ -602,9 +648,9 @@ message r_get_menu_sequence_t {
 
 //***********************app or fw send cmd****************
 message hl_cmds {
-  enum cmd_t {
+    enum cmd_t {
         CMD_BIND_DEVICE             = 1;//绑定激活
-           CMD_GET_DEVICE_INFO            = 2;//获取设备信息
+        CMD_GET_DEVICE_INFO            = 2;//获取设备信息
         CMD_SET_AUTH_INFO            = 3;//设置Auth
         CMD_SYNC_USER_INFO            = 4;//同步用户信息
         CMD_SYNC_SWITCH                = 5;
@@ -677,15 +723,22 @@ message hl_cmds {
         CMD_GET_MENU_SEQUENCE_DATA  = 74;// 获取一级页面的顺序
         CMD_SET_DATA_COLLECTION_SLOT = 75;//设置数据采集间隔
         CMD_SET_CARING                 =76;//关怀提醒开关
-
+        CMD_SET_CARING_REMINDER               =77;//心率、跌倒预警 跌倒开关
+        CMD_GET_LOCATION_IFNO          =78; //保存最后位置信息
+        CMD_DEVICE_BIND_CONFIRM        =79; //设备绑定确认操作
+        CMD_SET_PRIVATEKEY_INFO        =80; //m_privatekey证书
+        CMD_SET_CERTIFICATEPEM_INFO        =81; //m_certificatepem证书
+        
+        
+        
     }
-
+    
     required cmd_t            cmd                = 1;//cmd
     required bool             response        = 2;
     required uint32             seconds            = 3;
-    required int32             timezone        = 45;
+    required float             timezone        = 45;
     optional bytes         client_id        = 60; //YJ：最长长度
-
+    
     // optional set_user_info_t        set_app_info            = 4;
     optional r_bind_device_t        r_bind_device             = 5;
     optional get_device_info_t    r_get_device_info         = 6;
@@ -751,9 +804,11 @@ message hl_cmds {
     optional r_get_4G_online_or_not_t          r_get_4G_online_or_not     = 69; //发布4G在线
     optional r_check_dial_t              r_check_dial_data = 70; //查询表盘是否存在是，手表回复的
     optional set_data_collection_slot_t  set_data_collection_slot_data = 71; //设置数据采集间隔
-
+    optional r_get_last_location_t r_get_last_location = 72; //保存最后位置信息
+    optional r_bind_device_confirm_t        r_bind_device_confirm             = 73;
+    optional set_privatekey_t                          set_privatekey = 74;
+    optional set_certificatepem_t                          set_certificatepem = 75;
 }
-
 
 
 

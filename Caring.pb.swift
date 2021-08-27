@@ -66,16 +66,6 @@ struct Caring_set_device_info_t {
   /// Clears the value of `mLanguage`. Subsequent reads from it will return its default value.
   mutating func clearMLanguage() {self._mLanguage = nil}
 
-  ///用户uid
-  var mUid: UInt32 {
-    get {return _mUid ?? 0}
-    set {_mUid = newValue}
-  }
-  /// Returns true if `mUid` has been explicitly set.
-  var hasMUid: Bool {return self._mUid != nil}
-  /// Clears the value of `mUid`. Subsequent reads from it will return its default value.
-  mutating func clearMUid() {self._mUid = nil}
-
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -84,7 +74,6 @@ struct Caring_set_device_info_t {
   fileprivate var _mSystemversion: String? = nil
   fileprivate var _mAppversion: String? = nil
   fileprivate var _mLanguage: UInt32? = nil
-  fileprivate var _mUid: UInt32? = nil
 }
 
 ///设备信息
@@ -111,8 +100,8 @@ struct Caring_r_bind_device_t {
   /// Clears the value of `mFwversion`. Subsequent reads from it will return its default value.
   mutating func clearMFwversion() {self._mFwversion = nil}
 
-  var mFontversion: UInt32 {
-    get {return _mFontversion ?? 0}
+  var mFontversion: String {
+    get {return _mFontversion ?? String()}
     set {_mFontversion = newValue}
   }
   /// Returns true if `mFontversion` has been explicitly set.
@@ -120,8 +109,8 @@ struct Caring_r_bind_device_t {
   /// Clears the value of `mFontversion`. Subsequent reads from it will return its default value.
   mutating func clearMFontversion() {self._mFontversion = nil}
 
-  var mSdversion: UInt32 {
-    get {return _mSdversion ?? 0}
+  var mSdversion: String {
+    get {return _mSdversion ?? String()}
     set {_mSdversion = newValue}
   }
   /// Returns true if `mSdversion` has been explicitly set.
@@ -129,8 +118,8 @@ struct Caring_r_bind_device_t {
   /// Clears the value of `mSdversion`. Subsequent reads from it will return its default value.
   mutating func clearMSdversion() {self._mSdversion = nil}
 
-  var mUiversion: UInt32 {
-    get {return _mUiversion ?? 0}
+  var mUiversion: String {
+    get {return _mUiversion ?? String()}
     set {_mUiversion = newValue}
   }
   /// Returns true if `mUiversion` has been explicitly set.
@@ -138,8 +127,8 @@ struct Caring_r_bind_device_t {
   /// Clears the value of `mUiversion`. Subsequent reads from it will return its default value.
   mutating func clearMUiversion() {self._mUiversion = nil}
 
-  var mDevicesn: UInt32 {
-    get {return _mDevicesn ?? 0}
+  var mDevicesn: String {
+    get {return _mDevicesn ?? String()}
     set {_mDevicesn = newValue}
   }
   /// Returns true if `mDevicesn` has been explicitly set.
@@ -147,8 +136,8 @@ struct Caring_r_bind_device_t {
   /// Clears the value of `mDevicesn`. Subsequent reads from it will return its default value.
   mutating func clearMDevicesn() {self._mDevicesn = nil}
 
-  var mDevicename: UInt32 {
-    get {return _mDevicename ?? 0}
+  var mDevicename: String {
+    get {return _mDevicename ?? String()}
     set {_mDevicename = newValue}
   }
   /// Returns true if `mDevicename` has been explicitly set.
@@ -165,8 +154,8 @@ struct Caring_r_bind_device_t {
   /// Clears the value of `mBattvalue`. Subsequent reads from it will return its default value.
   mutating func clearMBattvalue() {self._mBattvalue = nil}
 
-  var mDevicemac: UInt32 {
-    get {return _mDevicemac ?? 0}
+  var mDevicemac: String {
+    get {return _mDevicemac ?? String()}
     set {_mDevicemac = newValue}
   }
   /// Returns true if `mDevicemac` has been explicitly set.
@@ -174,6 +163,7 @@ struct Caring_r_bind_device_t {
   /// Clears the value of `mDevicemac`. Subsequent reads from it will return its default value.
   mutating func clearMDevicemac() {self._mDevicemac = nil}
 
+  /// 1表示用户选√ 。 2表示用户取消。 3表示 。  4表示超时。 5表示开始
   var mBindOperate: UInt32 {
     get {return _mBindOperate ?? 0}
     set {_mBindOperate = newValue}
@@ -192,8 +182,8 @@ struct Caring_r_bind_device_t {
   /// Clears the value of `mPower`. Subsequent reads from it will return its default value.
   mutating func clearMPower() {self._mPower = nil}
 
-  var mDeviceimei: UInt32 {
-    get {return _mDeviceimei ?? 0}
+  var mDeviceimei: String {
+    get {return _mDeviceimei ?? String()}
     set {_mDeviceimei = newValue}
   }
   /// Returns true if `mDeviceimei` has been explicitly set.
@@ -201,8 +191,8 @@ struct Caring_r_bind_device_t {
   /// Clears the value of `mDeviceimei`. Subsequent reads from it will return its default value.
   mutating func clearMDeviceimei() {self._mDeviceimei = nil}
 
-  var mDeviceid: UInt32 {
-    get {return _mDeviceid ?? 0}
+  var mDeviceid: String {
+    get {return _mDeviceid ?? String()}
     set {_mDeviceid = newValue}
   }
   /// Returns true if `mDeviceid` has been explicitly set.
@@ -216,17 +206,49 @@ struct Caring_r_bind_device_t {
 
   fileprivate var _mProjno: Data? = nil
   fileprivate var _mFwversion: Data? = nil
-  fileprivate var _mFontversion: UInt32? = nil
-  fileprivate var _mSdversion: UInt32? = nil
-  fileprivate var _mUiversion: UInt32? = nil
-  fileprivate var _mDevicesn: UInt32? = nil
-  fileprivate var _mDevicename: UInt32? = nil
+  fileprivate var _mFontversion: String? = nil
+  fileprivate var _mSdversion: String? = nil
+  fileprivate var _mUiversion: String? = nil
+  fileprivate var _mDevicesn: String? = nil
+  fileprivate var _mDevicename: String? = nil
   fileprivate var _mBattvalue: UInt32? = nil
-  fileprivate var _mDevicemac: UInt32? = nil
+  fileprivate var _mDevicemac: String? = nil
   fileprivate var _mBindOperate: UInt32? = nil
   fileprivate var _mPower: UInt32? = nil
-  fileprivate var _mDeviceimei: UInt32? = nil
-  fileprivate var _mDeviceid: UInt32? = nil
+  fileprivate var _mDeviceimei: String? = nil
+  fileprivate var _mDeviceid: String? = nil
+}
+
+struct Caring_r_bind_device_confirm_t {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// 1表示用户选√ 。 2表示用户取消
+  var mBindOperate: UInt32 {
+    get {return _mBindOperate ?? 0}
+    set {_mBindOperate = newValue}
+  }
+  /// Returns true if `mBindOperate` has been explicitly set.
+  var hasMBindOperate: Bool {return self._mBindOperate != nil}
+  /// Clears the value of `mBindOperate`. Subsequent reads from it will return its default value.
+  mutating func clearMBindOperate() {self._mBindOperate = nil}
+
+  var mUserID: String {
+    get {return _mUserID ?? String()}
+    set {_mUserID = newValue}
+  }
+  /// Returns true if `mUserID` has been explicitly set.
+  var hasMUserID: Bool {return self._mUserID != nil}
+  /// Clears the value of `mUserID`. Subsequent reads from it will return its default value.
+  mutating func clearMUserID() {self._mUserID = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _mBindOperate: UInt32? = nil
+  fileprivate var _mUserID: String? = nil
 }
 
 ///获取推送设备信息
@@ -262,8 +284,8 @@ struct Caring_get_device_info_t {
   /// Clears the value of `mFwversion`. Subsequent reads from it will return its default value.
   mutating func clearMFwversion() {self._mFwversion = nil}
 
-  var mDevicesn: UInt32 {
-    get {return _mDevicesn ?? 0}
+  var mDevicesn: String {
+    get {return _mDevicesn ?? String()}
     set {_mDevicesn = newValue}
   }
   /// Returns true if `mDevicesn` has been explicitly set.
@@ -271,8 +293,8 @@ struct Caring_get_device_info_t {
   /// Clears the value of `mDevicesn`. Subsequent reads from it will return its default value.
   mutating func clearMDevicesn() {self._mDevicesn = nil}
 
-  var mDevicemac: UInt32 {
-    get {return _mDevicemac ?? 0}
+  var mDevicemac: String {
+    get {return _mDevicemac ?? String()}
     set {_mDevicemac = newValue}
   }
   /// Returns true if `mDevicemac` has been explicitly set.
@@ -289,8 +311,8 @@ struct Caring_get_device_info_t {
   /// Clears the value of `mPower`. Subsequent reads from it will return its default value.
   mutating func clearMPower() {self._mPower = nil}
 
-  var mDeviceimei: UInt32 {
-    get {return _mDeviceimei ?? 0}
+  var mDeviceimei: String {
+    get {return _mDeviceimei ?? String()}
     set {_mDeviceimei = newValue}
   }
   /// Returns true if `mDeviceimei` has been explicitly set.
@@ -298,8 +320,8 @@ struct Caring_get_device_info_t {
   /// Clears the value of `mDeviceimei`. Subsequent reads from it will return its default value.
   mutating func clearMDeviceimei() {self._mDeviceimei = nil}
 
-  var mDeviceid: UInt32 {
-    get {return _mDeviceid ?? 0}
+  var mDeviceid: String {
+    get {return _mDeviceid ?? String()}
     set {_mDeviceid = newValue}
   }
   /// Returns true if `mDeviceid` has been explicitly set.
@@ -314,11 +336,11 @@ struct Caring_get_device_info_t {
   fileprivate var _mProjno: Data? = nil
   fileprivate var _mUiversion: Data? = nil
   fileprivate var _mFwversion: Data? = nil
-  fileprivate var _mDevicesn: UInt32? = nil
-  fileprivate var _mDevicemac: UInt32? = nil
+  fileprivate var _mDevicesn: String? = nil
+  fileprivate var _mDevicemac: String? = nil
   fileprivate var _mPower: UInt32? = nil
-  fileprivate var _mDeviceimei: UInt32? = nil
-  fileprivate var _mDeviceid: UInt32? = nil
+  fileprivate var _mDeviceimei: String? = nil
+  fileprivate var _mDeviceid: String? = nil
 }
 
 ///set 鉴权值
@@ -327,14 +349,15 @@ struct Caring_set_auth_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var mValue: UInt32 {
-    get {return _mValue ?? 0}
-    set {_mValue = newValue}
+  ///厂测软件下发的auth
+  var mClientid: String {
+    get {return _mClientid ?? String()}
+    set {_mClientid = newValue}
   }
-  /// Returns true if `mValue` has been explicitly set.
-  var hasMValue: Bool {return self._mValue != nil}
-  /// Clears the value of `mValue`. Subsequent reads from it will return its default value.
-  mutating func clearMValue() {self._mValue = nil}
+  /// Returns true if `mClientid` has been explicitly set.
+  var hasMClientid: Bool {return self._mClientid != nil}
+  /// Clears the value of `mClientid`. Subsequent reads from it will return its default value.
+  mutating func clearMClientid() {self._mClientid = nil}
 
   ///YJ： 40字节
   var mDomain: String {
@@ -350,8 +373,52 @@ struct Caring_set_auth_t {
 
   init() {}
 
-  fileprivate var _mValue: UInt32? = nil
+  fileprivate var _mClientid: String? = nil
   fileprivate var _mDomain: String? = nil
+}
+
+///set m_privatekey证书
+struct Caring_set_privatekey_t {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var mPrivatekey: String {
+    get {return _mPrivatekey ?? String()}
+    set {_mPrivatekey = newValue}
+  }
+  /// Returns true if `mPrivatekey` has been explicitly set.
+  var hasMPrivatekey: Bool {return self._mPrivatekey != nil}
+  /// Clears the value of `mPrivatekey`. Subsequent reads from it will return its default value.
+  mutating func clearMPrivatekey() {self._mPrivatekey = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _mPrivatekey: String? = nil
+}
+
+///set  m_certificatepem
+struct Caring_set_certificatepem_t {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var mCertificatepem: String {
+    get {return _mCertificatepem ?? String()}
+    set {_mCertificatepem = newValue}
+  }
+  /// Returns true if `mCertificatepem` has been explicitly set.
+  var hasMCertificatepem: Bool {return self._mCertificatepem != nil}
+  /// Clears the value of `mCertificatepem`. Subsequent reads from it will return its default value.
+  mutating func clearMCertificatepem() {self._mCertificatepem = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _mCertificatepem: String? = nil
 }
 
 ///设置心率采样间隔
@@ -551,9 +618,8 @@ struct Caring_alarm_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  ///YJ：一个byte就可以了，不需要bytes？
-  var mAlarm1Cfg: Data {
-    get {return _mAlarm1Cfg ?? Data()}
+  var mAlarm1Cfg: UInt32 {
+    get {return _mAlarm1Cfg ?? 0}
     set {_mAlarm1Cfg = newValue}
   }
   /// Returns true if `mAlarm1Cfg` has been explicitly set.
@@ -593,7 +659,7 @@ struct Caring_alarm_t {
 
   init() {}
 
-  fileprivate var _mAlarm1Cfg: Data? = nil
+  fileprivate var _mAlarm1Cfg: UInt32? = nil
   fileprivate var _mAlarm1Hour: UInt32? = nil
   fileprivate var _mAlarm1Min: UInt32? = nil
   fileprivate var _mAlarm1Name: String? = nil
@@ -616,7 +682,7 @@ struct Caring_set_country_info_t {
   mutating func clearMCountryCode() {self._mCountryCode = nil}
 
   ///时区 8，最高为0代表正时区。1代表负时区
-  var mCountryTimezone: UInt32 {
+  var mCountryTimezone: Float {
     get {return _mCountryTimezone ?? 0}
     set {_mCountryTimezone = newValue}
   }
@@ -630,7 +696,7 @@ struct Caring_set_country_info_t {
   init() {}
 
   fileprivate var _mCountryCode: UInt32? = nil
-  fileprivate var _mCountryTimezone: UInt32? = nil
+  fileprivate var _mCountryTimezone: Float? = nil
 }
 
 ///内置表盘设置
@@ -733,41 +799,45 @@ struct Caring_set_hr_warning_t {
   /// Clears the value of `mHrLower`. Subsequent reads from it will return its default value.
   mutating func clearMHrLower() {self._mHrLower = nil}
 
-  var mBpUpperMax: UInt32 {
-    get {return _mBpUpperMax ?? 0}
-    set {_mBpUpperMax = newValue}
+  ///收缩压上限
+  var mSbpUpper: UInt32 {
+    get {return _mSbpUpper ?? 0}
+    set {_mSbpUpper = newValue}
   }
-  /// Returns true if `mBpUpperMax` has been explicitly set.
-  var hasMBpUpperMax: Bool {return self._mBpUpperMax != nil}
-  /// Clears the value of `mBpUpperMax`. Subsequent reads from it will return its default value.
-  mutating func clearMBpUpperMax() {self._mBpUpperMax = nil}
+  /// Returns true if `mSbpUpper` has been explicitly set.
+  var hasMSbpUpper: Bool {return self._mSbpUpper != nil}
+  /// Clears the value of `mSbpUpper`. Subsequent reads from it will return its default value.
+  mutating func clearMSbpUpper() {self._mSbpUpper = nil}
 
-  var mBpUpperMin: UInt32 {
-    get {return _mBpUpperMin ?? 0}
-    set {_mBpUpperMin = newValue}
+  ///收缩压下限
+  var mSbpLower: UInt32 {
+    get {return _mSbpLower ?? 0}
+    set {_mSbpLower = newValue}
   }
-  /// Returns true if `mBpUpperMin` has been explicitly set.
-  var hasMBpUpperMin: Bool {return self._mBpUpperMin != nil}
-  /// Clears the value of `mBpUpperMin`. Subsequent reads from it will return its default value.
-  mutating func clearMBpUpperMin() {self._mBpUpperMin = nil}
+  /// Returns true if `mSbpLower` has been explicitly set.
+  var hasMSbpLower: Bool {return self._mSbpLower != nil}
+  /// Clears the value of `mSbpLower`. Subsequent reads from it will return its default value.
+  mutating func clearMSbpLower() {self._mSbpLower = nil}
 
-  var mBpLowerMax: UInt32 {
-    get {return _mBpLowerMax ?? 0}
-    set {_mBpLowerMax = newValue}
+  ///舒张压上限
+  var mDbpUpper: UInt32 {
+    get {return _mDbpUpper ?? 0}
+    set {_mDbpUpper = newValue}
   }
-  /// Returns true if `mBpLowerMax` has been explicitly set.
-  var hasMBpLowerMax: Bool {return self._mBpLowerMax != nil}
-  /// Clears the value of `mBpLowerMax`. Subsequent reads from it will return its default value.
-  mutating func clearMBpLowerMax() {self._mBpLowerMax = nil}
+  /// Returns true if `mDbpUpper` has been explicitly set.
+  var hasMDbpUpper: Bool {return self._mDbpUpper != nil}
+  /// Clears the value of `mDbpUpper`. Subsequent reads from it will return its default value.
+  mutating func clearMDbpUpper() {self._mDbpUpper = nil}
 
-  var mBpLowerMin: UInt32 {
-    get {return _mBpLowerMin ?? 0}
-    set {_mBpLowerMin = newValue}
+  ///舒张压下限
+  var mDbpLower: UInt32 {
+    get {return _mDbpLower ?? 0}
+    set {_mDbpLower = newValue}
   }
-  /// Returns true if `mBpLowerMin` has been explicitly set.
-  var hasMBpLowerMin: Bool {return self._mBpLowerMin != nil}
-  /// Clears the value of `mBpLowerMin`. Subsequent reads from it will return its default value.
-  mutating func clearMBpLowerMin() {self._mBpLowerMin = nil}
+  /// Returns true if `mDbpLower` has been explicitly set.
+  var hasMDbpLower: Bool {return self._mDbpLower != nil}
+  /// Clears the value of `mDbpLower`. Subsequent reads from it will return its default value.
+  mutating func clearMDbpLower() {self._mDbpLower = nil}
 
   var mDetectState: UInt32 {
     get {return _mDetectState ?? 0}
@@ -784,10 +854,10 @@ struct Caring_set_hr_warning_t {
 
   fileprivate var _mHrUpper: UInt32? = nil
   fileprivate var _mHrLower: UInt32? = nil
-  fileprivate var _mBpUpperMax: UInt32? = nil
-  fileprivate var _mBpUpperMin: UInt32? = nil
-  fileprivate var _mBpLowerMax: UInt32? = nil
-  fileprivate var _mBpLowerMin: UInt32? = nil
+  fileprivate var _mSbpUpper: UInt32? = nil
+  fileprivate var _mSbpLower: UInt32? = nil
+  fileprivate var _mDbpUpper: UInt32? = nil
+  fileprivate var _mDbpLower: UInt32? = nil
   fileprivate var _mDetectState: UInt32? = nil
 }
 
@@ -896,6 +966,35 @@ struct Caring_r_get_health_data_t {
   ///血氧
   var spo2: [Caring_r_get_health_spo2_t] = []
 
+  ///设备id
+  var mDeviceid: String {
+    get {return _mDeviceid ?? String()}
+    set {_mDeviceid = newValue}
+  }
+  /// Returns true if `mDeviceid` has been explicitly set.
+  var hasMDeviceid: Bool {return self._mDeviceid != nil}
+  /// Clears the value of `mDeviceid`. Subsequent reads from it will return its default value.
+  mutating func clearMDeviceid() {self._mDeviceid = nil}
+
+  ///用户id
+  var mUserid: String {
+    get {return _mUserid ?? String()}
+    set {_mUserid = newValue}
+  }
+  /// Returns true if `mUserid` has been explicitly set.
+  var hasMUserid: Bool {return self._mUserid != nil}
+  /// Clears the value of `mUserid`. Subsequent reads from it will return its default value.
+  mutating func clearMUserid() {self._mUserid = nil}
+
+  var mClientid: String {
+    get {return _mClientid ?? String()}
+    set {_mClientid = newValue}
+  }
+  /// Returns true if `mClientid` has been explicitly set.
+  var hasMClientid: Bool {return self._mClientid != nil}
+  /// Clears the value of `mClientid`. Subsequent reads from it will return its default value.
+  mutating func clearMClientid() {self._mClientid = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -903,6 +1002,9 @@ struct Caring_r_get_health_data_t {
   fileprivate var _mErrCode: UInt32? = nil
   fileprivate var _mSn: UInt32? = nil
   fileprivate var _mData: Data? = nil
+  fileprivate var _mDeviceid: String? = nil
+  fileprivate var _mUserid: String? = nil
+  fileprivate var _mClientid: String? = nil
 }
 
 /// 一天内历史步数
@@ -1537,14 +1639,14 @@ struct Caring_set_reset_machine_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var mUserid: UInt32 {
-    get {return _mUserid ?? 0}
-    set {_mUserid = newValue}
+  var mDeviceid: String {
+    get {return _mDeviceid ?? String()}
+    set {_mDeviceid = newValue}
   }
-  /// Returns true if `mUserid` has been explicitly set.
-  var hasMUserid: Bool {return self._mUserid != nil}
-  /// Clears the value of `mUserid`. Subsequent reads from it will return its default value.
-  mutating func clearMUserid() {self._mUserid = nil}
+  /// Returns true if `mDeviceid` has been explicitly set.
+  var hasMDeviceid: Bool {return self._mDeviceid != nil}
+  /// Clears the value of `mDeviceid`. Subsequent reads from it will return its default value.
+  mutating func clearMDeviceid() {self._mDeviceid = nil}
 
   var mFactoryMode: UInt32 {
     get {return _mFactoryMode ?? 0}
@@ -1559,7 +1661,7 @@ struct Caring_set_reset_machine_t {
 
   init() {}
 
-  fileprivate var _mUserid: UInt32? = nil
+  fileprivate var _mDeviceid: String? = nil
   fileprivate var _mFactoryMode: UInt32? = nil
 }
 
@@ -2213,8 +2315,9 @@ struct Caring_sync_user_info_t {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var mUserid: UInt32 {
-    get {return _mUserid ?? 0}
+  ///用户id
+  var mUserid: String {
+    get {return _mUserid ?? String()}
     set {_mUserid = newValue}
   }
   /// Returns true if `mUserid` has been explicitly set.
@@ -2267,16 +2370,27 @@ struct Caring_sync_user_info_t {
   /// Clears the value of `mWearstyle`. Subsequent reads from it will return its default value.
   mutating func clearMWearstyle() {self._mWearstyle = nil}
 
+  ///设备id 用来区分弹窗
+  var mDeviceid: String {
+    get {return _mDeviceid ?? String()}
+    set {_mDeviceid = newValue}
+  }
+  /// Returns true if `mDeviceid` has been explicitly set.
+  var hasMDeviceid: Bool {return self._mDeviceid != nil}
+  /// Clears the value of `mDeviceid`. Subsequent reads from it will return its default value.
+  mutating func clearMDeviceid() {self._mDeviceid = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
-  fileprivate var _mUserid: UInt32? = nil
+  fileprivate var _mUserid: String? = nil
   fileprivate var _mGender: UInt32? = nil
   fileprivate var _mAge: UInt32? = nil
   fileprivate var _mHeight: UInt32? = nil
   fileprivate var _mWeight: UInt32? = nil
   fileprivate var _mWearstyle: UInt32? = nil
+  fileprivate var _mDeviceid: String? = nil
 }
 
 struct Caring_r_get_power_t {
@@ -2354,12 +2468,192 @@ struct Caring_r_get_weather_info_t {
   /// Clears the value of `mLng`. Subsequent reads from it will return its default value.
   mutating func clearMLng() {self._mLng = nil}
 
+  /// type=1 为经纬度定位，type=2为基站定位
+  var mType: UInt32 {
+    get {return _mType ?? 0}
+    set {_mType = newValue}
+  }
+  /// Returns true if `mType` has been explicitly set.
+  var hasMType: Bool {return self._mType != nil}
+  /// Clears the value of `mType`. Subsequent reads from it will return its default value.
+  mutating func clearMType() {self._mType = nil}
+
+  ///cellid(电信对应bid)，十进制
+  var mCi: UInt32 {
+    get {return _mCi ?? 0}
+    set {_mCi = newValue}
+  }
+  /// Returns true if `mCi` has been explicitly set.
+  var hasMCi: Bool {return self._mCi != nil}
+  /// Clears the value of `mCi`. Subsequent reads from it will return its default value.
+  mutating func clearMCi() {self._mCi = nil}
+
+  ///位置编码(area_code)，lac(电信对应nid)，十进制
+  var mLac: UInt32 {
+    get {return _mLac ?? 0}
+    set {_mLac = newValue}
+  }
+  /// Returns true if `mLac` has been explicitly set.
+  var hasMLac: Bool {return self._mLac != nil}
+  /// Clears the value of `mLac`. Subsequent reads from it will return its default value.
+  mutating func clearMLac() {self._mLac = nil}
+
+  ///mcc国家代码：中国代码 460
+  var mMcc: UInt32 {
+    get {return _mMcc ?? 0}
+    set {_mMcc = newValue}
+  }
+  /// Returns true if `mMcc` has been explicitly set.
+  var hasMMcc: Bool {return self._mMcc != nil}
+  /// Clears the value of `mMcc`. Subsequent reads from it will return its default value.
+  mutating func clearMMcc() {self._mMcc = nil}
+
+  ///mnc网络类型：0移动，1联通(电信对应sid)，十进制
+  var mMnc: UInt32 {
+    get {return _mMnc ?? 0}
+    set {_mMnc = newValue}
+  }
+  /// Returns true if `mMnc` has been explicitly set.
+  var hasMMnc: Bool {return self._mMnc != nil}
+  /// Clears the value of `mMnc`. Subsequent reads from it will return its default value.
+  mutating func clearMMnc() {self._mMnc = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
   fileprivate var _mLat: UInt32? = nil
   fileprivate var _mLng: UInt32? = nil
+  fileprivate var _mType: UInt32? = nil
+  fileprivate var _mCi: UInt32? = nil
+  fileprivate var _mLac: UInt32? = nil
+  fileprivate var _mMcc: UInt32? = nil
+  fileprivate var _mMnc: UInt32? = nil
+}
+
+///保存最后一次的位置信息
+struct Caring_r_get_last_location_t {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var mLatLng: [Caring_r_lat_lng_t] = []
+
+  var mBaseStation: [Caring_r_base_station_t] = []
+
+  /// type=1 为经纬度定位，type=2为基站定位
+  var mType: UInt32 {
+    get {return _mType ?? 0}
+    set {_mType = newValue}
+  }
+  /// Returns true if `mType` has been explicitly set.
+  var hasMType: Bool {return self._mType != nil}
+  /// Clears the value of `mType`. Subsequent reads from it will return its default value.
+  mutating func clearMType() {self._mType = nil}
+
+  var timeStamp: UInt32 {
+    get {return _timeStamp ?? 0}
+    set {_timeStamp = newValue}
+  }
+  /// Returns true if `timeStamp` has been explicitly set.
+  var hasTimeStamp: Bool {return self._timeStamp != nil}
+  /// Clears the value of `timeStamp`. Subsequent reads from it will return its default value.
+  mutating func clearTimeStamp() {self._timeStamp = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _mType: UInt32? = nil
+  fileprivate var _timeStamp: UInt32? = nil
+}
+
+///经纬度
+struct Caring_r_lat_lng_t {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var mLat: UInt32 {
+    get {return _mLat ?? 0}
+    set {_mLat = newValue}
+  }
+  /// Returns true if `mLat` has been explicitly set.
+  var hasMLat: Bool {return self._mLat != nil}
+  /// Clears the value of `mLat`. Subsequent reads from it will return its default value.
+  mutating func clearMLat() {self._mLat = nil}
+
+  var mLng: UInt32 {
+    get {return _mLng ?? 0}
+    set {_mLng = newValue}
+  }
+  /// Returns true if `mLng` has been explicitly set.
+  var hasMLng: Bool {return self._mLng != nil}
+  /// Clears the value of `mLng`. Subsequent reads from it will return its default value.
+  mutating func clearMLng() {self._mLng = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _mLat: UInt32? = nil
+  fileprivate var _mLng: UInt32? = nil
+}
+
+///基站
+struct Caring_r_base_station_t {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///cellid(电信对应bid)，十进制
+  var mCi: UInt32 {
+    get {return _mCi ?? 0}
+    set {_mCi = newValue}
+  }
+  /// Returns true if `mCi` has been explicitly set.
+  var hasMCi: Bool {return self._mCi != nil}
+  /// Clears the value of `mCi`. Subsequent reads from it will return its default value.
+  mutating func clearMCi() {self._mCi = nil}
+
+  ///位置编码(area_code)，lac(电信对应nid)，十进制
+  var mLac: UInt32 {
+    get {return _mLac ?? 0}
+    set {_mLac = newValue}
+  }
+  /// Returns true if `mLac` has been explicitly set.
+  var hasMLac: Bool {return self._mLac != nil}
+  /// Clears the value of `mLac`. Subsequent reads from it will return its default value.
+  mutating func clearMLac() {self._mLac = nil}
+
+  ///mcc国家代码：中国代码 460
+  var mMcc: UInt32 {
+    get {return _mMcc ?? 0}
+    set {_mMcc = newValue}
+  }
+  /// Returns true if `mMcc` has been explicitly set.
+  var hasMMcc: Bool {return self._mMcc != nil}
+  /// Clears the value of `mMcc`. Subsequent reads from it will return its default value.
+  mutating func clearMMcc() {self._mMcc = nil}
+
+  ///mnc网络类型：0移动，1联通(电信对应sid)，十进制
+  var mMnc: UInt32 {
+    get {return _mMnc ?? 0}
+    set {_mMnc = newValue}
+  }
+  /// Returns true if `mMnc` has been explicitly set.
+  var hasMMnc: Bool {return self._mMnc != nil}
+  /// Clears the value of `mMnc`. Subsequent reads from it will return its default value.
+  mutating func clearMMnc() {self._mMnc = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _mCi: UInt32? = nil
+  fileprivate var _mLac: UInt32? = nil
+  fileprivate var _mMcc: UInt32? = nil
+  fileprivate var _mMnc: UInt32? = nil
 }
 
 struct Caring_set_sport_status_t {
@@ -2659,6 +2953,7 @@ struct Caring_r_rtimehr_value_t {
   fileprivate var _mHrValue: UInt32? = nil
 }
 
+///0,1  正式发送表盘数据询问下一包
 struct Caring_r_error_code_t {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -3661,7 +3956,7 @@ struct Caring_hl_cmds {
   /// Clears the value of `seconds`. Subsequent reads from it will return its default value.
   mutating func clearSeconds() {_uniqueStorage()._seconds = nil}
 
-  var timezone: Int32 {
+  var timezone: Float {
     get {return _storage._timezone ?? 0}
     set {_uniqueStorage()._timezone = newValue}
   }
@@ -4256,6 +4551,43 @@ struct Caring_hl_cmds {
   /// Clears the value of `setDataCollectionSlotData`. Subsequent reads from it will return its default value.
   mutating func clearSetDataCollectionSlotData() {_uniqueStorage()._setDataCollectionSlotData = nil}
 
+  ///保存最后位置信息
+  var rGetLastLocation: Caring_r_get_last_location_t {
+    get {return _storage._rGetLastLocation ?? Caring_r_get_last_location_t()}
+    set {_uniqueStorage()._rGetLastLocation = newValue}
+  }
+  /// Returns true if `rGetLastLocation` has been explicitly set.
+  var hasRGetLastLocation: Bool {return _storage._rGetLastLocation != nil}
+  /// Clears the value of `rGetLastLocation`. Subsequent reads from it will return its default value.
+  mutating func clearRGetLastLocation() {_uniqueStorage()._rGetLastLocation = nil}
+
+  var rBindDeviceConfirm: Caring_r_bind_device_confirm_t {
+    get {return _storage._rBindDeviceConfirm ?? Caring_r_bind_device_confirm_t()}
+    set {_uniqueStorage()._rBindDeviceConfirm = newValue}
+  }
+  /// Returns true if `rBindDeviceConfirm` has been explicitly set.
+  var hasRBindDeviceConfirm: Bool {return _storage._rBindDeviceConfirm != nil}
+  /// Clears the value of `rBindDeviceConfirm`. Subsequent reads from it will return its default value.
+  mutating func clearRBindDeviceConfirm() {_uniqueStorage()._rBindDeviceConfirm = nil}
+
+  var setPrivatekey: Caring_set_privatekey_t {
+    get {return _storage._setPrivatekey ?? Caring_set_privatekey_t()}
+    set {_uniqueStorage()._setPrivatekey = newValue}
+  }
+  /// Returns true if `setPrivatekey` has been explicitly set.
+  var hasSetPrivatekey: Bool {return _storage._setPrivatekey != nil}
+  /// Clears the value of `setPrivatekey`. Subsequent reads from it will return its default value.
+  mutating func clearSetPrivatekey() {_uniqueStorage()._setPrivatekey = nil}
+
+  var setCertificatepem: Caring_set_certificatepem_t {
+    get {return _storage._setCertificatepem ?? Caring_set_certificatepem_t()}
+    set {_uniqueStorage()._setCertificatepem = newValue}
+  }
+  /// Returns true if `setCertificatepem` has been explicitly set.
+  var hasSetCertificatepem: Bool {return _storage._setCertificatepem != nil}
+  /// Clears the value of `setCertificatepem`. Subsequent reads from it will return its default value.
+  mutating func clearSetCertificatepem() {_uniqueStorage()._setCertificatepem = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   enum cmd_t: SwiftProtobuf.Enum {
@@ -4407,6 +4739,21 @@ struct Caring_hl_cmds {
     ///关怀提醒开关
     case cmdSetCaring // = 76
 
+    ///心率、跌倒预警 跌倒开关
+    case cmdSetCaringReminder // = 77
+
+    ///保存最后位置信息
+    case cmdGetLocationIfno // = 78
+
+    ///设备绑定确认操作
+    case cmdDeviceBindConfirm // = 79
+
+    ///m_privatekey证书
+    case cmdSetPrivatekeyInfo // = 80
+
+    ///m_certificatepem证书
+    case cmdSetCertificatepemInfo // = 81
+
     init() {
       self = .cmdBindDevice
     }
@@ -4487,6 +4834,11 @@ struct Caring_hl_cmds {
       case 74: self = .cmdGetMenuSequenceData
       case 75: self = .cmdSetDataCollectionSlot
       case 76: self = .cmdSetCaring
+      case 77: self = .cmdSetCaringReminder
+      case 78: self = .cmdGetLocationIfno
+      case 79: self = .cmdDeviceBindConfirm
+      case 80: self = .cmdSetPrivatekeyInfo
+      case 81: self = .cmdSetCertificatepemInfo
       default: return nil
       }
     }
@@ -4567,6 +4919,11 @@ struct Caring_hl_cmds {
       case .cmdGetMenuSequenceData: return 74
       case .cmdSetDataCollectionSlot: return 75
       case .cmdSetCaring: return 76
+      case .cmdSetCaringReminder: return 77
+      case .cmdGetLocationIfno: return 78
+      case .cmdDeviceBindConfirm: return 79
+      case .cmdSetPrivatekeyInfo: return 80
+      case .cmdSetCertificatepemInfo: return 81
       }
     }
 
@@ -4596,7 +4953,6 @@ extension Caring_set_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
     2: .standard(proto: "m_systemversion"),
     3: .standard(proto: "m_appversion"),
     4: .standard(proto: "m_language"),
-    5: .standard(proto: "m_uid"),
   ]
 
   public var isInitialized: Bool {
@@ -4604,7 +4960,6 @@ extension Caring_set_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if self._mSystemversion == nil {return false}
     if self._mAppversion == nil {return false}
     if self._mLanguage == nil {return false}
-    if self._mUid == nil {return false}
     return true
   }
 
@@ -4618,7 +4973,6 @@ extension Caring_set_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 2: try { try decoder.decodeSingularStringField(value: &self._mSystemversion) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self._mAppversion) }()
       case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mLanguage) }()
-      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mUid) }()
       default: break
       }
     }
@@ -4637,9 +4991,6 @@ extension Caring_set_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if let v = self._mLanguage {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
     }
-    if let v = self._mUid {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
-    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -4648,7 +4999,6 @@ extension Caring_set_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if lhs._mSystemversion != rhs._mSystemversion {return false}
     if lhs._mAppversion != rhs._mAppversion {return false}
     if lhs._mLanguage != rhs._mLanguage {return false}
-    if lhs._mUid != rhs._mUid {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -4678,12 +5028,10 @@ extension Caring_r_bind_device_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     if self._mFontversion == nil {return false}
     if self._mSdversion == nil {return false}
     if self._mUiversion == nil {return false}
-    if self._mDevicesn == nil {return false}
     if self._mDevicename == nil {return false}
     if self._mBattvalue == nil {return false}
     if self._mDevicemac == nil {return false}
     if self._mBindOperate == nil {return false}
-    if self._mPower == nil {return false}
     if self._mDeviceimei == nil {return false}
     if self._mDeviceid == nil {return false}
     return true
@@ -4697,17 +5045,17 @@ extension Caring_r_bind_device_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularBytesField(value: &self._mProjno) }()
       case 3: try { try decoder.decodeSingularBytesField(value: &self._mFwversion) }()
-      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mFontversion) }()
-      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mSdversion) }()
-      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mUiversion) }()
-      case 7: try { try decoder.decodeSingularUInt32Field(value: &self._mDevicesn) }()
-      case 8: try { try decoder.decodeSingularUInt32Field(value: &self._mDevicename) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self._mFontversion) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self._mSdversion) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self._mUiversion) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self._mDevicesn) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self._mDevicename) }()
       case 9: try { try decoder.decodeSingularUInt32Field(value: &self._mBattvalue) }()
-      case 10: try { try decoder.decodeSingularUInt32Field(value: &self._mDevicemac) }()
+      case 10: try { try decoder.decodeSingularStringField(value: &self._mDevicemac) }()
       case 11: try { try decoder.decodeSingularUInt32Field(value: &self._mBindOperate) }()
       case 12: try { try decoder.decodeSingularUInt32Field(value: &self._mPower) }()
-      case 13: try { try decoder.decodeSingularUInt32Field(value: &self._mDeviceimei) }()
-      case 14: try { try decoder.decodeSingularUInt32Field(value: &self._mDeviceid) }()
+      case 13: try { try decoder.decodeSingularStringField(value: &self._mDeviceimei) }()
+      case 14: try { try decoder.decodeSingularStringField(value: &self._mDeviceid) }()
       default: break
       }
     }
@@ -4721,25 +5069,25 @@ extension Caring_r_bind_device_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       try visitor.visitSingularBytesField(value: v, fieldNumber: 3)
     }
     if let v = self._mFontversion {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
     }
     if let v = self._mSdversion {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 5)
     }
     if let v = self._mUiversion {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 6)
     }
     if let v = self._mDevicesn {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 7)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 7)
     }
     if let v = self._mDevicename {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 8)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 8)
     }
     if let v = self._mBattvalue {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 9)
     }
     if let v = self._mDevicemac {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 10)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 10)
     }
     if let v = self._mBindOperate {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 11)
@@ -4748,10 +5096,10 @@ extension Caring_r_bind_device_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 12)
     }
     if let v = self._mDeviceimei {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 13)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 13)
     }
     if let v = self._mDeviceid {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 14)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 14)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -4775,6 +5123,50 @@ extension Caring_r_bind_device_t: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 }
 
+extension Caring_r_bind_device_confirm_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".r_bind_device_confirm_t"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "m_bind_operate"),
+    2: .standard(proto: "m_userId"),
+  ]
+
+  public var isInitialized: Bool {
+    if self._mBindOperate == nil {return false}
+    if self._mUserID == nil {return false}
+    return true
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mBindOperate) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self._mUserID) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._mBindOperate {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
+    }
+    if let v = self._mUserID {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Caring_r_bind_device_confirm_t, rhs: Caring_r_bind_device_confirm_t) -> Bool {
+    if lhs._mBindOperate != rhs._mBindOperate {return false}
+    if lhs._mUserID != rhs._mUserID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Caring_get_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".get_device_info_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -4792,9 +5184,7 @@ extension Caring_get_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if self._mProjno == nil {return false}
     if self._mUiversion == nil {return false}
     if self._mFwversion == nil {return false}
-    if self._mDevicesn == nil {return false}
     if self._mDevicemac == nil {return false}
-    if self._mPower == nil {return false}
     if self._mDeviceimei == nil {return false}
     if self._mDeviceid == nil {return false}
     return true
@@ -4809,11 +5199,11 @@ extension Caring_get_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 1: try { try decoder.decodeSingularBytesField(value: &self._mProjno) }()
       case 2: try { try decoder.decodeSingularBytesField(value: &self._mUiversion) }()
       case 3: try { try decoder.decodeSingularBytesField(value: &self._mFwversion) }()
-      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mDevicesn) }()
-      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mDevicemac) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self._mDevicesn) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self._mDevicemac) }()
       case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mPower) }()
-      case 7: try { try decoder.decodeSingularUInt32Field(value: &self._mDeviceimei) }()
-      case 8: try { try decoder.decodeSingularUInt32Field(value: &self._mDeviceid) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self._mDeviceimei) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self._mDeviceid) }()
       default: break
       }
     }
@@ -4830,19 +5220,19 @@ extension Caring_get_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
       try visitor.visitSingularBytesField(value: v, fieldNumber: 3)
     }
     if let v = self._mDevicesn {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
     }
     if let v = self._mDevicemac {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 5)
     }
     if let v = self._mPower {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
     }
     if let v = self._mDeviceimei {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 7)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 7)
     }
     if let v = self._mDeviceid {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 8)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 8)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -4864,12 +5254,12 @@ extension Caring_get_device_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messag
 extension Caring_set_auth_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".set_auth_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "m_value"),
+    1: .standard(proto: "m_clientid"),
     2: .standard(proto: "m_domain"),
   ]
 
   public var isInitialized: Bool {
-    if self._mValue == nil {return false}
+    if self._mClientid == nil {return false}
     if self._mDomain == nil {return false}
     return true
   }
@@ -4880,7 +5270,7 @@ extension Caring_set_auth_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mValue) }()
+      case 1: try { try decoder.decodeSingularStringField(value: &self._mClientid) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self._mDomain) }()
       default: break
       }
@@ -4888,8 +5278,8 @@ extension Caring_set_auth_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._mValue {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
+    if let v = self._mClientid {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     }
     if let v = self._mDomain {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
@@ -4898,8 +5288,82 @@ extension Caring_set_auth_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 
   static func ==(lhs: Caring_set_auth_t, rhs: Caring_set_auth_t) -> Bool {
-    if lhs._mValue != rhs._mValue {return false}
+    if lhs._mClientid != rhs._mClientid {return false}
     if lhs._mDomain != rhs._mDomain {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Caring_set_privatekey_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".set_privatekey_t"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "m_privatekey"),
+  ]
+
+  public var isInitialized: Bool {
+    if self._mPrivatekey == nil {return false}
+    return true
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self._mPrivatekey) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._mPrivatekey {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Caring_set_privatekey_t, rhs: Caring_set_privatekey_t) -> Bool {
+    if lhs._mPrivatekey != rhs._mPrivatekey {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Caring_set_certificatepem_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".set_certificatepem_t"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "m_certificatepem"),
+  ]
+
+  public var isInitialized: Bool {
+    if self._mCertificatepem == nil {return false}
+    return true
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self._mCertificatepem) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._mCertificatepem {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Caring_set_certificatepem_t, rhs: Caring_set_certificatepem_t) -> Bool {
+    if lhs._mCertificatepem != rhs._mCertificatepem {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -5146,7 +5610,7 @@ extension Caring_alarm_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularBytesField(value: &self._mAlarm1Cfg) }()
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mAlarm1Cfg) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mAlarm1Hour) }()
       case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mAlarm1Min) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self._mAlarm1Name) }()
@@ -5157,7 +5621,7 @@ extension Caring_alarm_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._mAlarm1Cfg {
-      try visitor.visitSingularBytesField(value: v, fieldNumber: 1)
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
     if let v = self._mAlarm1Hour {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
@@ -5201,7 +5665,7 @@ extension Caring_set_country_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messa
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mCountryCode) }()
-      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mCountryTimezone) }()
+      case 2: try { try decoder.decodeSingularFloatField(value: &self._mCountryTimezone) }()
       default: break
       }
     }
@@ -5212,7 +5676,7 @@ extension Caring_set_country_info_t: SwiftProtobuf.Message, SwiftProtobuf._Messa
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     }
     if let v = self._mCountryTimezone {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
+      try visitor.visitSingularFloatField(value: v, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -5348,20 +5812,20 @@ extension Caring_set_hr_warning_t: SwiftProtobuf.Message, SwiftProtobuf._Message
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "m_hr_upper"),
     2: .standard(proto: "m_hr_lower"),
-    3: .standard(proto: "m_bp_upper_max"),
-    4: .standard(proto: "m_bp_upper_min"),
-    5: .standard(proto: "m_bp_lower_max"),
-    6: .standard(proto: "m_bp_lower_min"),
+    3: .standard(proto: "m_sbp_upper"),
+    4: .standard(proto: "m_sbp_lower"),
+    5: .standard(proto: "m_dbp_upper"),
+    6: .standard(proto: "m_dbp_lower"),
     7: .standard(proto: "m_detect_state"),
   ]
 
   public var isInitialized: Bool {
     if self._mHrUpper == nil {return false}
     if self._mHrLower == nil {return false}
-    if self._mBpUpperMax == nil {return false}
-    if self._mBpUpperMin == nil {return false}
-    if self._mBpLowerMax == nil {return false}
-    if self._mBpLowerMin == nil {return false}
+    if self._mSbpUpper == nil {return false}
+    if self._mSbpLower == nil {return false}
+    if self._mDbpUpper == nil {return false}
+    if self._mDbpLower == nil {return false}
     if self._mDetectState == nil {return false}
     return true
   }
@@ -5374,10 +5838,10 @@ extension Caring_set_hr_warning_t: SwiftProtobuf.Message, SwiftProtobuf._Message
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mHrUpper) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mHrLower) }()
-      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mBpUpperMax) }()
-      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mBpUpperMin) }()
-      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mBpLowerMax) }()
-      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mBpLowerMin) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mSbpUpper) }()
+      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mSbpLower) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mDbpUpper) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mDbpLower) }()
       case 7: try { try decoder.decodeSingularUInt32Field(value: &self._mDetectState) }()
       default: break
       }
@@ -5391,16 +5855,16 @@ extension Caring_set_hr_warning_t: SwiftProtobuf.Message, SwiftProtobuf._Message
     if let v = self._mHrLower {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
     }
-    if let v = self._mBpUpperMax {
+    if let v = self._mSbpUpper {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
     }
-    if let v = self._mBpUpperMin {
+    if let v = self._mSbpLower {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
     }
-    if let v = self._mBpLowerMax {
+    if let v = self._mDbpUpper {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
     }
-    if let v = self._mBpLowerMin {
+    if let v = self._mDbpLower {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
     }
     if let v = self._mDetectState {
@@ -5412,10 +5876,10 @@ extension Caring_set_hr_warning_t: SwiftProtobuf.Message, SwiftProtobuf._Message
   static func ==(lhs: Caring_set_hr_warning_t, rhs: Caring_set_hr_warning_t) -> Bool {
     if lhs._mHrUpper != rhs._mHrUpper {return false}
     if lhs._mHrLower != rhs._mHrLower {return false}
-    if lhs._mBpUpperMax != rhs._mBpUpperMax {return false}
-    if lhs._mBpUpperMin != rhs._mBpUpperMin {return false}
-    if lhs._mBpLowerMax != rhs._mBpLowerMax {return false}
-    if lhs._mBpLowerMin != rhs._mBpLowerMin {return false}
+    if lhs._mSbpUpper != rhs._mSbpUpper {return false}
+    if lhs._mSbpLower != rhs._mSbpLower {return false}
+    if lhs._mDbpUpper != rhs._mDbpUpper {return false}
+    if lhs._mDbpLower != rhs._mDbpLower {return false}
     if lhs._mDetectState != rhs._mDetectState {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -5491,11 +5955,17 @@ extension Caring_r_get_health_data_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
     6: .same(proto: "bp"),
     7: .same(proto: "sleep"),
     8: .same(proto: "spo2"),
+    9: .standard(proto: "m_deviceid"),
+    10: .standard(proto: "m_userid"),
+    11: .standard(proto: "m_clientid"),
   ]
 
   public var isInitialized: Bool {
     if self._mErrCode == nil {return false}
     if self._mSn == nil {return false}
+    if self._mDeviceid == nil {return false}
+    if self._mUserid == nil {return false}
+    if self._mClientid == nil {return false}
     if !SwiftProtobuf.Internal.areAllInitialized(self.step) {return false}
     if !SwiftProtobuf.Internal.areAllInitialized(self.hrs) {return false}
     if !SwiftProtobuf.Internal.areAllInitialized(self.bp) {return false}
@@ -5518,6 +5988,9 @@ extension Caring_r_get_health_data_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
       case 6: try { try decoder.decodeRepeatedMessageField(value: &self.bp) }()
       case 7: try { try decoder.decodeRepeatedMessageField(value: &self.sleep) }()
       case 8: try { try decoder.decodeRepeatedMessageField(value: &self.spo2) }()
+      case 9: try { try decoder.decodeSingularStringField(value: &self._mDeviceid) }()
+      case 10: try { try decoder.decodeSingularStringField(value: &self._mUserid) }()
+      case 11: try { try decoder.decodeSingularStringField(value: &self._mClientid) }()
       default: break
       }
     }
@@ -5548,6 +6021,15 @@ extension Caring_r_get_health_data_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if !self.spo2.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.spo2, fieldNumber: 8)
     }
+    if let v = self._mDeviceid {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 9)
+    }
+    if let v = self._mUserid {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 10)
+    }
+    if let v = self._mClientid {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 11)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -5560,6 +6042,9 @@ extension Caring_r_get_health_data_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if lhs.bp != rhs.bp {return false}
     if lhs.sleep != rhs.sleep {return false}
     if lhs.spo2 != rhs.spo2 {return false}
+    if lhs._mDeviceid != rhs._mDeviceid {return false}
+    if lhs._mUserid != rhs._mUserid {return false}
+    if lhs._mClientid != rhs._mClientid {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -6275,12 +6760,12 @@ extension Caring_weather_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
 extension Caring_set_reset_machine_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".set_reset_machine_t"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "m_userid"),
+    1: .standard(proto: "m_deviceid"),
     2: .standard(proto: "m_factory_mode"),
   ]
 
   public var isInitialized: Bool {
-    if self._mUserid == nil {return false}
+    if self._mDeviceid == nil {return false}
     if self._mFactoryMode == nil {return false}
     return true
   }
@@ -6291,7 +6776,7 @@ extension Caring_set_reset_machine_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mUserid) }()
+      case 1: try { try decoder.decodeSingularStringField(value: &self._mDeviceid) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mFactoryMode) }()
       default: break
       }
@@ -6299,8 +6784,8 @@ extension Caring_set_reset_machine_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._mUserid {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
+    if let v = self._mDeviceid {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     }
     if let v = self._mFactoryMode {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
@@ -6309,7 +6794,7 @@ extension Caring_set_reset_machine_t: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 
   static func ==(lhs: Caring_set_reset_machine_t, rhs: Caring_set_reset_machine_t) -> Bool {
-    if lhs._mUserid != rhs._mUserid {return false}
+    if lhs._mDeviceid != rhs._mDeviceid {return false}
     if lhs._mFactoryMode != rhs._mFactoryMode {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -7166,6 +7651,7 @@ extension Caring_sync_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._Message
     4: .standard(proto: "m_height"),
     5: .standard(proto: "m_weight"),
     6: .standard(proto: "m_wearstyle"),
+    7: .standard(proto: "m_deviceid"),
   ]
 
   public var isInitialized: Bool {
@@ -7175,6 +7661,7 @@ extension Caring_sync_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._Message
     if self._mHeight == nil {return false}
     if self._mWeight == nil {return false}
     if self._mWearstyle == nil {return false}
+    if self._mDeviceid == nil {return false}
     return true
   }
 
@@ -7184,12 +7671,13 @@ extension Caring_sync_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._Message
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mUserid) }()
+      case 1: try { try decoder.decodeSingularStringField(value: &self._mUserid) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mGender) }()
       case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mAge) }()
       case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mHeight) }()
       case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mWeight) }()
       case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mWearstyle) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self._mDeviceid) }()
       default: break
       }
     }
@@ -7197,7 +7685,7 @@ extension Caring_sync_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._Message
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._mUserid {
-      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     }
     if let v = self._mGender {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
@@ -7214,6 +7702,9 @@ extension Caring_sync_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._Message
     if let v = self._mWearstyle {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
     }
+    if let v = self._mDeviceid {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 7)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -7224,6 +7715,7 @@ extension Caring_sync_user_info_t: SwiftProtobuf.Message, SwiftProtobuf._Message
     if lhs._mHeight != rhs._mHeight {return false}
     if lhs._mWeight != rhs._mWeight {return false}
     if lhs._mWearstyle != rhs._mWearstyle {return false}
+    if lhs._mDeviceid != rhs._mDeviceid {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -7315,6 +7807,137 @@ extension Caring_r_get_weather_info_t: SwiftProtobuf.Message, SwiftProtobuf._Mes
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "m_lat"),
     2: .standard(proto: "m_lng"),
+    3: .standard(proto: "m_type"),
+    4: .standard(proto: "m_ci"),
+    5: .standard(proto: "m_lac"),
+    6: .standard(proto: "m_mcc"),
+    7: .standard(proto: "m_mnc"),
+  ]
+
+  public var isInitialized: Bool {
+    if self._mType == nil {return false}
+    return true
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self._mLat) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self._mLng) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mType) }()
+      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mCi) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mLac) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mMcc) }()
+      case 7: try { try decoder.decodeSingularUInt32Field(value: &self._mMnc) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._mLat {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
+    }
+    if let v = self._mLng {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 2)
+    }
+    if let v = self._mType {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
+    }
+    if let v = self._mCi {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
+    }
+    if let v = self._mLac {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
+    }
+    if let v = self._mMcc {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
+    }
+    if let v = self._mMnc {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 7)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Caring_r_get_weather_info_t, rhs: Caring_r_get_weather_info_t) -> Bool {
+    if lhs._mLat != rhs._mLat {return false}
+    if lhs._mLng != rhs._mLng {return false}
+    if lhs._mType != rhs._mType {return false}
+    if lhs._mCi != rhs._mCi {return false}
+    if lhs._mLac != rhs._mLac {return false}
+    if lhs._mMcc != rhs._mMcc {return false}
+    if lhs._mMnc != rhs._mMnc {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Caring_r_get_last_location_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".r_get_last_location_t"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "m_lat_lng"),
+    2: .standard(proto: "m_base_station"),
+    3: .standard(proto: "m_type"),
+    4: .same(proto: "timeStamp"),
+  ]
+
+  public var isInitialized: Bool {
+    if self._mType == nil {return false}
+    if self._timeStamp == nil {return false}
+    if !SwiftProtobuf.Internal.areAllInitialized(self.mLatLng) {return false}
+    if !SwiftProtobuf.Internal.areAllInitialized(self.mBaseStation) {return false}
+    return true
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.mLatLng) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.mBaseStation) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self._mType) }()
+      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._timeStamp) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.mLatLng.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.mLatLng, fieldNumber: 1)
+    }
+    if !self.mBaseStation.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.mBaseStation, fieldNumber: 2)
+    }
+    if let v = self._mType {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 3)
+    }
+    if let v = self._timeStamp {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Caring_r_get_last_location_t, rhs: Caring_r_get_last_location_t) -> Bool {
+    if lhs.mLatLng != rhs.mLatLng {return false}
+    if lhs.mBaseStation != rhs.mBaseStation {return false}
+    if lhs._mType != rhs._mType {return false}
+    if lhs._timeStamp != rhs._timeStamp {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Caring_r_lat_lng_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".r_lat_lng_t"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "m_lat"),
+    2: .standard(proto: "m_lng"),
   ]
 
   public var isInitialized: Bool {
@@ -7346,9 +7969,67 @@ extension Caring_r_get_weather_info_t: SwiftProtobuf.Message, SwiftProtobuf._Mes
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Caring_r_get_weather_info_t, rhs: Caring_r_get_weather_info_t) -> Bool {
+  static func ==(lhs: Caring_r_lat_lng_t, rhs: Caring_r_lat_lng_t) -> Bool {
     if lhs._mLat != rhs._mLat {return false}
     if lhs._mLng != rhs._mLng {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Caring_r_base_station_t: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".r_base_station_t"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    4: .standard(proto: "m_ci"),
+    5: .standard(proto: "m_lac"),
+    6: .standard(proto: "m_mcc"),
+    7: .standard(proto: "m_mnc"),
+  ]
+
+  public var isInitialized: Bool {
+    if self._mCi == nil {return false}
+    if self._mLac == nil {return false}
+    if self._mMcc == nil {return false}
+    if self._mMnc == nil {return false}
+    return true
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 4: try { try decoder.decodeSingularUInt32Field(value: &self._mCi) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self._mLac) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self._mMcc) }()
+      case 7: try { try decoder.decodeSingularUInt32Field(value: &self._mMnc) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._mCi {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 4)
+    }
+    if let v = self._mLac {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
+    }
+    if let v = self._mMcc {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 6)
+    }
+    if let v = self._mMnc {
+      try visitor.visitSingularUInt32Field(value: v, fieldNumber: 7)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Caring_r_base_station_t, rhs: Caring_r_base_station_t) -> Bool {
+    if lhs._mCi != rhs._mCi {return false}
+    if lhs._mLac != rhs._mLac {return false}
+    if lhs._mMcc != rhs._mMcc {return false}
+    if lhs._mMnc != rhs._mMnc {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -8971,13 +9652,17 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     69: .standard(proto: "r_get_4G_online_or_not"),
     70: .standard(proto: "r_check_dial_data"),
     71: .standard(proto: "set_data_collection_slot_data"),
+    72: .standard(proto: "r_get_last_location"),
+    73: .standard(proto: "r_bind_device_confirm"),
+    74: .standard(proto: "set_privatekey"),
+    75: .standard(proto: "set_certificatepem"),
   ]
 
   fileprivate class _StorageClass {
     var _cmd: Caring_hl_cmds.cmd_t? = nil
     var _response: Bool? = nil
     var _seconds: UInt32? = nil
-    var _timezone: Int32? = nil
+    var _timezone: Float? = nil
     var _clientID: Data? = nil
     var _rBindDevice: Caring_r_bind_device_t? = nil
     var _rGetDeviceInfo: Caring_get_device_info_t? = nil
@@ -9042,6 +9727,10 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     var _rGet4GOnlineOrNot: Caring_r_get_4G_online_or_not_t? = nil
     var _rCheckDialData: Caring_r_check_dial_t? = nil
     var _setDataCollectionSlotData: Caring_set_data_collection_slot_t? = nil
+    var _rGetLastLocation: Caring_r_get_last_location_t? = nil
+    var _rBindDeviceConfirm: Caring_r_bind_device_confirm_t? = nil
+    var _setPrivatekey: Caring_set_privatekey_t? = nil
+    var _setCertificatepem: Caring_set_certificatepem_t? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -9116,6 +9805,10 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       _rGet4GOnlineOrNot = source._rGet4GOnlineOrNot
       _rCheckDialData = source._rCheckDialData
       _setDataCollectionSlotData = source._setDataCollectionSlotData
+      _rGetLastLocation = source._rGetLastLocation
+      _rBindDeviceConfirm = source._rBindDeviceConfirm
+      _setPrivatekey = source._setPrivatekey
+      _setCertificatepem = source._setCertificatepem
     }
   }
 
@@ -9195,6 +9888,10 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if let v = _storage._rGet4GOnlineOrNot, !v.isInitialized {return false}
       if let v = _storage._rCheckDialData, !v.isInitialized {return false}
       if let v = _storage._setDataCollectionSlotData, !v.isInitialized {return false}
+      if let v = _storage._rGetLastLocation, !v.isInitialized {return false}
+      if let v = _storage._rBindDeviceConfirm, !v.isInitialized {return false}
+      if let v = _storage._setPrivatekey, !v.isInitialized {return false}
+      if let v = _storage._setCertificatepem, !v.isInitialized {return false}
       return true
     }
   }
@@ -9250,7 +9947,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         case 42: try { try decoder.decodeSingularMessageField(value: &_storage._rSetLightResult) }()
         case 43: try { try decoder.decodeSingularMessageField(value: &_storage._rGetActiveRecord) }()
         case 44: try { try decoder.decodeSingularMessageField(value: &_storage._rSetActiveInfo) }()
-        case 45: try { try decoder.decodeSingularInt32Field(value: &_storage._timezone) }()
+        case 45: try { try decoder.decodeSingularFloatField(value: &_storage._timezone) }()
         case 46: try { try decoder.decodeSingularMessageField(value: &_storage._rGetLogInfo) }()
         case 47: try { try decoder.decodeSingularMessageField(value: &_storage._rGetUiHrs) }()
         case 48: try { try decoder.decodeSingularMessageField(value: &_storage._rErrorCode) }()
@@ -9275,6 +9972,10 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         case 69: try { try decoder.decodeSingularMessageField(value: &_storage._rGet4GOnlineOrNot) }()
         case 70: try { try decoder.decodeSingularMessageField(value: &_storage._rCheckDialData) }()
         case 71: try { try decoder.decodeSingularMessageField(value: &_storage._setDataCollectionSlotData) }()
+        case 72: try { try decoder.decodeSingularMessageField(value: &_storage._rGetLastLocation) }()
+        case 73: try { try decoder.decodeSingularMessageField(value: &_storage._rBindDeviceConfirm) }()
+        case 74: try { try decoder.decodeSingularMessageField(value: &_storage._setPrivatekey) }()
+        case 75: try { try decoder.decodeSingularMessageField(value: &_storage._setCertificatepem) }()
         default: break
         }
       }
@@ -9413,7 +10114,7 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         try visitor.visitSingularMessageField(value: v, fieldNumber: 44)
       }
       if let v = _storage._timezone {
-        try visitor.visitSingularInt32Field(value: v, fieldNumber: 45)
+        try visitor.visitSingularFloatField(value: v, fieldNumber: 45)
       }
       if let v = _storage._rGetLogInfo {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 46)
@@ -9486,6 +10187,18 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       }
       if let v = _storage._setDataCollectionSlotData {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 71)
+      }
+      if let v = _storage._rGetLastLocation {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 72)
+      }
+      if let v = _storage._rBindDeviceConfirm {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 73)
+      }
+      if let v = _storage._setPrivatekey {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 74)
+      }
+      if let v = _storage._setCertificatepem {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 75)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -9564,6 +10277,10 @@ extension Caring_hl_cmds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         if _storage._rGet4GOnlineOrNot != rhs_storage._rGet4GOnlineOrNot {return false}
         if _storage._rCheckDialData != rhs_storage._rCheckDialData {return false}
         if _storage._setDataCollectionSlotData != rhs_storage._setDataCollectionSlotData {return false}
+        if _storage._rGetLastLocation != rhs_storage._rGetLastLocation {return false}
+        if _storage._rBindDeviceConfirm != rhs_storage._rBindDeviceConfirm {return false}
+        if _storage._setPrivatekey != rhs_storage._setPrivatekey {return false}
+        if _storage._setCertificatepem != rhs_storage._setCertificatepem {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -9649,5 +10366,10 @@ extension Caring_hl_cmds.cmd_t: SwiftProtobuf._ProtoNameProviding {
     74: .same(proto: "CMD_GET_MENU_SEQUENCE_DATA"),
     75: .same(proto: "CMD_SET_DATA_COLLECTION_SLOT"),
     76: .same(proto: "CMD_SET_CARING"),
+    77: .same(proto: "CMD_SET_CARING_REMINDER"),
+    78: .same(proto: "CMD_GET_LOCATION_IFNO"),
+    79: .same(proto: "CMD_DEVICE_BIND_CONFIRM"),
+    80: .same(proto: "CMD_SET_PRIVATEKEY_INFO"),
+    81: .same(proto: "CMD_SET_CERTIFICATEPEM_INFO"),
   ]
 }
